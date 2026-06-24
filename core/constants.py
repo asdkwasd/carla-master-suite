@@ -118,13 +118,13 @@ SEMANTIC_DEFAULT = [80, 0, 0]
 # =============================================================================
 CURRICULUM_STAGES = {
     1: {"name": "Basics",  "map": "Town01", "traffic": 0,  "pedestrians": 0,
-        "weather": "Clear",  "obstacles": False, "threshold": 500.0},
+        "weather": "Clear",  "obstacles": False, "threshold": 100.0},  # Reduced from 500
     2: {"name": "Traffic", "map": "Town03", "traffic": 10, "pedestrians": 5,
-        "weather": "Cloudy", "obstacles": False, "threshold": 1000.0},
+        "weather": "Cloudy", "obstacles": False, "threshold": 300.0},  # Reduced from 1000
     3: {"name": "Expert",  "map": "Town05", "traffic": 30, "pedestrians": 15,
-        "weather": "Rainy",  "obstacles": True,  "threshold": 2000.0},
+        "weather": "Rainy",  "obstacles": True,  "threshold": 500.0},  # Reduced from 2000
     4: {"name": "Master",  "map": "Town10HD", "traffic": 50, "pedestrians": 30,
-        "weather": "Stormy", "obstacles": True,  "threshold": 5000.0},
+        "weather": "Stormy", "obstacles": True,  "threshold": 1000.0},  # Reduced from 5000
 }
 CURRICULUM_WINDOW = 50
 

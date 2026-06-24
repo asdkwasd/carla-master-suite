@@ -1,0 +1,4109 @@
+total_timesteps | 2048
+ep_rew_mean | 0.0000
+loss | 0.000000e+00
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 4096
+ep_rew_mean | 0.0000
+loss | 1.312095e+07
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 6144
+ep_rew_mean | 0.0000
+loss | 5.920538e+07
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 2048
+ep_rew_mean | 0.0000
+loss | 0.000000e+00
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 4096
+ep_rew_mean | 0.0000
+loss | 3.454170e+07
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 2048
+ep_rew_mean | 0.0000
+loss | 0.000000e+00
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 4096
+ep_rew_mean | 0.0000
+loss | 5.595516e+05
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 4096
+ep_rew_mean | 0.0000
+loss | 0.000000e+00
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 8192
+ep_rew_mean | 0.0000
+loss | 8.612176e+05
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 12288
+ep_rew_mean | 0.0000
+loss | 6.417156e+05
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 16384
+ep_rew_mean | 0.0000
+loss | 5.863538e+05
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 20480
+ep_rew_mean | 0.0000
+loss | 8.364966e+05
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 4096
+ep_rew_mean | 0.0000
+loss | 0.000000e+00
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 8192
+ep_rew_mean | 0.0000
+loss | 7.107714e+05
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 12288
+ep_rew_mean | 0.0000
+loss | 6.894976e+05
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 16384
+ep_rew_mean | 0.0000
+loss | 8.236386e+05
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 20480
+ep_rew_mean | 0.0000
+loss | 8.524388e+05
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 24576
+ep_rew_mean | 0.0000
+loss | 7.163431e+05
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 28672
+ep_rew_mean | 0.0000
+loss | 8.000144e+05
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 32768
+ep_rew_mean | 0.0000
+loss | 7.507733e+05
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 36864
+ep_rew_mean | 0.0000
+loss | 6.139740e+05
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 40960
+ep_rew_mean | 0.0000
+loss | 5.243554e+05
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 45056
+ep_rew_mean | 0.0000
+loss | 2.766552e+05
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 49152
+ep_rew_mean | 0.0000
+loss | 2.503740e+05
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 4096
+ep_rew_mean | 0.0000
+loss | 0.000000e+00
+curriculum_stage | 1
+ego_wins | 2
+rival_wins | 0
+---
+total_timesteps | 4096
+ep_rew_mean | 0.0000
+loss | 0.000000e+00
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 8192
+ep_rew_mean | 0.0000
+loss | 3.475093e+06
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 12288
+ep_rew_mean | 0.0000
+loss | 4.584930e+06
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 16384
+ep_rew_mean | 0.0000
+loss | 2.305497e+09
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 4096
+ep_rew_mean | 0.0000
+loss | 0.000000e+00
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 8192
+ep_rew_mean | 0.0000
+loss | 2.880296e+06
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 12288
+ep_rew_mean | 0.0000
+loss | 4.343238e+06
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 16384
+ep_rew_mean | 0.0000
+loss | 2.039977e+09
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 20480
+ep_rew_mean | 0.0000
+loss | 3.097735e+09
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 24576
+ep_rew_mean | 0.0000
+loss | 3.083367e+09
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 28672
+ep_rew_mean | 0.0000
+loss | 3.967868e+06
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 32768
+ep_rew_mean | 0.0000
+loss | 4.748250e+06
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 36864
+ep_rew_mean | 0.0000
+loss | 1.006548e+09
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 40960
+ep_rew_mean | 0.0000
+loss | 3.809317e+09
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 45056
+ep_rew_mean | 0.0000
+loss | 4.048418e+09
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 49152
+ep_rew_mean | 0.0000
+loss | 3.986555e+06
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 53248
+ep_rew_mean | 0.0000
+loss | 3.519530e+06
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 57344
+ep_rew_mean | 0.0000
+loss | 8.043540e+09
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 61440
+ep_rew_mean | 0.0000
+loss | 8.419303e+09
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 65536
+ep_rew_mean | 0.0000
+loss | 5.301803e+09
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 69632
+ep_rew_mean | 0.0000
+loss | 4.213468e+06
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 73728
+ep_rew_mean | 0.0000
+loss | 4.173436e+06
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 77824
+ep_rew_mean | 0.0000
+loss | 5.052564e+09
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 81920
+ep_rew_mean | 0.0000
+loss | 7.966124e+09
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 86016
+ep_rew_mean | 0.0000
+loss | 4.916947e+09
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 90112
+ep_rew_mean | 0.0000
+loss | 4.171272e+06
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 94208
+ep_rew_mean | 0.0000
+loss | 6.806620e+08
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 98304
+ep_rew_mean | 0.0000
+loss | 3.640864e+09
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 102400
+ep_rew_mean | 0.0000
+loss | 2.833062e+09
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 106496
+ep_rew_mean | 0.0000
+loss | 1.307107e+09
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 110592
+ep_rew_mean | 0.0000
+loss | 4.323704e+06
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 114688
+ep_rew_mean | 0.0000
+loss | 3.598825e+08
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 118784
+ep_rew_mean | 0.0000
+loss | 3.336018e+09
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 4096
+ep_rew_mean | 0.0000
+loss | 0.000000e+00
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 8192
+ep_rew_mean | 0.0000
+loss | 7.526841e+04
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 12288
+ep_rew_mean | 0.0000
+loss | 1.340151e+05
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 16384
+ep_rew_mean | 0.0000
+loss | 2.109139e+09
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 20480
+ep_rew_mean | 0.0000
+loss | 3.023214e+09
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 24576
+ep_rew_mean | 0.0000
+loss | 3.006597e+09
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 28672
+ep_rew_mean | 0.0000
+loss | 8.850974e+04
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 32768
+ep_rew_mean | 0.0000
+loss | 1.021817e+05
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 36864
+ep_rew_mean | 0.0000
+loss | 1.028800e+05
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 40960
+ep_rew_mean | 0.0000
+loss | 2.318692e+09
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 45056
+ep_rew_mean | 0.0000
+loss | 3.067593e+09
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 49152
+ep_rew_mean | 0.0000
+loss | 7.185074e+04
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 53248
+ep_rew_mean | 0.0000
+loss | 1.319338e+05
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 57344
+ep_rew_mean | 0.0000
+loss | 4.327668e+08
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 61440
+ep_rew_mean | 0.0000
+loss | 1.092671e+09
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 65536
+ep_rew_mean | 0.0000
+loss | 6.162877e+08
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 69632
+ep_rew_mean | 0.0000
+loss | 6.365071e+04
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 73728
+ep_rew_mean | 0.0000
+loss | 7.636536e+04
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 77824
+ep_rew_mean | 0.0000
+loss | 1.346053e+05
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 81920
+ep_rew_mean | 0.0000
+loss | 3.300449e+09
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 86016
+ep_rew_mean | 0.0000
+loss | 4.770656e+09
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 90112
+ep_rew_mean | 0.0000
+loss | 4.555111e+04
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 94208
+ep_rew_mean | 0.0000
+loss | 4.256489e+04
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 98304
+ep_rew_mean | 0.0000
+loss | 4.738161e+04
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 102400
+ep_rew_mean | 0.0000
+loss | 6.164551e+04
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 106496
+ep_rew_mean | 0.0000
+loss | 5.832314e+04
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 110592
+ep_rew_mean | 0.0000
+loss | 5.967175e+04
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 114688
+ep_rew_mean | 0.0000
+loss | 4.392291e+04
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 118784
+ep_rew_mean | 0.0000
+loss | 4.576810e+04
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 122880
+ep_rew_mean | 0.0000
+loss | 5.592509e+04
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 126976
+ep_rew_mean | 0.0000
+loss | 7.283161e+04
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 131072
+ep_rew_mean | 0.0000
+loss | 8.198902e+04
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 135168
+ep_rew_mean | 0.0000
+loss | 8.578059e+04
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 139264
+ep_rew_mean | 0.0000
+loss | 9.072232e+08
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 143360
+ep_rew_mean | 0.0000
+loss | 7.423186e+09
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 147456
+ep_rew_mean | 0.0000
+loss | 1.503284e+09
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 151552
+ep_rew_mean | 0.0000
+loss | 5.355634e+04
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 155648
+ep_rew_mean | 0.0000
+loss | 4.902973e+04
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 159744
+ep_rew_mean | 0.0000
+loss | 5.020770e+04
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 4096
+ep_rew_mean | 0.0000
+loss | 0.000000e+00
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 8192
+ep_rew_mean | 0.0000
+loss | 4.444988e+00
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 12288
+ep_rew_mean | 0.0000
+loss | 7.673158e+01
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 16384
+ep_rew_mean | 0.0000
+loss | 1.477713e+03
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 20480
+ep_rew_mean | 0.0000
+loss | 1.286444e+03
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 24576
+ep_rew_mean | 0.0000
+loss | 7.146383e+02
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 28672
+ep_rew_mean | 0.0000
+loss | 3.151146e+01
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 32768
+ep_rew_mean | 0.0000
+loss | 4.377723e+01
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 36864
+ep_rew_mean | 0.0000
+loss | 1.050783e+03
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 40960
+ep_rew_mean | 0.0000
+loss | 1.002628e+03
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 45056
+ep_rew_mean | 0.0000
+loss | 4.579234e+02
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 49152
+ep_rew_mean | 0.0000
+loss | 4.357975e+02
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 4096
+ep_rew_mean | 0.0000
+loss | 0.000000e+00
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 8192
+ep_rew_mean | 0.0000
+loss | 4.574304e+00
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 4096
+ep_rew_mean | 0.0000
+loss | 0.000000e+00
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 4096
+ep_rew_mean | 0.0000
+loss | 0.000000e+00
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 8192
+ep_rew_mean | 0.0000
+loss | 1.113054e+01
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 4096
+ep_rew_mean | 0.0000
+loss | 0.000000e+00
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 8192
+ep_rew_mean | 0.0000
+loss | 1.170671e+01
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 12288
+ep_rew_mean | 0.0000
+loss | 4.918605e+01
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 16384
+ep_rew_mean | 0.0000
+loss | 2.962240e+01
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 20480
+ep_rew_mean | 0.0000
+loss | 2.685323e+01
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 24576
+ep_rew_mean | 0.0000
+loss | 2.460394e+02
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 28672
+ep_rew_mean | 0.0000
+loss | 2.469009e+03
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 32768
+ep_rew_mean | 0.0000
+loss | 4.490589e+03
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 36864
+ep_rew_mean | 0.0000
+loss | 1.009930e+04
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 40960
+ep_rew_mean | 0.0000
+loss | 1.698437e+04
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 45056
+ep_rew_mean | 0.0000
+loss | 1.748213e+04
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 4096
+ep_rew_mean | 0.0000
+loss | 0.000000e+00
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 8192
+ep_rew_mean | 0.0000
+loss | 4.589240e+00
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 12288
+ep_rew_mean | 0.0000
+loss | 4.826262e+01
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 16384
+ep_rew_mean | 0.0000
+loss | 1.191269e+02
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 4096
+ep_rew_mean | 0.0000
+loss | 0.000000e+00
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 4096
+ep_rew_mean | 0.0000
+loss | 0.000000e+00
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 8192
+ep_rew_mean | 0.0000
+loss | 8.164485e+00
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 12288
+ep_rew_mean | 0.0000
+loss | 3.546701e+01
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 16384
+ep_rew_mean | 0.0000
+loss | 5.266416e+01
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 20480
+ep_rew_mean | 0.0000
+loss | 4.664834e+01
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 24576
+ep_rew_mean | 0.0000
+loss | 2.710251e+04
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 28672
+ep_rew_mean | 0.0000
+loss | 5.150153e+01
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 32768
+ep_rew_mean | 0.0000
+loss | 1.380427e+02
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 4096
+ep_rew_mean | 0.0000
+loss | 0.000000e+00
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 8192
+ep_rew_mean | 0.0000
+loss | -3.615456e-01
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 12288
+ep_rew_mean | 0.0000
+loss | -2.060480e-01
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 4096
+ep_rew_mean | 0.0000
+loss | 0.000000e+00
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 8192
+ep_rew_mean | 0.0000
+loss | -2.114199e-01
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 12288
+ep_rew_mean | 0.0000
+loss | -1.352563e-01
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 16384
+ep_rew_mean | 0.0000
+loss | 3.802109e-02
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 20480
+ep_rew_mean | 0.0000
+loss | 1.980088e-01
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 24576
+ep_rew_mean | 0.0000
+loss | 4.026833e-02
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 28672
+ep_rew_mean | 0.0000
+loss | -1.633960e-01
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 32768
+ep_rew_mean | 0.0000
+loss | -7.542363e-02
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 36864
+ep_rew_mean | 0.0000
+loss | -2.888915e-02
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 40960
+ep_rew_mean | 0.0000
+loss | -5.165601e-02
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 45056
+ep_rew_mean | 0.0000
+loss | -1.660107e-01
+curriculum_stage | 1
+ego_wins | 1
+rival_wins | 0
+---
+total_timesteps | 49152
+ep_rew_mean | 0.0000
+loss | 1.512013e+01
+curriculum_stage | 1
+ego_wins | 1
+rival_wins | 0
+---
+total_timesteps | 53248
+ep_rew_mean | 0.0000
+loss | -9.203967e-02
+curriculum_stage | 1
+ego_wins | 1
+rival_wins | 0
+---
+total_timesteps | 57344
+ep_rew_mean | 0.0000
+loss | 9.497401e+01
+curriculum_stage | 1
+ego_wins | 1
+rival_wins | 0
+---
+total_timesteps | 61440
+ep_rew_mean | 0.0000
+loss | 3.469809e-01
+curriculum_stage | 1
+ego_wins | 1
+rival_wins | 0
+---
+total_timesteps | 65536
+ep_rew_mean | 0.0000
+loss | 6.030840e-01
+curriculum_stage | 1
+ego_wins | 2
+rival_wins | 0
+---
+total_timesteps | 69632
+ep_rew_mean | 0.0000
+loss | 1.833339e+01
+curriculum_stage | 1
+ego_wins | 2
+rival_wins | 0
+---
+total_timesteps | 4096
+ep_rew_mean | 0.0000
+loss | 0.000000e+00
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 8192
+ep_rew_mean | 0.0000
+loss | -2.801430e-01
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 12288
+ep_rew_mean | 0.0000
+loss | -3.247948e-01
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 16384
+ep_rew_mean | 0.0000
+loss | -2.745126e-01
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 20480
+ep_rew_mean | 0.0000
+loss | 3.188092e-02
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 24576
+ep_rew_mean | 0.0000
+loss | -1.639433e-01
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 28672
+ep_rew_mean | 0.0000
+loss | 3.518200e-02
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 32768
+ep_rew_mean | 0.0000
+loss | -2.546442e-01
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 36864
+ep_rew_mean | 0.0000
+loss | -1.249982e-01
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 40960
+ep_rew_mean | 0.0000
+loss | -1.469923e-01
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 45056
+ep_rew_mean | 0.0000
+loss | -2.239107e-01
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 49152
+ep_rew_mean | 0.0000
+loss | -2.880766e-01
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 53248
+ep_rew_mean | 0.0000
+loss | -2.877142e-01
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 57344
+ep_rew_mean | 0.0000
+loss | -3.097931e-01
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 61440
+ep_rew_mean | 0.0000
+loss | -2.892235e-02
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 65536
+ep_rew_mean | 0.0000
+loss | -2.526823e-01
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 69632
+ep_rew_mean | 0.0000
+loss | 3.193089e-02
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 0
+---
+total_timesteps | 73728
+ep_rew_mean | 0.0000
+loss | -4.062079e-01
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 1
+---
+total_timesteps | 77824
+ep_rew_mean | 0.0000
+loss | 5.886285e-01
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 3
+---
+total_timesteps | 81920
+ep_rew_mean | 0.0000
+loss | 8.433745e+01
+curriculum_stage | 1
+ego_wins | 0
+rival_wins | 3
+---
+total_timesteps | 86016
+ep_rew_mean | 0.0000
+loss | 2.649660e+02
+curriculum_stage | 1
+ego_wins | 1
+rival_wins | 3
+---
+total_timesteps | 90112
+ep_rew_mean | 0.0000
+loss | 8.741270e+02
+curriculum_stage | 1
+ego_wins | 1
+rival_wins | 3
+---
+total_timesteps | 94208
+ep_rew_mean | 0.0000
+loss | -2.101467e-01
+curriculum_stage | 1
+ego_wins | 1
+rival_wins | 3
+---
+total_timesteps | 98304
+ep_rew_mean | 0.0000
+loss | -2.060277e-01
+curriculum_stage | 1
+ego_wins | 1
+rival_wins | 5
+---
+total_timesteps | 102400
+ep_rew_mean | 0.0000
+loss | 4.233342e+01
+curriculum_stage | 1
+ego_wins | 1
+rival_wins | 6
+---
+total_timesteps | 106496
+ep_rew_mean | 0.0000
+loss | -1.614473e-01
+curriculum_stage | 1
+ego_wins | 1
+rival_wins | 8
+---
+total_timesteps | 110592
+ep_rew_mean | 0.0000
+loss | 7.753223e-01
+curriculum_stage | 1
+ego_wins | 1
+rival_wins | 10
+---
+total_timesteps | 114688
+ep_rew_mean | 0.0000
+loss | 4.033743e-01
+curriculum_stage | 1
+ego_wins | 2
+rival_wins | 12
+---
+total_timesteps | 118784
+ep_rew_mean | 0.0000
+loss | -1.570934e-01
+curriculum_stage | 1
+ego_wins | 2
+rival_wins | 13
+---
+total_timesteps | 122880
+ep_rew_mean | 0.0000
+loss | 2.145105e+00
+curriculum_stage | 1
+ego_wins | 2
+rival_wins | 14
+---
+total_timesteps | 126976
+ep_rew_mean | 0.0000
+loss | 1.760284e+02
+curriculum_stage | 1
+ego_wins | 2
+rival_wins | 15
+---
+total_timesteps | 131072
+ep_rew_mean | 0.0000
+loss | -1.850092e-02
+curriculum_stage | 1
+ego_wins | 2
+rival_wins | 16
+---
+total_timesteps | 135168
+ep_rew_mean | 0.0000
+loss | 1.541590e+00
+curriculum_stage | 1
+ego_wins | 3
+rival_wins | 17
+---
+total_timesteps | 139264
+ep_rew_mean | 0.0000
+loss | 1.398639e+02
+curriculum_stage | 1
+ego_wins | 3
+rival_wins | 20
+---
+total_timesteps | 143360
+ep_rew_mean | 0.0000
+loss | 7.630166e-01
+curriculum_stage | 1
+ego_wins | 3
+rival_wins | 21
+---
+total_timesteps | 147456
+ep_rew_mean | 0.0000
+loss | 4.115497e+00
+curriculum_stage | 1
+ego_wins | 3
+rival_wins | 22
+---
+total_timesteps | 151552
+ep_rew_mean | 0.0000
+loss | -4.149088e-01
+curriculum_stage | 1
+ego_wins | 3
+rival_wins | 24
+---
+total_timesteps | 155648
+ep_rew_mean | 0.0000
+loss | 2.196455e-02
+curriculum_stage | 1
+ego_wins | 3
+rival_wins | 24
+---
+total_timesteps | 159744
+ep_rew_mean | 0.0000
+loss | -3.629045e-01
+curriculum_stage | 1
+ego_wins | 3
+rival_wins | 25
+---
+total_timesteps | 163840
+ep_rew_mean | 0.0000
+loss | 3.388250e-01
+curriculum_stage | 1
+ego_wins | 3
+rival_wins | 27
+---
+total_timesteps | 167936
+ep_rew_mean | 0.0000
+loss | -4.229671e-01
+curriculum_stage | 1
+ego_wins | 3
+rival_wins | 27
+---
+total_timesteps | 172032
+ep_rew_mean | 0.0000
+loss | -4.295912e-01
+curriculum_stage | 1
+ego_wins | 3
+rival_wins | 28
+---
+total_timesteps | 176128
+ep_rew_mean | 0.0000
+loss | -4.410466e-01
+curriculum_stage | 1
+ego_wins | 3
+rival_wins | 28
+---
+total_timesteps | 180224
+ep_rew_mean | 0.0000
+loss | -4.708539e-01
+curriculum_stage | 1
+ego_wins | 3
+rival_wins | 29
+---
+total_timesteps | 184320
+ep_rew_mean | 0.0000
+loss | -4.539877e-01
+curriculum_stage | 1
+ego_wins | 3
+rival_wins | 30
+---
+total_timesteps | 188416
+ep_rew_mean | 0.0000
+loss | -3.537151e-01
+curriculum_stage | 1
+ego_wins | 3
+rival_wins | 31
+---
+total_timesteps | 192512
+ep_rew_mean | 0.0000
+loss | -3.674899e-01
+curriculum_stage | 1
+ego_wins | 3
+rival_wins | 33
+---
+total_timesteps | 196608
+ep_rew_mean | 0.0000
+loss | -4.094458e-01
+curriculum_stage | 1
+ego_wins | 3
+rival_wins | 34
+---
+total_timesteps | 200704
+ep_rew_mean | 0.0000
+loss | -5.084236e-01
+curriculum_stage | 1
+ego_wins | 3
+rival_wins | 36
+---
+total_timesteps | 204800
+ep_rew_mean | 0.0000
+loss | -4.130136e-01
+curriculum_stage | 1
+ego_wins | 3
+rival_wins | 37
+---
+total_timesteps | 208896
+ep_rew_mean | 0.0000
+loss | 1.369750e-01
+curriculum_stage | 1
+ego_wins | 3
+rival_wins | 40
+---
+total_timesteps | 212992
+ep_rew_mean | 0.0000
+loss | 4.113338e+00
+curriculum_stage | 1
+ego_wins | 3
+rival_wins | 41
+---
+total_timesteps | 217088
+ep_rew_mean | 0.0000
+loss | 2.048593e+02
+curriculum_stage | 1
+ego_wins | 3
+rival_wins | 42
+---
+total_timesteps | 221184
+ep_rew_mean | 0.0000
+loss | -3.991651e-01
+curriculum_stage | 1
+ego_wins | 3
+rival_wins | 43
+---
+total_timesteps | 225280
+ep_rew_mean | 0.0000
+loss | -3.895839e-01
+curriculum_stage | 1
+ego_wins | 3
+rival_wins | 45
+---
+total_timesteps | 229376
+ep_rew_mean | 0.0000
+loss | 1.672310e+00
+curriculum_stage | 1
+ego_wins | 3
+rival_wins | 46
+---
+total_timesteps | 233472
+ep_rew_mean | 0.0000
+loss | -5.202253e-01
+curriculum_stage | 1
+ego_wins | 3
+rival_wins | 47
+---
+total_timesteps | 237568
+ep_rew_mean | 0.0000
+loss | -1.034917e-01
+curriculum_stage | 1
+ego_wins | 3
+rival_wins | 48
+---
+total_timesteps | 241664
+ep_rew_mean | 0.0000
+loss | 2.211696e+02
+curriculum_stage | 1
+ego_wins | 4
+rival_wins | 49
+---
+total_timesteps | 245760
+ep_rew_mean | 0.0000
+loss | 8.278326e-01
+curriculum_stage | 1
+ego_wins | 4
+rival_wins | 49
+---
+total_timesteps | 249856
+ep_rew_mean | 0.0000
+loss | -5.176489e-01
+curriculum_stage | 1
+ego_wins | 4
+rival_wins | 52
+---
+total_timesteps | 253952
+ep_rew_mean | 0.0000
+loss | 7.742009e+01
+curriculum_stage | 1
+ego_wins | 5
+rival_wins | 53
+---
+total_timesteps | 258048
+ep_rew_mean | 0.0000
+loss | -3.006129e-01
+curriculum_stage | 1
+ego_wins | 8
+rival_wins | 53
+---
+total_timesteps | 262144
+ep_rew_mean | 0.0000
+loss | 5.098722e+01
+curriculum_stage | 1
+ego_wins | 10
+rival_wins | 53
+---
+total_timesteps | 266240
+ep_rew_mean | 0.0000
+loss | 1.730616e+02
+curriculum_stage | 1
+ego_wins | 10
+rival_wins | 54
+---
+total_timesteps | 270336
+ep_rew_mean | 0.0000
+loss | -4.631603e-01
+curriculum_stage | 1
+ego_wins | 11
+rival_wins | 56
+---
+total_timesteps | 274432
+ep_rew_mean | 0.0000
+loss | 4.395219e+01
+curriculum_stage | 1
+ego_wins | 12
+rival_wins | 56
+---
+total_timesteps | 278528
+ep_rew_mean | 0.0000
+loss | -3.886971e-01
+curriculum_stage | 1
+ego_wins | 12
+rival_wins | 57
+---
+total_timesteps | 282624
+ep_rew_mean | 0.0000
+loss | -5.312169e-01
+curriculum_stage | 1
+ego_wins | 13
+rival_wins | 58
+---
+total_timesteps | 286720
+ep_rew_mean | 0.0000
+loss | 1.146586e+02
+curriculum_stage | 1
+ego_wins | 13
+rival_wins | 60
+---
+total_timesteps | 290816
+ep_rew_mean | 0.0000
+loss | -4.177127e-01
+curriculum_stage | 1
+ego_wins | 14
+rival_wins | 60
+---
+total_timesteps | 294912
+ep_rew_mean | 0.0000
+loss | 1.024928e+01
+curriculum_stage | 1
+ego_wins | 14
+rival_wins | 61
+---
+total_timesteps | 299008
+ep_rew_mean | 0.0000
+loss | -5.089852e-01
+curriculum_stage | 1
+ego_wins | 14
+rival_wins | 62
+---
+total_timesteps | 303104
+ep_rew_mean | 0.0000
+loss | 3.747604e+01
+curriculum_stage | 1
+ego_wins | 14
+rival_wins | 63
+---
+total_timesteps | 307200
+ep_rew_mean | 0.0000
+loss | -4.237285e-01
+curriculum_stage | 1
+ego_wins | 14
+rival_wins | 64
+---
+total_timesteps | 311296
+ep_rew_mean | 0.0000
+loss | -2.716852e-01
+curriculum_stage | 1
+ego_wins | 14
+rival_wins | 64
+---
+total_timesteps | 315392
+ep_rew_mean | 0.0000
+loss | -5.369750e-01
+curriculum_stage | 1
+ego_wins | 15
+rival_wins | 64
+---
+total_timesteps | 319488
+ep_rew_mean | 0.0000
+loss | 4.085698e+01
+curriculum_stage | 1
+ego_wins | 15
+rival_wins | 65
+---
+total_timesteps | 323584
+ep_rew_mean | 0.0000
+loss | -5.530414e-01
+curriculum_stage | 1
+ego_wins | 15
+rival_wins | 66
+---
+total_timesteps | 327680
+ep_rew_mean | 0.0000
+loss | 1.202145e+00
+curriculum_stage | 1
+ego_wins | 15
+rival_wins | 67
+---
+total_timesteps | 331776
+ep_rew_mean | 0.0000
+loss | 3.045698e-01
+curriculum_stage | 1
+ego_wins | 15
+rival_wins | 68
+---
+total_timesteps | 335872
+ep_rew_mean | 0.0000
+loss | -5.953006e-01
+curriculum_stage | 1
+ego_wins | 16
+rival_wins | 69
+---
+total_timesteps | 339968
+ep_rew_mean | 0.0000
+loss | 2.671799e+01
+curriculum_stage | 1
+ego_wins | 17
+rival_wins | 69
+---
+total_timesteps | 344064
+ep_rew_mean | 0.0000
+loss | -2.660746e-01
+curriculum_stage | 1
+ego_wins | 18
+rival_wins | 69
+---
+total_timesteps | 348160
+ep_rew_mean | 0.0000
+loss | -5.740049e-01
+curriculum_stage | 1
+ego_wins | 18
+rival_wins | 69
+---
+total_timesteps | 352256
+ep_rew_mean | 0.0000
+loss | -5.497590e-01
+curriculum_stage | 1
+ego_wins | 18
+rival_wins | 70
+---
+total_timesteps | 356352
+ep_rew_mean | 0.0000
+loss | -6.342616e-01
+curriculum_stage | 1
+ego_wins | 18
+rival_wins | 71
+---
+total_timesteps | 360448
+ep_rew_mean | 0.0000
+loss | 6.549555e+00
+curriculum_stage | 1
+ego_wins | 18
+rival_wins | 72
+---
+total_timesteps | 364544
+ep_rew_mean | 0.0000
+loss | 2.719839e-01
+curriculum_stage | 1
+ego_wins | 18
+rival_wins | 73
+---
+total_timesteps | 368640
+ep_rew_mean | 0.0000
+loss | 2.524097e+00
+curriculum_stage | 1
+ego_wins | 19
+rival_wins | 73
+---
+total_timesteps | 372736
+ep_rew_mean | 0.0000
+loss | -3.869980e-01
+curriculum_stage | 1
+ego_wins | 20
+rival_wins | 74
+---
+total_timesteps | 376832
+ep_rew_mean | 0.0000
+loss | 9.263438e+01
+curriculum_stage | 1
+ego_wins | 21
+rival_wins | 75
+---
+total_timesteps | 380928
+ep_rew_mean | 0.0000
+loss | 1.710401e+02
+curriculum_stage | 1
+ego_wins | 21
+rival_wins | 76
+---
+total_timesteps | 385024
+ep_rew_mean | 0.0000
+loss | -5.671585e-02
+curriculum_stage | 1
+ego_wins | 22
+rival_wins | 76
+---
+total_timesteps | 389120
+ep_rew_mean | 0.0000
+loss | -5.767335e-01
+curriculum_stage | 1
+ego_wins | 22
+rival_wins | 79
+---
+total_timesteps | 393216
+ep_rew_mean | 0.0000
+loss | -3.747978e-01
+curriculum_stage | 1
+ego_wins | 22
+rival_wins | 80
+---
+total_timesteps | 397312
+ep_rew_mean | 0.0000
+loss | -5.701407e-01
+curriculum_stage | 1
+ego_wins | 22
+rival_wins | 81
+---
+total_timesteps | 401408
+ep_rew_mean | 0.0000
+loss | -6.012080e-01
+curriculum_stage | 1
+ego_wins | 26
+rival_wins | 81
+---
+total_timesteps | 405504
+ep_rew_mean | 0.0000
+loss | -3.866810e-01
+curriculum_stage | 1
+ego_wins | 27
+rival_wins | 81
+---
+total_timesteps | 409600
+ep_rew_mean | 0.0000
+loss | -5.760484e-01
+curriculum_stage | 1
+ego_wins | 28
+rival_wins | 83
+---
+total_timesteps | 413696
+ep_rew_mean | 0.0000
+loss | -6.121261e-01
+curriculum_stage | 1
+ego_wins | 28
+rival_wins | 85
+---
+total_timesteps | 417792
+ep_rew_mean | 0.0000
+loss | 2.264412e+01
+curriculum_stage | 1
+ego_wins | 29
+rival_wins | 85
+---
+total_timesteps | 421888
+ep_rew_mean | 0.0000
+loss | -3.891968e-01
+curriculum_stage | 1
+ego_wins | 30
+rival_wins | 85
+---
+total_timesteps | 425984
+ep_rew_mean | 0.0000
+loss | 1.578187e+02
+curriculum_stage | 1
+ego_wins | 32
+rival_wins | 85
+---
+total_timesteps | 430080
+ep_rew_mean | 0.0000
+loss | 2.239456e+02
+curriculum_stage | 1
+ego_wins | 32
+rival_wins | 85
+---
+total_timesteps | 434176
+ep_rew_mean | 0.0000
+loss | -6.382232e-01
+curriculum_stage | 1
+ego_wins | 32
+rival_wins | 85
+---
+total_timesteps | 438272
+ep_rew_mean | 0.0000
+loss | -6.970962e-01
+curriculum_stage | 1
+ego_wins | 33
+rival_wins | 85
+---
+total_timesteps | 442368
+ep_rew_mean | 0.0000
+loss | -6.671672e-01
+curriculum_stage | 1
+ego_wins | 33
+rival_wins | 86
+---
+total_timesteps | 446464
+ep_rew_mean | 0.0000
+loss | 7.942445e+01
+curriculum_stage | 1
+ego_wins | 33
+rival_wins | 87
+---
+total_timesteps | 450560
+ep_rew_mean | 0.0000
+loss | -4.165543e-01
+curriculum_stage | 1
+ego_wins | 33
+rival_wins | 88
+---
+total_timesteps | 454656
+ep_rew_mean | 0.0000
+loss | 6.314518e+01
+curriculum_stage | 1
+ego_wins | 34
+rival_wins | 88
+---
+total_timesteps | 458752
+ep_rew_mean | 0.0000
+loss | -5.929810e-01
+curriculum_stage | 1
+ego_wins | 34
+rival_wins | 88
+---
+total_timesteps | 462848
+ep_rew_mean | 0.0000
+loss | -5.369897e-01
+curriculum_stage | 1
+ego_wins | 34
+rival_wins | 88
+---
+total_timesteps | 466944
+ep_rew_mean | 0.0000
+loss | -6.742375e-01
+curriculum_stage | 1
+ego_wins | 34
+rival_wins | 89
+---
+total_timesteps | 471040
+ep_rew_mean | 0.0000
+loss | -7.001135e-01
+curriculum_stage | 1
+ego_wins | 34
+rival_wins | 90
+---
+total_timesteps | 475136
+ep_rew_mean | 0.0000
+loss | -7.075562e-01
+curriculum_stage | 1
+ego_wins | 34
+rival_wins | 90
+---
+total_timesteps | 479232
+ep_rew_mean | 0.0000
+loss | -7.022503e-01
+curriculum_stage | 1
+ego_wins | 34
+rival_wins | 90
+---
+total_timesteps | 483328
+ep_rew_mean | 0.0000
+loss | -7.681007e-01
+curriculum_stage | 1
+ego_wins | 35
+rival_wins | 90
+---
+total_timesteps | 487424
+ep_rew_mean | 0.0000
+loss | -6.896660e-01
+curriculum_stage | 1
+ego_wins | 36
+rival_wins | 90
+---
+total_timesteps | 491520
+ep_rew_mean | 0.0000
+loss | -7.266345e-01
+curriculum_stage | 1
+ego_wins | 36
+rival_wins | 90
+---
+total_timesteps | 495616
+ep_rew_mean | 0.0000
+loss | -7.407431e-01
+curriculum_stage | 1
+ego_wins | 37
+rival_wins | 90
+---
+total_timesteps | 499712
+ep_rew_mean | 0.0000
+loss | 2.732276e+00
+curriculum_stage | 1
+ego_wins | 37
+rival_wins | 91
+---
+total_timesteps | 503808
+ep_rew_mean | 0.0000
+loss | -6.833538e-01
+curriculum_stage | 1
+ego_wins | 37
+rival_wins | 91
+---
+total_timesteps | 507904
+ep_rew_mean | 0.0000
+loss | -7.477893e-01
+curriculum_stage | 1
+ego_wins | 38
+rival_wins | 91
+---
+total_timesteps | 512000
+ep_rew_mean | 0.0000
+loss | -7.827079e-01
+curriculum_stage | 1
+ego_wins | 38
+rival_wins | 91
+---
+total_timesteps | 516096
+ep_rew_mean | 0.0000
+loss | -7.937513e-01
+curriculum_stage | 1
+ego_wins | 39
+rival_wins | 91
+---
+total_timesteps | 520192
+ep_rew_mean | 0.0000
+loss | -1.775494e-01
+curriculum_stage | 1
+ego_wins | 40
+rival_wins | 91
+---
+total_timesteps | 524288
+ep_rew_mean | 0.0000
+loss | 2.526213e+00
+curriculum_stage | 1
+ego_wins | 40
+rival_wins | 93
+---
+total_timesteps | 528384
+ep_rew_mean | 0.0000
+loss | -6.411539e-01
+curriculum_stage | 1
+ego_wins | 40
+rival_wins | 93
+---
+total_timesteps | 532480
+ep_rew_mean | 0.0000
+loss | -8.001160e-01
+curriculum_stage | 1
+ego_wins | 40
+rival_wins | 94
+---
+total_timesteps | 536576
+ep_rew_mean | 0.0000
+loss | -5.978817e-01
+curriculum_stage | 1
+ego_wins | 41
+rival_wins | 95
+---
+total_timesteps | 540672
+ep_rew_mean | 0.0000
+loss | -8.216032e-01
+curriculum_stage | 1
+ego_wins | 41
+rival_wins | 95
+---
+total_timesteps | 544768
+ep_rew_mean | 0.0000
+loss | -8.105642e-01
+curriculum_stage | 1
+ego_wins | 43
+rival_wins | 95
+---
+total_timesteps | 548864
+ep_rew_mean | 0.0000
+loss | -7.127717e-01
+curriculum_stage | 1
+ego_wins | 43
+rival_wins | 96
+---
+total_timesteps | 552960
+ep_rew_mean | 0.0000
+loss | -8.191060e-01
+curriculum_stage | 1
+ego_wins | 44
+rival_wins | 96
+---
+total_timesteps | 557056
+ep_rew_mean | 0.0000
+loss | -7.079169e-01
+curriculum_stage | 1
+ego_wins | 45
+rival_wins | 96
+---
+total_timesteps | 561152
+ep_rew_mean | 0.0000
+loss | -7.367200e-01
+curriculum_stage | 1
+ego_wins | 45
+rival_wins | 97
+---
+total_timesteps | 565248
+ep_rew_mean | 0.0000
+loss | -8.229305e-01
+curriculum_stage | 1
+ego_wins | 45
+rival_wins | 99
+---
+total_timesteps | 569344
+ep_rew_mean | 0.0000
+loss | -8.222560e-01
+curriculum_stage | 1
+ego_wins | 45
+rival_wins | 101
+---
+total_timesteps | 573440
+ep_rew_mean | 0.0000
+loss | -8.611808e-01
+curriculum_stage | 1
+ego_wins | 45
+rival_wins | 102
+---
+total_timesteps | 577536
+ep_rew_mean | 0.0000
+loss | -8.643610e-01
+curriculum_stage | 1
+ego_wins | 46
+rival_wins | 102
+---
+total_timesteps | 581632
+ep_rew_mean | 0.0000
+loss | -7.837288e-01
+curriculum_stage | 1
+ego_wins | 46
+rival_wins | 103
+---
+total_timesteps | 585728
+ep_rew_mean | 0.0000
+loss | -8.893530e-01
+curriculum_stage | 1
+ego_wins | 46
+rival_wins | 103
+---
+total_timesteps | 589824
+ep_rew_mean | 0.0000
+loss | -8.829577e-01
+curriculum_stage | 1
+ego_wins | 46
+rival_wins | 104
+---
+total_timesteps | 593920
+ep_rew_mean | 0.0000
+loss | 1.753175e+00
+curriculum_stage | 1
+ego_wins | 47
+rival_wins | 104
+---
+total_timesteps | 598016
+ep_rew_mean | 0.0000
+loss | -7.385916e-01
+curriculum_stage | 1
+ego_wins | 47
+rival_wins | 105
+---
+total_timesteps | 602112
+ep_rew_mean | 0.0000
+loss | -8.726387e-01
+curriculum_stage | 1
+ego_wins | 48
+rival_wins | 106
+---
+total_timesteps | 606208
+ep_rew_mean | 0.0000
+loss | -8.743974e-01
+curriculum_stage | 1
+ego_wins | 48
+rival_wins | 107
+---
+total_timesteps | 610304
+ep_rew_mean | 0.0000
+loss | -7.975636e-01
+curriculum_stage | 1
+ego_wins | 48
+rival_wins | 108
+---
+total_timesteps | 614400
+ep_rew_mean | 0.0000
+loss | -9.217423e-01
+curriculum_stage | 1
+ego_wins | 48
+rival_wins | 110
+---
+total_timesteps | 618496
+ep_rew_mean | 0.0000
+loss | -8.800911e-01
+curriculum_stage | 1
+ego_wins | 49
+rival_wins | 110
+---
+total_timesteps | 622592
+ep_rew_mean | 0.0000
+loss | -8.820376e-01
+curriculum_stage | 1
+ego_wins | 51
+rival_wins | 110
+---
+total_timesteps | 626688
+ep_rew_mean | 0.0000
+loss | 3.392593e+00
+curriculum_stage | 1
+ego_wins | 52
+rival_wins | 110
+---
+total_timesteps | 630784
+ep_rew_mean | 0.0000
+loss | -9.340419e-01
+curriculum_stage | 1
+ego_wins | 52
+rival_wins | 112
+---
+total_timesteps | 634880
+ep_rew_mean | 0.0000
+loss | -9.123677e-01
+curriculum_stage | 1
+ego_wins | 52
+rival_wins | 113
+---
+total_timesteps | 638976
+ep_rew_mean | 0.0000
+loss | -9.529447e-01
+curriculum_stage | 1
+ego_wins | 53
+rival_wins | 113
+---
+total_timesteps | 643072
+ep_rew_mean | 0.0000
+loss | -1.196077e-01
+curriculum_stage | 1
+ego_wins | 53
+rival_wins | 114
+---
+total_timesteps | 647168
+ep_rew_mean | 0.0000
+loss | -8.821823e-01
+curriculum_stage | 1
+ego_wins | 53
+rival_wins | 114
+---
+total_timesteps | 651264
+ep_rew_mean | 0.0000
+loss | -7.140571e-01
+curriculum_stage | 1
+ego_wins | 53
+rival_wins | 115
+---
+total_timesteps | 655360
+ep_rew_mean | 0.0000
+loss | -9.200483e-01
+curriculum_stage | 1
+ego_wins | 54
+rival_wins | 115
+---
+total_timesteps | 659456
+ep_rew_mean | 0.0000
+loss | -8.616812e-01
+curriculum_stage | 1
+ego_wins | 56
+rival_wins | 115
+---
+total_timesteps | 663552
+ep_rew_mean | 0.0000
+loss | -7.835124e-01
+curriculum_stage | 1
+ego_wins | 56
+rival_wins | 115
+---
+total_timesteps | 667648
+ep_rew_mean | 0.0000
+loss | 1.623343e+01
+curriculum_stage | 1
+ego_wins | 56
+rival_wins | 117
+---
+total_timesteps | 671744
+ep_rew_mean | 0.0000
+loss | 1.236882e+00
+curriculum_stage | 1
+ego_wins | 57
+rival_wins | 117
+---
+total_timesteps | 675840
+ep_rew_mean | 0.0000
+loss | -8.871987e-01
+curriculum_stage | 1
+ego_wins | 57
+rival_wins | 118
+---
+total_timesteps | 679936
+ep_rew_mean | 0.0000
+loss | -9.052889e-01
+curriculum_stage | 1
+ego_wins | 58
+rival_wins | 118
+---
+total_timesteps | 684032
+ep_rew_mean | 0.0000
+loss | -3.623522e-01
+curriculum_stage | 1
+ego_wins | 58
+rival_wins | 118
+---
+total_timesteps | 688128
+ep_rew_mean | 0.0000
+loss | -8.993991e-01
+curriculum_stage | 1
+ego_wins | 59
+rival_wins | 118
+---
+total_timesteps | 692224
+ep_rew_mean | 0.0000
+loss | -9.773842e-01
+curriculum_stage | 1
+ego_wins | 59
+rival_wins | 119
+---
+total_timesteps | 696320
+ep_rew_mean | 0.0000
+loss | -9.782238e-01
+curriculum_stage | 1
+ego_wins | 59
+rival_wins | 119
+---
+total_timesteps | 700416
+ep_rew_mean | 0.0000
+loss | -9.378868e-01
+curriculum_stage | 1
+ego_wins | 59
+rival_wins | 120
+---
+total_timesteps | 704512
+ep_rew_mean | 0.0000
+loss | -9.905006e-01
+curriculum_stage | 1
+ego_wins | 59
+rival_wins | 120
+---
+total_timesteps | 708608
+ep_rew_mean | 0.0000
+loss | -1.017730e+00
+curriculum_stage | 1
+ego_wins | 59
+rival_wins | 121
+---
+total_timesteps | 712704
+ep_rew_mean | 0.0000
+loss | -1.038966e+00
+curriculum_stage | 1
+ego_wins | 59
+rival_wins | 122
+---
+total_timesteps | 716800
+ep_rew_mean | 0.0000
+loss | -9.867538e-01
+curriculum_stage | 1
+ego_wins | 59
+rival_wins | 124
+---
+total_timesteps | 720896
+ep_rew_mean | 0.0000
+loss | -9.751589e-01
+curriculum_stage | 1
+ego_wins | 59
+rival_wins | 125
+---
+total_timesteps | 724992
+ep_rew_mean | 0.0000
+loss | 5.801352e+00
+curriculum_stage | 1
+ego_wins | 60
+rival_wins | 126
+---
+total_timesteps | 729088
+ep_rew_mean | 0.0000
+loss | -9.769530e-01
+curriculum_stage | 1
+ego_wins | 60
+rival_wins | 127
+---
+total_timesteps | 733184
+ep_rew_mean | 0.0000
+loss | -1.023602e+00
+curriculum_stage | 1
+ego_wins | 61
+rival_wins | 127
+---
+total_timesteps | 737280
+ep_rew_mean | 0.0000
+loss | -9.729371e-01
+curriculum_stage | 1
+ego_wins | 61
+rival_wins | 129
+---
+total_timesteps | 741376
+ep_rew_mean | 0.0000
+loss | 1.585245e+00
+curriculum_stage | 1
+ego_wins | 61
+rival_wins | 130
+---
+total_timesteps | 745472
+ep_rew_mean | 0.0000
+loss | 2.760369e+00
+curriculum_stage | 1
+ego_wins | 61
+rival_wins | 131
+---
+total_timesteps | 749568
+ep_rew_mean | 0.0000
+loss | -9.793266e-01
+curriculum_stage | 1
+ego_wins | 61
+rival_wins | 132
+---
+total_timesteps | 753664
+ep_rew_mean | 0.0000
+loss | -9.923483e-01
+curriculum_stage | 1
+ego_wins | 61
+rival_wins | 132
+---
+total_timesteps | 757760
+ep_rew_mean | 0.0000
+loss | -4.333898e-01
+curriculum_stage | 1
+ego_wins | 61
+rival_wins | 133
+---
+total_timesteps | 761856
+ep_rew_mean | 0.0000
+loss | -9.764061e-01
+curriculum_stage | 1
+ego_wins | 62
+rival_wins | 134
+---
+total_timesteps | 765952
+ep_rew_mean | 0.0000
+loss | -9.394500e-01
+curriculum_stage | 1
+ego_wins | 62
+rival_wins | 136
+---
+total_timesteps | 770048
+ep_rew_mean | 0.0000
+loss | -9.679427e-01
+curriculum_stage | 1
+ego_wins | 63
+rival_wins | 137
+---
+total_timesteps | 774144
+ep_rew_mean | 0.0000
+loss | -1.001629e+00
+curriculum_stage | 1
+ego_wins | 63
+rival_wins | 140
+---
+total_timesteps | 778240
+ep_rew_mean | 0.0000
+loss | 7.773972e-01
+curriculum_stage | 1
+ego_wins | 63
+rival_wins | 142
+---
+total_timesteps | 782336
+ep_rew_mean | 0.0000
+loss | 1.152041e+00
+curriculum_stage | 1
+ego_wins | 63
+rival_wins | 146
+---
+total_timesteps | 786432
+ep_rew_mean | 0.0000
+loss | -3.953292e-01
+curriculum_stage | 1
+ego_wins | 63
+rival_wins | 150
+---
+total_timesteps | 790528
+ep_rew_mean | 0.0000
+loss | -6.445377e-01
+curriculum_stage | 1
+ego_wins | 63
+rival_wins | 152
+---
+total_timesteps | 794624
+ep_rew_mean | 0.0000
+loss | -1.046496e+00
+curriculum_stage | 1
+ego_wins | 63
+rival_wins | 153
+---
+total_timesteps | 798720
+ep_rew_mean | 0.0000
+loss | -1.069782e+00
+curriculum_stage | 1
+ego_wins | 63
+rival_wins | 153
+---
+total_timesteps | 802816
+ep_rew_mean | 0.0000
+loss | -1.060733e+00
+curriculum_stage | 1
+ego_wins | 64
+rival_wins | 154
+---
+total_timesteps | 806912
+ep_rew_mean | 0.0000
+loss | -7.399502e-01
+curriculum_stage | 1
+ego_wins | 64
+rival_wins | 155
+---
+total_timesteps | 811008
+ep_rew_mean | 0.0000
+loss | -1.003359e+00
+curriculum_stage | 1
+ego_wins | 64
+rival_wins | 157
+---
+total_timesteps | 815104
+ep_rew_mean | 0.0000
+loss | -9.528471e-01
+curriculum_stage | 1
+ego_wins | 64
+rival_wins | 157
+---
+total_timesteps | 819200
+ep_rew_mean | 0.0000
+loss | -1.089202e+00
+curriculum_stage | 1
+ego_wins | 64
+rival_wins | 157
+---
+total_timesteps | 823296
+ep_rew_mean | 0.0000
+loss | -1.094595e+00
+curriculum_stage | 1
+ego_wins | 64
+rival_wins | 158
+---
+total_timesteps | 827392
+ep_rew_mean | 0.0000
+loss | -7.740426e-01
+curriculum_stage | 1
+ego_wins | 64
+rival_wins | 160
+---
+total_timesteps | 831488
+ep_rew_mean | 0.0000
+loss | 4.788071e-01
+curriculum_stage | 1
+ego_wins | 64
+rival_wins | 161
+---
+total_timesteps | 835584
+ep_rew_mean | 0.0000
+loss | -4.820755e-01
+curriculum_stage | 1
+ego_wins | 64
+rival_wins | 163
+---
+total_timesteps | 839680
+ep_rew_mean | 0.0000
+loss | 3.811259e+00
+curriculum_stage | 1
+ego_wins | 64
+rival_wins | 165
+---
+total_timesteps | 843776
+ep_rew_mean | 0.0000
+loss | 2.039166e+00
+curriculum_stage | 1
+ego_wins | 65
+rival_wins | 166
+---
+total_timesteps | 847872
+ep_rew_mean | 0.0000
+loss | -7.287802e-01
+curriculum_stage | 1
+ego_wins | 65
+rival_wins | 167
+---
+total_timesteps | 851968
+ep_rew_mean | 0.0000
+loss | -1.036324e+00
+curriculum_stage | 1
+ego_wins | 66
+rival_wins | 167
+---
+total_timesteps | 856064
+ep_rew_mean | 0.0000
+loss | -3.953705e-01
+curriculum_stage | 1
+ego_wins | 68
+rival_wins | 167
+---
+total_timesteps | 860160
+ep_rew_mean | 0.0000
+loss | 4.255055e+00
+curriculum_stage | 1
+ego_wins | 68
+rival_wins | 170
+---
+total_timesteps | 864256
+ep_rew_mean | 0.0000
+loss | -3.930110e-01
+curriculum_stage | 1
+ego_wins | 69
+rival_wins | 171
+---
+total_timesteps | 868352
+ep_rew_mean | 0.0000
+loss | -8.873398e-01
+curriculum_stage | 1
+ego_wins | 69
+rival_wins | 172
+---
+total_timesteps | 872448
+ep_rew_mean | 0.0000
+loss | -9.649436e-01
+curriculum_stage | 1
+ego_wins | 69
+rival_wins | 173
+---
+total_timesteps | 876544
+ep_rew_mean | 0.0000
+loss | 3.118768e+01
+curriculum_stage | 1
+ego_wins | 70
+rival_wins | 174
+---
+total_timesteps | 880640
+ep_rew_mean | 0.0000
+loss | 3.119025e+00
+curriculum_stage | 1
+ego_wins | 70
+rival_wins | 175
+---
+total_timesteps | 884736
+ep_rew_mean | 0.0000
+loss | -4.565200e-01
+curriculum_stage | 1
+ego_wins | 70
+rival_wins | 177
+---
+total_timesteps | 888832
+ep_rew_mean | 0.0000
+loss | -1.015175e+00
+curriculum_stage | 1
+ego_wins | 70
+rival_wins | 178
+---
+total_timesteps | 892928
+ep_rew_mean | 0.0000
+loss | -1.118882e+00
+curriculum_stage | 1
+ego_wins | 70
+rival_wins | 179
+---
+total_timesteps | 897024
+ep_rew_mean | 0.0000
+loss | -1.107339e+00
+curriculum_stage | 1
+ego_wins | 70
+rival_wins | 180
+---
+total_timesteps | 901120
+ep_rew_mean | 0.0000
+loss | -1.091914e+00
+curriculum_stage | 1
+ego_wins | 71
+rival_wins | 180
+---
+total_timesteps | 905216
+ep_rew_mean | 0.0000
+loss | -1.108658e+00
+curriculum_stage | 1
+ego_wins | 72
+rival_wins | 180
+---
+total_timesteps | 909312
+ep_rew_mean | 0.0000
+loss | -1.136624e+00
+curriculum_stage | 1
+ego_wins | 73
+rival_wins | 180
+---
+total_timesteps | 913408
+ep_rew_mean | 0.0000
+loss | 5.744103e+00
+curriculum_stage | 1
+ego_wins | 73
+rival_wins | 181
+---
+total_timesteps | 917504
+ep_rew_mean | 0.0000
+loss | -1.115497e+00
+curriculum_stage | 1
+ego_wins | 73
+rival_wins | 182
+---
+total_timesteps | 921600
+ep_rew_mean | 0.0000
+loss | -1.169616e+00
+curriculum_stage | 1
+ego_wins | 74
+rival_wins | 182
+---
+total_timesteps | 925696
+ep_rew_mean | 0.0000
+loss | -1.103596e+00
+curriculum_stage | 1
+ego_wins | 75
+rival_wins | 182
+---
+total_timesteps | 929792
+ep_rew_mean | 0.0000
+loss | -9.063104e-01
+curriculum_stage | 1
+ego_wins | 76
+rival_wins | 183
+---
+total_timesteps | 933888
+ep_rew_mean | 0.0000
+loss | -1.150444e+00
+curriculum_stage | 1
+ego_wins | 76
+rival_wins | 184
+---
+total_timesteps | 937984
+ep_rew_mean | 0.0000
+loss | -1.207034e+00
+curriculum_stage | 1
+ego_wins | 76
+rival_wins | 186
+---
+total_timesteps | 942080
+ep_rew_mean | 0.0000
+loss | -5.918128e-01
+curriculum_stage | 1
+ego_wins | 76
+rival_wins | 187
+---
+total_timesteps | 946176
+ep_rew_mean | 0.0000
+loss | -1.140386e+00
+curriculum_stage | 1
+ego_wins | 76
+rival_wins | 187
+---
+total_timesteps | 950272
+ep_rew_mean | 0.0000
+loss | -1.217432e+00
+curriculum_stage | 1
+ego_wins | 77
+rival_wins | 187
+---
+total_timesteps | 954368
+ep_rew_mean | 0.0000
+loss | -1.158476e+00
+curriculum_stage | 1
+ego_wins | 78
+rival_wins | 187
+---
+total_timesteps | 958464
+ep_rew_mean | 0.0000
+loss | -1.226652e+00
+curriculum_stage | 1
+ego_wins | 78
+rival_wins | 187
+---
+total_timesteps | 962560
+ep_rew_mean | 0.0000
+loss | -1.228500e+00
+curriculum_stage | 1
+ego_wins | 78
+rival_wins | 188
+---
+total_timesteps | 966656
+ep_rew_mean | 0.0000
+loss | -1.264109e+00
+curriculum_stage | 1
+ego_wins | 78
+rival_wins | 188
+---
+total_timesteps | 970752
+ep_rew_mean | 0.0000
+loss | -1.246165e+00
+curriculum_stage | 1
+ego_wins | 78
+rival_wins | 189
+---
+total_timesteps | 974848
+ep_rew_mean | 0.0000
+loss | -1.246693e+00
+curriculum_stage | 1
+ego_wins | 78
+rival_wins | 189
+---
+total_timesteps | 978944
+ep_rew_mean | 0.0000
+loss | -1.235104e+00
+curriculum_stage | 1
+ego_wins | 79
+rival_wins | 189
+---
+total_timesteps | 983040
+ep_rew_mean | 0.0000
+loss | 4.378623e+00
+curriculum_stage | 1
+ego_wins | 79
+rival_wins | 190
+---
+total_timesteps | 987136
+ep_rew_mean | 0.0000
+loss | -1.195551e+00
+curriculum_stage | 1
+ego_wins | 79
+rival_wins | 190
+---
+total_timesteps | 991232
+ep_rew_mean | 0.0000
+loss | -1.242478e+00
+curriculum_stage | 1
+ego_wins | 80
+rival_wins | 191
+---
+total_timesteps | 995328
+ep_rew_mean | 0.0000
+loss | 1.294745e+00
+curriculum_stage | 1
+ego_wins | 81
+rival_wins | 191
+---
+total_timesteps | 999424
+ep_rew_mean | 0.0000
+loss | -1.170064e+00
+curriculum_stage | 1
+ego_wins | 83
+rival_wins | 192
+---
+total_timesteps | 1003520
+ep_rew_mean | 0.0000
+loss | 1.900055e-01
+curriculum_stage | 1
+ego_wins | 84
+rival_wins | 192
+---
+total_timesteps | 1007616
+ep_rew_mean | 0.0000
+loss | -7.949408e-01
+curriculum_stage | 1
+ego_wins | 85
+rival_wins | 192
+---
+total_timesteps | 1011712
+ep_rew_mean | 0.0000
+loss | -1.281165e+00
+curriculum_stage | 1
+ego_wins | 85
+rival_wins | 193
+---
+total_timesteps | 1015808
+ep_rew_mean | 0.0000
+loss | 3.866305e+00
+curriculum_stage | 1
+ego_wins | 86
+rival_wins | 195
+---
+total_timesteps | 1019904
+ep_rew_mean | 0.0000
+loss | -8.157456e-01
+curriculum_stage | 1
+ego_wins | 86
+rival_wins | 195
+---
+total_timesteps | 1024000
+ep_rew_mean | 0.0000
+loss | -1.199307e+00
+curriculum_stage | 1
+ego_wins | 86
+rival_wins | 195
+---
+total_timesteps | 1028096
+ep_rew_mean | 0.0000
+loss | -1.297208e+00
+curriculum_stage | 1
+ego_wins | 86
+rival_wins | 196
+---
+total_timesteps | 1032192
+ep_rew_mean | 0.0000
+loss | -2.301883e-01
+curriculum_stage | 1
+ego_wins | 86
+rival_wins | 197
+---
+total_timesteps | 1036288
+ep_rew_mean | 0.0000
+loss | -1.307427e+00
+curriculum_stage | 1
+ego_wins | 86
+rival_wins | 197
+---
+total_timesteps | 1040384
+ep_rew_mean | 0.0000
+loss | -1.335417e+00
+curriculum_stage | 1
+ego_wins | 87
+rival_wins | 197
+---
+total_timesteps | 1044480
+ep_rew_mean | 0.0000
+loss | 3.408957e+00
+curriculum_stage | 1
+ego_wins | 88
+rival_wins | 198
+---
+total_timesteps | 1048576
+ep_rew_mean | 0.0000
+loss | -1.071052e+00
+curriculum_stage | 1
+ego_wins | 88
+rival_wins | 200
+---
+total_timesteps | 1052672
+ep_rew_mean | 0.0000
+loss | -1.219480e+00
+curriculum_stage | 1
+ego_wins | 88
+rival_wins | 201
+---
+total_timesteps | 1056768
+ep_rew_mean | 0.0000
+loss | -1.304979e+00
+curriculum_stage | 1
+ego_wins | 89
+rival_wins | 201
+---
+total_timesteps | 1060864
+ep_rew_mean | 0.0000
+loss | -1.219440e+00
+curriculum_stage | 1
+ego_wins | 90
+rival_wins | 201
+---
+total_timesteps | 1064960
+ep_rew_mean | 0.0000
+loss | -1.246690e+00
+curriculum_stage | 1
+ego_wins | 91
+rival_wins | 202
+---
+total_timesteps | 1069056
+ep_rew_mean | 0.0000
+loss | 2.602271e+00
+curriculum_stage | 1
+ego_wins | 91
+rival_wins | 202
+---
+total_timesteps | 1073152
+ep_rew_mean | 0.0000
+loss | -1.152521e+00
+curriculum_stage | 1
+ego_wins | 91
+rival_wins | 203
+---
+total_timesteps | 1077248
+ep_rew_mean | 0.0000
+loss | -1.244663e+00
+curriculum_stage | 1
+ego_wins | 91
+rival_wins | 204
+---
+total_timesteps | 1081344
+ep_rew_mean | 0.0000
+loss | 6.631058e-01
+curriculum_stage | 1
+ego_wins | 92
+rival_wins | 204
+---
+total_timesteps | 1085440
+ep_rew_mean | 0.0000
+loss | 4.678102e+01
+curriculum_stage | 1
+ego_wins | 92
+rival_wins | 206
+---
+total_timesteps | 1089536
+ep_rew_mean | 0.0000
+loss | -7.988153e-01
+curriculum_stage | 1
+ego_wins | 92
+rival_wins | 206
+---
+total_timesteps | 1093632
+ep_rew_mean | 0.0000
+loss | -1.325219e+00
+curriculum_stage | 1
+ego_wins | 93
+rival_wins | 206
+---
+total_timesteps | 1097728
+ep_rew_mean | 0.0000
+loss | -1.217532e+00
+curriculum_stage | 1
+ego_wins | 94
+rival_wins | 206
+---
+total_timesteps | 1101824
+ep_rew_mean | 0.0000
+loss | -1.289707e+00
+curriculum_stage | 1
+ego_wins | 94
+rival_wins | 206
+---
+total_timesteps | 1105920
+ep_rew_mean | 0.0000
+loss | -1.253275e-01
+curriculum_stage | 1
+ego_wins | 94
+rival_wins | 208
+---
+total_timesteps | 1110016
+ep_rew_mean | 0.0000
+loss | -1.231946e+00
+curriculum_stage | 1
+ego_wins | 94
+rival_wins | 208
+---
+total_timesteps | 1114112
+ep_rew_mean | 0.0000
+loss | -1.332388e+00
+curriculum_stage | 1
+ego_wins | 95
+rival_wins | 208
+---
+total_timesteps | 1118208
+ep_rew_mean | 0.0000
+loss | -1.348612e+00
+curriculum_stage | 1
+ego_wins | 96
+rival_wins | 208
+---
+total_timesteps | 1122304
+ep_rew_mean | 0.0000
+loss | -5.098374e-01
+curriculum_stage | 1
+ego_wins | 96
+rival_wins | 208
+---
+total_timesteps | 1126400
+ep_rew_mean | 0.0000
+loss | 4.706070e-01
+curriculum_stage | 1
+ego_wins | 96
+rival_wins | 209
+---
+total_timesteps | 1130496
+ep_rew_mean | 0.0000
+loss | -1.362632e+00
+curriculum_stage | 1
+ego_wins | 96
+rival_wins | 210
+---
+total_timesteps | 1134592
+ep_rew_mean | 0.0000
+loss | -1.373415e+00
+curriculum_stage | 1
+ego_wins | 96
+rival_wins | 211
+---
+total_timesteps | 1138688
+ep_rew_mean | 0.0000
+loss | -1.413872e+00
+curriculum_stage | 1
+ego_wins | 96
+rival_wins | 211
+---
+total_timesteps | 1142784
+ep_rew_mean | 0.0000
+loss | -1.372914e+00
+curriculum_stage | 1
+ego_wins | 96
+rival_wins | 211
+---
+total_timesteps | 1146880
+ep_rew_mean | 0.0000
+loss | -1.435636e+00
+curriculum_stage | 1
+ego_wins | 96
+rival_wins | 211
+---
+total_timesteps | 1150976
+ep_rew_mean | 0.0000
+loss | -1.428090e+00
+curriculum_stage | 1
+ego_wins | 98
+rival_wins | 211
+---
+total_timesteps | 1155072
+ep_rew_mean | 0.0000
+loss | -1.178743e+00
+curriculum_stage | 1
+ego_wins | 99
+rival_wins | 211
+---
+total_timesteps | 1159168
+ep_rew_mean | 0.0000
+loss | -1.340359e+00
+curriculum_stage | 1
+ego_wins | 99
+rival_wins | 211
+---
+total_timesteps | 1163264
+ep_rew_mean | 0.0000
+loss | -1.455361e+00
+curriculum_stage | 1
+ego_wins | 99
+rival_wins | 212
+---
+total_timesteps | 1167360
+ep_rew_mean | 0.0000
+loss | -1.435561e+00
+curriculum_stage | 1
+ego_wins | 99
+rival_wins | 212
+---
+total_timesteps | 1171456
+ep_rew_mean | 0.0000
+loss | -1.469840e+00
+curriculum_stage | 1
+ego_wins | 99
+rival_wins | 214
+---
+total_timesteps | 1175552
+ep_rew_mean | 0.0000
+loss | 3.146317e+00
+curriculum_stage | 1
+ego_wins | 100
+rival_wins | 215
+---
+total_timesteps | 1179648
+ep_rew_mean | 0.0000
+loss | -1.265247e+00
+curriculum_stage | 1
+ego_wins | 100
+rival_wins | 218
+---
+total_timesteps | 1183744
+ep_rew_mean | 0.0000
+loss | -1.391563e+00
+curriculum_stage | 1
+ego_wins | 101
+rival_wins | 218
+---
+total_timesteps | 1187840
+ep_rew_mean | 0.0000
+loss | -7.151035e-01
+curriculum_stage | 1
+ego_wins | 101
+rival_wins | 219
+---
+total_timesteps | 1191936
+ep_rew_mean | 0.0000
+loss | -1.345022e+00
+curriculum_stage | 1
+ego_wins | 102
+rival_wins | 219
+---
+total_timesteps | 1196032
+ep_rew_mean | 0.0000
+loss | -1.104332e+00
+curriculum_stage | 1
+ego_wins | 102
+rival_wins | 219
+---
+total_timesteps | 1200128
+ep_rew_mean | 0.0000
+loss | -1.441497e+00
+curriculum_stage | 1
+ego_wins | 102
+rival_wins | 219
+---
+total_timesteps | 1204224
+ep_rew_mean | 0.0000
+loss | -1.440568e+00
+curriculum_stage | 1
+ego_wins | 102
+rival_wins | 219
+---
+total_timesteps | 1208320
+ep_rew_mean | 0.0000
+loss | -1.488365e+00
+curriculum_stage | 1
+ego_wins | 102
+rival_wins | 219
+---
+total_timesteps | 1212416
+ep_rew_mean | 0.0000
+loss | -1.462979e+00
+curriculum_stage | 1
+ego_wins | 102
+rival_wins | 219
+---
+total_timesteps | 1216512
+ep_rew_mean | 0.0000
+loss | -1.499043e+00
+curriculum_stage | 1
+ego_wins | 102
+rival_wins | 219
+---
+total_timesteps | 1220608
+ep_rew_mean | 0.0000
+loss | -1.480004e+00
+curriculum_stage | 1
+ego_wins | 102
+rival_wins | 220
+---
+total_timesteps | 1224704
+ep_rew_mean | 0.0000
+loss | -1.452947e+00
+curriculum_stage | 1
+ego_wins | 103
+rival_wins | 220
+---
+total_timesteps | 1228800
+ep_rew_mean | 0.0000
+loss | -1.482518e+00
+curriculum_stage | 1
+ego_wins | 103
+rival_wins | 220
+---
+total_timesteps | 1232896
+ep_rew_mean | 0.0000
+loss | -1.513275e+00
+curriculum_stage | 1
+ego_wins | 103
+rival_wins | 220
+---
+total_timesteps | 1236992
+ep_rew_mean | 0.0000
+loss | -1.548509e+00
+curriculum_stage | 1
+ego_wins | 104
+rival_wins | 220
+---
+total_timesteps | 1241088
+ep_rew_mean | 0.0000
+loss | -1.532660e+00
+curriculum_stage | 1
+ego_wins | 105
+rival_wins | 220
+---
+total_timesteps | 1245184
+ep_rew_mean | 0.0000
+loss | -1.067493e+00
+curriculum_stage | 1
+ego_wins | 106
+rival_wins | 221
+---
+total_timesteps | 1249280
+ep_rew_mean | 0.0000
+loss | -1.392003e+00
+curriculum_stage | 1
+ego_wins | 107
+rival_wins | 221
+---
+total_timesteps | 1253376
+ep_rew_mean | 0.0000
+loss | -1.376392e+00
+curriculum_stage | 1
+ego_wins | 107
+rival_wins | 221
+---
+total_timesteps | 1257472
+ep_rew_mean | 0.0000
+loss | -1.542332e+00
+curriculum_stage | 1
+ego_wins | 107
+rival_wins | 221
+---
+total_timesteps | 1261568
+ep_rew_mean | 0.0000
+loss | -1.582051e+00
+curriculum_stage | 1
+ego_wins | 107
+rival_wins | 221
+---
+total_timesteps | 1265664
+ep_rew_mean | 0.0000
+loss | -1.557919e+00
+curriculum_stage | 1
+ego_wins | 108
+rival_wins | 221
+---
+total_timesteps | 1269760
+ep_rew_mean | 0.0000
+loss | -1.551052e+00
+curriculum_stage | 1
+ego_wins | 108
+rival_wins | 221
+---
+total_timesteps | 1273856
+ep_rew_mean | 0.0000
+loss | -1.593715e+00
+curriculum_stage | 1
+ego_wins | 109
+rival_wins | 221
+---
+total_timesteps | 1277952
+ep_rew_mean | 0.0000
+loss | -1.569671e+00
+curriculum_stage | 1
+ego_wins | 109
+rival_wins | 221
+---
+total_timesteps | 1282048
+ep_rew_mean | 0.0000
+loss | -1.595166e+00
+curriculum_stage | 1
+ego_wins | 109
+rival_wins | 221
+---
+total_timesteps | 1286144
+ep_rew_mean | 0.0000
+loss | -1.596306e+00
+curriculum_stage | 1
+ego_wins | 109
+rival_wins | 221
+---
+total_timesteps | 1290240
+ep_rew_mean | 0.0000
+loss | -1.574636e+00
+curriculum_stage | 1
+ego_wins | 109
+rival_wins | 221
+---
+total_timesteps | 1294336
+ep_rew_mean | 0.0000
+loss | -1.597588e+00
+curriculum_stage | 1
+ego_wins | 109
+rival_wins | 221
+---
+total_timesteps | 1298432
+ep_rew_mean | 0.0000
+loss | -1.612218e+00
+curriculum_stage | 1
+ego_wins | 109
+rival_wins | 221
+---
+total_timesteps | 1302528
+ep_rew_mean | 0.0000
+loss | -1.589572e+00
+curriculum_stage | 1
+ego_wins | 109
+rival_wins | 221
+---
+total_timesteps | 1306624
+ep_rew_mean | 0.0000
+loss | -1.640112e+00
+curriculum_stage | 1
+ego_wins | 109
+rival_wins | 221
+---
+total_timesteps | 1310720
+ep_rew_mean | 0.0000
+loss | -1.558135e+00
+curriculum_stage | 1
+ego_wins | 109
+rival_wins | 221
+---
+total_timesteps | 1314816
+ep_rew_mean | 0.0000
+loss | -1.629794e+00
+curriculum_stage | 1
+ego_wins | 109
+rival_wins | 221
+---
+total_timesteps | 1318912
+ep_rew_mean | 0.0000
+loss | -1.586028e+00
+curriculum_stage | 1
+ego_wins | 109
+rival_wins | 221
+---
+total_timesteps | 1323008
+ep_rew_mean | 0.0000
+loss | -1.631427e+00
+curriculum_stage | 1
+ego_wins | 109
+rival_wins | 222
+---
+total_timesteps | 1327104
+ep_rew_mean | 0.0000
+loss | -1.602678e+00
+curriculum_stage | 1
+ego_wins | 109
+rival_wins | 222
+---
+total_timesteps | 1331200
+ep_rew_mean | 0.0000
+loss | -1.680801e+00
+curriculum_stage | 1
+ego_wins | 109
+rival_wins | 222
+---
+total_timesteps | 1335296
+ep_rew_mean | 0.0000
+loss | -1.603798e+00
+curriculum_stage | 1
+ego_wins | 110
+rival_wins | 222
+---
+total_timesteps | 1339392
+ep_rew_mean | 0.0000
+loss | -1.600743e+00
+curriculum_stage | 1
+ego_wins | 110
+rival_wins | 222
+---
+total_timesteps | 1343488
+ep_rew_mean | 0.0000
+loss | -1.662634e+00
+curriculum_stage | 1
+ego_wins | 110
+rival_wins | 223
+---
+total_timesteps | 1347584
+ep_rew_mean | 0.0000
+loss | -1.666421e+00
+curriculum_stage | 1
+ego_wins | 110
+rival_wins | 223
+---
+total_timesteps | 1351680
+ep_rew_mean | 0.0000
+loss | -1.355648e+00
+curriculum_stage | 1
+ego_wins | 110
+rival_wins | 223
+---
+total_timesteps | 1355776
+ep_rew_mean | 0.0000
+loss | -1.655395e+00
+curriculum_stage | 1
+ego_wins | 110
+rival_wins | 223
+---
+total_timesteps | 1359872
+ep_rew_mean | 0.0000
+loss | -1.666036e+00
+curriculum_stage | 1
+ego_wins | 110
+rival_wins | 224
+---
+total_timesteps | 1363968
+ep_rew_mean | 0.0000
+loss | -1.691511e+00
+curriculum_stage | 1
+ego_wins | 110
+rival_wins | 224
+---
+total_timesteps | 1368064
+ep_rew_mean | 0.0000
+loss | -1.687556e+00
+curriculum_stage | 1
+ego_wins | 110
+rival_wins | 224
+---
+total_timesteps | 1372160
+ep_rew_mean | 0.0000
+loss | -1.709816e+00
+curriculum_stage | 1
+ego_wins | 110
+rival_wins | 224
+---
+total_timesteps | 1376256
+ep_rew_mean | 0.0000
+loss | -1.720133e+00
+curriculum_stage | 1
+ego_wins | 110
+rival_wins | 224
+---
+total_timesteps | 1380352
+ep_rew_mean | 0.0000
+loss | -1.702030e+00
+curriculum_stage | 1
+ego_wins | 110
+rival_wins | 224
+---
+total_timesteps | 1384448
+ep_rew_mean | 0.0000
+loss | -1.723624e+00
+curriculum_stage | 1
+ego_wins | 110
+rival_wins | 224
+---
+total_timesteps | 1388544
+ep_rew_mean | 0.0000
+loss | -1.732521e+00
+curriculum_stage | 1
+ego_wins | 110
+rival_wins | 224
+---
+total_timesteps | 1392640
+ep_rew_mean | 0.0000
+loss | -1.746674e+00
+curriculum_stage | 1
+ego_wins | 110
+rival_wins | 224
+---
+total_timesteps | 1396736
+ep_rew_mean | 0.0000
+loss | -1.745542e+00
+curriculum_stage | 1
+ego_wins | 110
+rival_wins | 224
+---
+total_timesteps | 1400832
+ep_rew_mean | 0.0000
+loss | -1.760816e+00
+curriculum_stage | 1
+ego_wins | 110
+rival_wins | 224
+---
+total_timesteps | 1404928
+ep_rew_mean | 0.0000
+loss | -1.737500e+00
+curriculum_stage | 1
+ego_wins | 110
+rival_wins | 224
+---
+total_timesteps | 1409024
+ep_rew_mean | 0.0000
+loss | -1.763197e+00
+curriculum_stage | 1
+ego_wins | 110
+rival_wins | 224
+---
+total_timesteps | 1413120
+ep_rew_mean | 0.0000
+loss | -1.771132e+00
+curriculum_stage | 1
+ego_wins | 110
+rival_wins | 224
+---
+total_timesteps | 1417216
+ep_rew_mean | 0.0000
+loss | -1.762202e+00
+curriculum_stage | 1
+ego_wins | 110
+rival_wins | 224
+---
+total_timesteps | 1421312
+ep_rew_mean | 0.0000
+loss | -1.769826e+00
+curriculum_stage | 1
+ego_wins | 110
+rival_wins | 224
+---
+total_timesteps | 1425408
+ep_rew_mean | 0.0000
+loss | -1.784193e+00
+curriculum_stage | 1
+ego_wins | 110
+rival_wins | 224
+---
+total_timesteps | 1429504
+ep_rew_mean | 0.0000
+loss | -1.779416e+00
+curriculum_stage | 1
+ego_wins | 110
+rival_wins | 224
+---
+total_timesteps | 1433600
+ep_rew_mean | 0.0000
+loss | -1.800078e+00
+curriculum_stage | 1
+ego_wins | 110
+rival_wins | 224
+---
+total_timesteps | 1437696
+ep_rew_mean | 0.0000
+loss | -1.770842e+00
+curriculum_stage | 1
+ego_wins | 110
+rival_wins | 224
+---
+total_timesteps | 1441792
+ep_rew_mean | 0.0000
+loss | -1.807345e+00
+curriculum_stage | 1
+ego_wins | 111
+rival_wins | 224
+---
+total_timesteps | 1445888
+ep_rew_mean | 0.0000
+loss | -1.555347e+00
+curriculum_stage | 1
+ego_wins | 112
+rival_wins | 224
+---
+total_timesteps | 1449984
+ep_rew_mean | 0.0000
+loss | -1.767378e+00
+curriculum_stage | 1
+ego_wins | 112
+rival_wins | 224
+---
+total_timesteps | 1454080
+ep_rew_mean | 0.0000
+loss | -1.792865e+00
+curriculum_stage | 1
+ego_wins | 112
+rival_wins | 225
+---
+total_timesteps | 1458176
+ep_rew_mean | 0.0000
+loss | -1.783184e+00
+curriculum_stage | 1
+ego_wins | 112
+rival_wins | 225
+---
+total_timesteps | 1462272
+ep_rew_mean | 0.0000
+loss | -1.821090e+00
+curriculum_stage | 1
+ego_wins | 112
+rival_wins | 225
+---
+total_timesteps | 1466368
+ep_rew_mean | 0.0000
+loss | -1.811498e+00
+curriculum_stage | 1
+ego_wins | 112
+rival_wins | 225
+---
+total_timesteps | 1470464
+ep_rew_mean | 0.0000
+loss | -1.816810e+00
+curriculum_stage | 1
+ego_wins | 112
+rival_wins | 225
+---
+total_timesteps | 1474560
+ep_rew_mean | 0.0000
+loss | -1.815262e+00
+curriculum_stage | 1
+ego_wins | 112
+rival_wins | 225
+---
+total_timesteps | 1478656
+ep_rew_mean | 0.0000
+loss | -1.837870e+00
+curriculum_stage | 1
+ego_wins | 112
+rival_wins | 225
+---
+total_timesteps | 1482752
+ep_rew_mean | 0.0000
+loss | -1.836528e+00
+curriculum_stage | 1
+ego_wins | 112
+rival_wins | 225
+---
+total_timesteps | 1486848
+ep_rew_mean | 0.0000
+loss | -1.858002e+00
+curriculum_stage | 1
+ego_wins | 112
+rival_wins | 225
+---
+total_timesteps | 1490944
+ep_rew_mean | 0.0000
+loss | -1.848197e+00
+curriculum_stage | 1
+ego_wins | 112
+rival_wins | 225
+---
+total_timesteps | 1495040
+ep_rew_mean | 0.0000
+loss | -1.843197e+00
+curriculum_stage | 1
+ego_wins | 112
+rival_wins | 225
+---
+total_timesteps | 1499136
+ep_rew_mean | 0.0000
+loss | -1.856691e+00
+curriculum_stage | 1
+ego_wins | 112
+rival_wins | 225
+---
+total_timesteps | 1503232
+ep_rew_mean | 0.0000
+loss | -1.872853e+00
+curriculum_stage | 1
+ego_wins | 112
+rival_wins | 225
+---
+total_timesteps | 1507328
+ep_rew_mean | 0.0000
+loss | -1.888535e+00
+curriculum_stage | 1
+ego_wins | 112
+rival_wins | 225
+---
+total_timesteps | 1511424
+ep_rew_mean | 0.0000
+loss | -1.881043e+00
+curriculum_stage | 1
+ego_wins | 112
+rival_wins | 225
+---
+total_timesteps | 1515520
+ep_rew_mean | 0.0000
+loss | -1.802130e+00
+curriculum_stage | 1
+ego_wins | 113
+rival_wins | 225
+---
+total_timesteps | 1519616
+ep_rew_mean | 0.0000
+loss | -1.736923e+00
+curriculum_stage | 1
+ego_wins | 113
+rival_wins | 225
+---
+total_timesteps | 1523712
+ep_rew_mean | 0.0000
+loss | -1.836028e+00
+curriculum_stage | 1
+ego_wins | 113
+rival_wins | 225
+---
+total_timesteps | 1527808
+ep_rew_mean | 0.0000
+loss | -1.880717e+00
+curriculum_stage | 1
+ego_wins | 113
+rival_wins | 225
+---
+total_timesteps | 1531904
+ep_rew_mean | 0.0000
+loss | -1.911413e+00
+curriculum_stage | 1
+ego_wins | 113
+rival_wins | 225
+---
+total_timesteps | 1536000
+ep_rew_mean | 0.0000
+loss | -1.892737e+00
+curriculum_stage | 1
+ego_wins | 114
+rival_wins | 225
+---
+total_timesteps | 1540096
+ep_rew_mean | 0.0000
+loss | -1.852289e+00
+curriculum_stage | 1
+ego_wins | 114
+rival_wins | 225
+---
+total_timesteps | 1544192
+ep_rew_mean | 0.0000
+loss | -1.915836e+00
+curriculum_stage | 1
+ego_wins | 114
+rival_wins | 225
+---
+total_timesteps | 1548288
+ep_rew_mean | 0.0000
+loss | -1.896145e+00
+curriculum_stage | 1
+ego_wins | 114
+rival_wins | 225
+---
+total_timesteps | 1552384
+ep_rew_mean | 0.0000
+loss | -1.923265e+00
+curriculum_stage | 1
+ego_wins | 114
+rival_wins | 225
+---
+total_timesteps | 1556480
+ep_rew_mean | 0.0000
+loss | -1.924514e+00
+curriculum_stage | 1
+ego_wins | 114
+rival_wins | 225
+---
+total_timesteps | 1560576
+ep_rew_mean | 0.0000
+loss | -1.929139e+00
+curriculum_stage | 1
+ego_wins | 114
+rival_wins | 225
+---
+total_timesteps | 1564672
+ep_rew_mean | 0.0000
+loss | -1.914367e+00
+curriculum_stage | 1
+ego_wins | 114
+rival_wins | 225
+---
+total_timesteps | 1568768
+ep_rew_mean | 0.0000
+loss | -1.877502e+00
+curriculum_stage | 1
+ego_wins | 114
+rival_wins | 225
+---
+total_timesteps | 1572864
+ep_rew_mean | 0.0000
+loss | -1.954781e+00
+curriculum_stage | 1
+ego_wins | 114
+rival_wins | 225
+---
+total_timesteps | 1576960
+ep_rew_mean | 0.0000
+loss | -1.966569e+00
+curriculum_stage | 1
+ego_wins | 114
+rival_wins | 225
+---
+total_timesteps | 1581056
+ep_rew_mean | 0.0000
+loss | -1.945523e+00
+curriculum_stage | 1
+ego_wins | 114
+rival_wins | 225
+---
+total_timesteps | 1585152
+ep_rew_mean | 0.0000
+loss | -1.929346e+00
+curriculum_stage | 1
+ego_wins | 114
+rival_wins | 225
+---
+total_timesteps | 1589248
+ep_rew_mean | 0.0000
+loss | -1.950812e+00
+curriculum_stage | 1
+ego_wins | 114
+rival_wins | 225
+---
+total_timesteps | 1593344
+ep_rew_mean | 0.0000
+loss | -1.960062e+00
+curriculum_stage | 1
+ego_wins | 114
+rival_wins | 225
+---
+total_timesteps | 1597440
+ep_rew_mean | 0.0000
+loss | -1.978040e+00
+curriculum_stage | 1
+ego_wins | 114
+rival_wins | 225
+---
+total_timesteps | 1601536
+ep_rew_mean | 0.0000
+loss | -1.978124e+00
+curriculum_stage | 1
+ego_wins | 114
+rival_wins | 225
+---
+total_timesteps | 1605632
+ep_rew_mean | 0.0000
+loss | -1.949978e+00
+curriculum_stage | 1
+ego_wins | 114
+rival_wins | 225
+---
+total_timesteps | 1609728
+ep_rew_mean | 0.0000
+loss | -1.951568e+00
+curriculum_stage | 1
+ego_wins | 114
+rival_wins | 225
+---
+total_timesteps | 1613824
+ep_rew_mean | 0.0000
+loss | -1.978344e+00
+curriculum_stage | 1
+ego_wins | 114
+rival_wins | 225
+---
+total_timesteps | 1617920
+ep_rew_mean | 0.0000
+loss | -1.991204e+00
+curriculum_stage | 1
+ego_wins | 114
+rival_wins | 225
+---
+total_timesteps | 1622016
+ep_rew_mean | 0.0000
+loss | -2.007134e+00
+curriculum_stage | 1
+ego_wins | 114
+rival_wins | 225
+---
+total_timesteps | 1626112
+ep_rew_mean | 0.0000
+loss | -2.009174e+00
+curriculum_stage | 1
+ego_wins | 114
+rival_wins | 225
+---
+total_timesteps | 1630208
+ep_rew_mean | 0.0000
+loss | -2.007863e+00
+curriculum_stage | 1
+ego_wins | 114
+rival_wins | 225
+---
+total_timesteps | 1634304
+ep_rew_mean | 0.0000
+loss | -2.001837e+00
+curriculum_stage | 1
+ego_wins | 114
+rival_wins | 225
+---
+total_timesteps | 1638400
+ep_rew_mean | 0.0000
+loss | -2.014861e+00
+curriculum_stage | 1
+ego_wins | 114
+rival_wins | 225
+---
+total_timesteps | 1642496
+ep_rew_mean | 0.0000
+loss | -2.019858e+00
+curriculum_stage | 1
+ego_wins | 115
+rival_wins | 225
+---
+total_timesteps | 1646592
+ep_rew_mean | 0.0000
+loss | -2.014106e+00
+curriculum_stage | 1
+ego_wins | 115
+rival_wins | 225
+---
+total_timesteps | 1650688
+ep_rew_mean | 0.0000
+loss | -2.029263e+00
+curriculum_stage | 1
+ego_wins | 115
+rival_wins | 225
+---
+total_timesteps | 1654784
+ep_rew_mean | 0.0000
+loss | -2.024876e+00
+curriculum_stage | 1
+ego_wins | 115
+rival_wins | 225
+---
+total_timesteps | 1658880
+ep_rew_mean | 0.0000
+loss | -2.034075e+00
+curriculum_stage | 1
+ego_wins | 115
+rival_wins | 225
+---
+total_timesteps | 1662976
+ep_rew_mean | 0.0000
+loss | -2.050677e+00
+curriculum_stage | 1
+ego_wins | 115
+rival_wins | 225
+---
+total_timesteps | 1667072
+ep_rew_mean | 0.0000
+loss | -2.066779e+00
+curriculum_stage | 1
+ego_wins | 115
+rival_wins | 225
+---
+total_timesteps | 1671168
+ep_rew_mean | 0.0000
+loss | -2.050660e+00
+curriculum_stage | 1
+ego_wins | 115
+rival_wins | 225
+---
+total_timesteps | 1675264
+ep_rew_mean | 0.0000
+loss | -1.860651e+00
+curriculum_stage | 1
+ego_wins | 115
+rival_wins | 225
+---
+total_timesteps | 1679360
+ep_rew_mean | 0.0000
+loss | -2.046395e+00
+curriculum_stage | 1
+ego_wins | 115
+rival_wins | 225
+---
+total_timesteps | 1683456
+ep_rew_mean | 0.0000
+loss | -2.059738e+00
+curriculum_stage | 1
+ego_wins | 115
+rival_wins | 225
+---
+total_timesteps | 1687552
+ep_rew_mean | 0.0000
+loss | -2.060161e+00
+curriculum_stage | 1
+ego_wins | 115
+rival_wins | 225
+---
+total_timesteps | 1691648
+ep_rew_mean | 0.0000
+loss | -2.085846e+00
+curriculum_stage | 1
+ego_wins | 115
+rival_wins | 225
+---
+total_timesteps | 1695744
+ep_rew_mean | 0.0000
+loss | -2.082164e+00
+curriculum_stage | 1
+ego_wins | 116
+rival_wins | 225
+---
+total_timesteps | 1699840
+ep_rew_mean | 0.0000
+loss | -2.001801e+00
+curriculum_stage | 1
+ego_wins | 116
+rival_wins | 225
+---
+total_timesteps | 1703936
+ep_rew_mean | 0.0000
+loss | -2.044903e+00
+curriculum_stage | 1
+ego_wins | 116
+rival_wins | 225
+---
+total_timesteps | 1708032
+ep_rew_mean | 0.0000
+loss | -2.092277e+00
+curriculum_stage | 1
+ego_wins | 116
+rival_wins | 225
+---
+total_timesteps | 1712128
+ep_rew_mean | 0.0000
+loss | -2.104378e+00
+curriculum_stage | 1
+ego_wins | 116
+rival_wins | 225
+---
+total_timesteps | 1716224
+ep_rew_mean | 0.0000
+loss | -2.106954e+00
+curriculum_stage | 1
+ego_wins | 116
+rival_wins | 225
+---
+total_timesteps | 1720320
+ep_rew_mean | 0.0000
+loss | -2.111301e+00
+curriculum_stage | 1
+ego_wins | 116
+rival_wins | 225
+---
+total_timesteps | 1724416
+ep_rew_mean | 0.0000
+loss | -2.104336e+00
+curriculum_stage | 1
+ego_wins | 116
+rival_wins | 225
+---
+total_timesteps | 1728512
+ep_rew_mean | 0.0000
+loss | -2.096430e+00
+curriculum_stage | 1
+ego_wins | 116
+rival_wins | 225
+---
+total_timesteps | 1732608
+ep_rew_mean | 0.0000
+loss | -2.110031e+00
+curriculum_stage | 1
+ego_wins | 116
+rival_wins | 225
+---
+total_timesteps | 1736704
+ep_rew_mean | 0.0000
+loss | -2.122505e+00
+curriculum_stage | 1
+ego_wins | 116
+rival_wins | 225
+---
+total_timesteps | 1740800
+ep_rew_mean | 0.0000
+loss | -2.116507e+00
+curriculum_stage | 1
+ego_wins | 116
+rival_wins | 225
+---
+total_timesteps | 1744896
+ep_rew_mean | 0.0000
+loss | -2.107870e+00
+curriculum_stage | 1
+ego_wins | 116
+rival_wins | 225
+---
+total_timesteps | 1748992
+ep_rew_mean | 0.0000
+loss | -2.148710e+00
+curriculum_stage | 1
+ego_wins | 116
+rival_wins | 225
+---
+total_timesteps | 1753088
+ep_rew_mean | 0.0000
+loss | -2.108616e+00
+curriculum_stage | 1
+ego_wins | 116
+rival_wins | 225
+---
+total_timesteps | 1757184
+ep_rew_mean | 0.0000
+loss | -2.164951e+00
+curriculum_stage | 1
+ego_wins | 116
+rival_wins | 225
+---

@@ -1,0 +1,321 @@
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+[WARN] `imitation` not installed. BC pre-training skipped.
+
+======================================================================
+  CARLA GRANDMASTER AI SUITE v9.0 — Ultimate Competition Edition
+  Self-Play | No-Reset | Decision Making | Recall Memory
+======================================================================
+
+[BC] No human demo data found. Skipping BC pre-training.
+[NEW] Creating fresh PPO brain...
+Using cuda device
+Wrapping the env with a `Monitor` wrapper
+Wrapping the env in a DummyVecEnv.
+Wrapping the env in a VecTransposeImage.
+[TRAIN] Starting 5M timestep run...
+[ENV] Rival AI Spawned for Self-Play!
+[ENV] Episode reset. Safety Score: 100.0
+Logging to D:\AI\traffic_vision\master_suite\tb_logs\PPO_62
+[PENALTY] Collision! Total: 9600.0
+[ENV] Rival stuck - Respawning...
+[ENV] EGO WINS! (57.4m vs 38.9m)
+[ENV] NEW RECORD! 57.4m
+[PENALTY] Collision! Total: 19600.0
+[PENALTY] Collision! Total: 29600.0
+[PENALTY] Collision! Total: 39600.0
+[PENALTY] Collision! Total: 49600.0
+[PENALTY] Collision! Total: 59600.0
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[DECISION] Hesitating: High danger zone (score: 1.00)
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[PENALTY] Collision! Total: 69400.0
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[DECISION] Hesitating: High danger zone (score: 1.00)
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Ego stuck - Respawning...
+[ENV] EGO WINS! (57.9m vs 46.9m)
+[ENV] NEW RECORD! 57.9m
+[DECISION] Hesitating: High danger zone (score: 1.00)
+[PENALTY] Off-road! Total: 75350.0
+[PENALTY] Off-road! Total: 80350.0
+[DECISION] Hesitating: High danger zone (score: 1.00)
+[PENALTY] Off-road! Total: 85350.0
+[PENALTY] Off-road! Total: 90350.0
+[DECISION] Hesitating: High danger zone (score: 1.00)
+[PENALTY] Off-road! Total: 95350.0
+[PENALTY] Off-road! Total: 100350.0
+[DECISION] Hesitating: High danger zone (score: 1.00)
+[PENALTY] Off-road! Total: 105350.0
+[PENALTY] Off-road! Total: 110350.0
+[DECISION] Hesitating: High danger zone (score: 1.00)
+[PENALTY] Off-road! Total: 115350.0
+[PENALTY] Off-road! Total: 120350.0
+[DECISION] Hesitating: High danger zone (score: 1.00)
+[PENALTY] Off-road! Total: 125350.0
+[PENALTY] Off-road! Total: 130350.0
+[DECISION] Hesitating: High danger zone (score: 1.00)
+[PENALTY] Off-road! Total: 135350.0
+[PENALTY] Off-road! Total: 140350.0
+[DECISION] Hesitating: High danger zone (score: 1.00)
+[PENALTY] Off-road! Total: 145350.0
+[PENALTY] Off-road! Total: 150350.0
+[DECISION] Hesitating: High danger zone (score: 1.00)
+[PENALTY] Off-road! Total: 155350.0
+[PENALTY] Off-road! Total: 160350.0
+[DECISION] Hesitating: High danger zone (score: 1.00)
+[PENALTY] Off-road! Total: 165350.0
+[PENALTY] Off-road! Total: 170350.0
+[DECISION] Hesitating: High danger zone (score: 1.00)
+[PENALTY] Off-road! Total: 175350.0
+[PENALTY] Off-road! Total: 180350.0
+[DECISION] Hesitating: High danger zone (score: 1.00)
+[PENALTY] Off-road! Total: 185350.0
+[PENALTY] Off-road! Total: 191550.0
+[PENALTY] Collision! Total: 191750.0
+[DECISION] Hesitating: High danger zone (score: 1.00)
+[PENALTY] Off-road! Total: 206550.0
+[PENALTY] Collision! Total: 206750.0
+[PENALTY] Off-road! Total: 221550.0
+[PENALTY] Collision! Total: 221750.0
+[DECISION] Hesitating: High danger zone (score: 1.00)
+[PENALTY] Off-road! Total: 236550.0
+[PENALTY] Collision! Total: 236750.0
+[PENALTY] Off-road! Total: 251550.0
+[PENALTY] Collision! Total: 251750.0
+[DECISION] Hesitating: High danger zone (score: 1.00)
+[PENALTY] Off-road! Total: 266550.0
+[PENALTY] Collision! Total: 266750.0
+[PENALTY] Off-road! Total: 281550.0
+[PENALTY] Collision! Total: 281750.0
+[DECISION] Hesitating: High danger zone (score: 1.00)
+[PENALTY] Off-road! Total: 296550.0
+[PENALTY] Collision! Total: 296750.0
+[PENALTY] Off-road! Total: 311550.0
+[PENALTY] Collision! Total: 311750.0
+[DECISION] Hesitating: High danger zone (score: 1.00)
+[PENALTY] Off-road! Total: 326550.0
+[PENALTY] Collision! Total: 326750.0
+[ENV] Ego stuck - Respawning...
+[ENV] EGO WINS! (100.0m vs 99.6m)
+[ENV] NEW RECORD! 100.0m
+[DECISION] Hesitating: High danger zone (score: 1.00)
+[DECISION] Hesitating: High danger zone (score: 1.00)
+[DECISION] Hesitating: High danger zone (score: 1.00)
+[DECISION] Hesitating: High danger zone (score: 1.00)
+[DECISION] Hesitating: High danger zone (score: 1.00)
+[DECISION] Hesitating: High danger zone (score: 1.00)
+[PENALTY] Off-road! Total: 344400.0
+[ENV] Rival stuck - Respawning...
+[ENV] RIVAL WINS! (103.6m vs 59.8m)
+[PENALTY] Off-road! Total: 349400.0
+[DECISION] Hesitating: High danger zone (score: 1.00)
+[PENALTY] Off-road! Total: 354400.0
+[PENALTY] Off-road! Total: 362200.0
+[PENALTY] Collision! Total: 362400.0
+[DECISION] Hesitating: High danger zone (score: 1.00)
+[PENALTY] Off-road! Total: 377200.0
+[PENALTY] Collision! Total: 377400.0
+[PENALTY] Off-road! Total: 392200.0
+[PENALTY] Collision! Total: 392400.0
+[DECISION] Hesitating: High danger zone (score: 1.00)
+[PENALTY] Off-road! Total: 407200.0
+[PENALTY] Collision! Total: 407400.0
+[PENALTY] Off-road! Total: 422200.0
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+[ENV] Rival crashed into ego!
+-----------------------------
+| competition/       |      |
+|    ego_wins        | 3    |
+|    rival_wins      | 1    |
+| time/              |      |
+|    fps             | 23   |
+|    iterations      | 1    |
+|    time_elapsed    | 170  |
+|    total_timesteps | 4096 |
+-----------------------------

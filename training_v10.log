@@ -1,0 +1,54 @@
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+
+======================================================================
+  CARLA GRANDMASTER AI SUITE v10.0 - ULTIMATE EDITION
+  HER | World Model | Attention | ADR | Self-Play
+======================================================================
+
+[NEW] Creating fresh PPO brain (optimized for CARLA)...
+Using cuda device
+Wrapping the env with a `Monitor` wrapper
+Wrapping the env in a DummyVecEnv.
+Wrapping the env in a VecTransposeImage.
+[TRAIN] Starting 5M timestep run...
+[TRAIN] Goal: Complete city lap without penalty!
+[ENV] Rival AI Spawned!
+[ENV] Episode reset. Safety: 100.0, ADR Difficulty: 0.00
+Logging to D:\AI\traffic_vision\master_suite\tb_logs\PPO_64
+[PENALTY] Off-road! Total: 1500.0
+[PENALTY] Off-road! Total: 6500.0
+[PENALTY] Off-road! Total: 11500.0
+[PENALTY] Off-road! Total: 16500.0
+[PENALTY] Off-road! Total: 21500.0
+[PENALTY] Off-road! Total: 26500.0
+[PENALTY] Off-road! Total: 31500.0
+[PENALTY] Off-road! Total: 36500.0
+[PENALTY] Off-road! Total: 53950.0
+[PENALTY] Collision! Total: 54100.0
+[PENALTY] Off-road! Total: 73950.0
+[PENALTY] Collision! Total: 74100.0
+[PENALTY] Off-road! Total: 93950.0
+[PENALTY] Collision! Total: 94100.0
+[PENALTY] Off-road! Total: 113950.0
+[PENALTY] Collision! Total: 114100.0
+[PENALTY] Off-road! Total: 133950.0
+[PENALTY] Collision! Total: 134100.0
+[ENV] Ego stuck - Respawning...
+[ENV] EGO WINS! (45.3m vs 42.0m)
+[PENALTY] Off-road! Total: 140980.0
+[PENALTY] Off-road! Total: 145980.0
+[PENALTY] Off-road! Total: 150980.0
+[PENALTY] Off-road! Total: 155980.0
+-----------------------------
+| competition/       |      |
+|    ego_wins        | 1    |
+|    rival_wins      | 0    |
+| time/              |      |
+|    fps             | 24   |
+|    iterations      | 1    |
+|    time_elapsed    | 84   |
+|    total_timesteps | 2048 |
+-----------------------------

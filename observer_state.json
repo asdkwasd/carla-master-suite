@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-04-09T10:50:33.918986",
+  "timesteps": 1757184,
+  "ep_rew_mean": 0.0,
+  "loss": -2.1649508476257324,
+  "curriculum_stage": 1,
+  "ego_wins": 116,
+  "rival_wins": 225,
+  "adr_difficulty": 0.0,
+  "shield_interventions": 102,
+  "shield_emergency_brakes": 98,
+  "best_distance": 59.755181272008485
+}

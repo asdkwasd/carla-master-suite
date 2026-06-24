@@ -1,0 +1,36 @@
+{
+  "Grandmaster_v9": {
+    "agent_id": "Grandmaster_v9",
+    "total_distance": 0.0,
+    "total_penalty": 0.0,
+    "collisions": 0,
+    "off_roads": 0,
+    "ego_wins": 1,
+    "rival_wins": 0,
+    "recoveries": 0,
+    "waypoints_visited": 0,
+    "episodes_completed": 0,
+    "best_single_distance": 0.0,
+    "safety_score": 100.0,
+    "avg_episode_reward": 0.0,
+    "shield_interventions": 0,
+    "last_updated": "2026-04-04 01:54:18"
+  },
+  "Grandmaster_v14": {
+    "agent_id": "Grandmaster_v14",
+    "total_distance": 47.76864363098139,
+    "total_penalty": 0.0,
+    "collisions": 0,
+    "off_roads": 0,
+    "ego_wins": 116,
+    "rival_wins": 225,
+    "recoveries": 240,
+    "waypoints_visited": 0,
+    "episodes_completed": 0,
+    "best_single_distance": 0.0,
+    "safety_score": 0,
+    "avg_episode_reward": -719.1831351226813,
+    "shield_interventions": 102,
+    "last_updated": "2026-04-09 11:06:41"
+  }
+}

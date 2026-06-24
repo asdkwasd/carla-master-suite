@@ -1,0 +1,7 @@
+total_timesteps | 4096
+ep_rew_mean     | 0.0000
+loss            | 0.000000e+00
+curriculum_stage| 1
+ego_wins        | 3
+rival_wins      | 1
+---

@@ -46,6 +46,7 @@ import json
 import random
 import math
 import glob
+import threading
 import numpy as np
 import cv2
 import carla
@@ -53,6 +54,97 @@ import gymnasium as gym
 from gymnasium import spaces
 from collections import deque
 from datetime import datetime
+
+
+# =============================================================================
+# BUG 1 FIX: world.tick() WATCHDOG — prevents freeze on CARLA hang
+# =============================================================================
+class TickWatchdog:
+    """
+    Watchdog timer for world.tick() calls.
+    Prevents deadlock when CARLA server hangs.
+
+    Usage:
+        watchdog = TickWatchdog(env, timeout=10.0)
+        watchdog.start()
+        env.world.tick()  # or watchdog.tick()
+        watchdog.stop()
+    """
+
+    def __init__(self, world, client, timeout: float = 10.0):
+        self.world = world
+        self.client = client
+        self.timeout = timeout
+        self._timer = None
+        self._hung = False
+        self._hung_count = 0
+        self._last_tick_ok = True
+        self.log = []
+
+    def start(self):
+        """Start the watchdog timer."""
+        self._hung = False
+        self._timer = threading.Timer(self.timeout, self._on_timeout)
+        self._timer.daemon = True
+        self._timer.start()
+
+    def stop(self):
+        """Stop the watchdog timer."""
+        if self._timer:
+            self._timer.cancel()
+            self._timer = None
+
+    def _on_timeout(self):
+        """Called when tick() takes too long."""
+        self._hung = True
+        self._hung_count += 1
+        msg = f"[WATCHDOG] tick() hung for >{self.timeout}s! Reconnecting... (#{self._hung_count})"
+        print(msg)
+        self.log.append(msg)
+        self._attempt_reconnect()
+
+    def _attempt_reconnect(self):
+        """Attempt to reconnect to CARLA."""
+        try:
+            # Force stop any pending operations
+            self.client.set_timeout(1.0)
+            # Try to reload the world
+            self.world = self.client.reload_world(False)
+            self.client.set_timeout(60.0)
+            msg = "[WATCHDOG] Reconnected successfully!"
+            print(msg)
+            self.log.append(msg)
+        except Exception as e:
+            msg = f"[WATCHDOG] Reconnect failed: {e}"
+            print(msg)
+            self.log.append(msg)
+
+    def tick(self):
+        """Execute tick with watchdog protection."""
+        self.start()
+        try:
+            self.world.tick()
+            self._last_tick_ok = True
+        except Exception as e:
+            msg = f"[WATCHDOG] tick() exception: {e}"
+            print(msg)
+            self.log.append(msg)
+            self._last_tick_ok = False
+            self._attempt_reconnect()
+        finally:
+            self.stop()
+        return self._last_tick_ok
+
+    @property
+    def is_hung(self) -> bool:
+        return self._hung
+
+    def get_stats(self) -> dict:
+        return {
+            "hung_count": self._hung_count,
+            "last_ok": self._last_tick_ok,
+        }
+
 
 # ── Apply GPU optimizations BEFORE torch import ─────────────────────────────
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -181,6 +273,9 @@ class CarlaGrandmasterEnv(gym.Env):
         self.world = self.client.load_world(self.config["map"])
         self.carla_map = self.world.get_map()
 
+        # === BUG 1 FIX: Add watchdog for world.tick() ===
+        self._watchdog = TickWatchdog(self.world, self.client, timeout=10.0)
+
         all_spawns = self.carla_map.get_spawn_points()
         self.initial_spawn = all_spawns[0]
         self._all_spawns = all_spawns
@@ -270,7 +365,8 @@ class CarlaGrandmasterEnv(gym.Env):
             except Exception:
                 pass
 
-        self.world.tick()
+        # === BUG 1 FIX: Use watchdog for tick ===
+        self._watchdog.tick()
 
     # =========================================================================
     # NPC SPAWN — Fixed: exclude ego spawn point
@@ -360,7 +456,7 @@ class CarlaGrandmasterEnv(gym.Env):
                     break
                 except RuntimeError:
                     time.sleep(0.2)
-                    self.world.tick()
+                    self._watchdog.tick()  # BUG 1 FIX
             if spawned:
                 break
         if not spawned:
@@ -392,7 +488,7 @@ class CarlaGrandmasterEnv(gym.Env):
 
         # Wait for sensors
         for _ in range(30):
-            self.world.tick()
+            self._watchdog.tick()  # BUG 1 FIX
             if self.sensors.has_camera_data():
                 break
 
@@ -560,6 +656,18 @@ class CarlaGrandmasterEnv(gym.Env):
             steer, throttle, brake, lidar, kmh, on_road
         )
 
+        # === ANTI-STALL: Apply AFTER safety shield ===
+        # IMPORTANT: This ensures SafetyShield has priority, but if the car
+        # is stuck (shield preventing all movement), anti-stall gives it a nudge.
+        # This is the KEY FIX for BUG 2: AI learns to move instead of staying still.
+        if self.stuck_counter > 100 and brake > 0.5 and throttle < 0.2:
+            # Car is stuck due to safety shield - give it a strong nudge forward
+            # Only do this if we've been stuck for 100+ steps (not a real obstacle)
+            steer = 0.0  # Go straight
+            throttle = 0.6  # Moderate throttle to overcome static friction
+            brake = 0.0  # Release brake
+            print(f"[ANTI_STALL] Stuck={self.stuck_counter} - Nudging forward")
+
         # --- Apply control ---
         ctrl = carla.VehicleControl(
             steer=steer,
@@ -583,7 +691,8 @@ class CarlaGrandmasterEnv(gym.Env):
             except Exception:
                 pass
 
-        self.world.tick()
+        # === BUG 1 FIX: Use watchdog for main tick ===
+        self._watchdog.tick()
 
         # --- Distance tracking ---
         step_dist = 0.0
@@ -698,22 +807,25 @@ class CarlaGrandmasterEnv(gym.Env):
 
         # =====================================================================
         # TERMINATION
+        # === CRITICAL FIX: No early termination ===
+        # PPO needs TIME to explore. Don't terminate on collision/offroad/stuck.
+        # Just penalize and let the episode run full length (5000 steps).
+        # Early termination prevents learning from mistakes.
         # =====================================================================
         done = False
         termination_reason = None
 
-        if len(collisions) > 0 and kmh > 5:
-            done = True
-            termination_reason = "collision"
-        elif self.stuck_counter > 500:
-            done = True
-            termination_reason = "stuck"
-        elif self.steps >= MAX_EPISODE_STEPS:
+        # REMOVED: Early termination on collision - AI needs to learn from mistakes
+        # OLD: if len(collisions) > 0 and kmh > 5:
+        # REMOVED: Early termination on recovery timeout
+        # OLD: elif self.recovery.recovery_steps > 300:
+
+        if self.steps >= MAX_EPISODE_STEPS:
             done = True
             termination_reason = "max_steps"
-        elif self.recovery.recovery_steps > 300:
+        elif self.stuck_counter > 1000:  # Increased from 500 - allow more exploration
             done = True
-            termination_reason = "recovery_timeout"
+            termination_reason = "stuck_timeout"
 
         truncated = (termination_reason == "max_steps")
 

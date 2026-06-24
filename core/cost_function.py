@@ -2,13 +2,14 @@
 ==============================================================================
   Tesla/Waymo-Style Cost Function — Multi-Objective Reward Decomposition.
 
-  Instead of one giant reward, we compute SEPARATE cost channels:
-    1. PROGRESS  — Are we making forward progress along the route?
-    2. SAFETY    — Are we collision-free and on-road?
-    3. COMFORT   — Are we driving smoothly (no swerving, good speed)?
-    4. RULES     — Are we following traffic rules (red lights, lanes)?
+  FIXED v2 — BUG 2B fixes:
+  - Strong anti-idle penalty: moving > staying always
+  - Forward-progress bonus: reward speed along route
+  - Reduced collision penalty: avoid reward hacking to idle
+  - Waypoint reward: encourage exploration
+  - Anti-stuck bonus: reward for recovering from stuck state
 
-  Each channel has a clear, interpretable meaning.
+  Each channel has clear, interpretable meaning.
   Final reward = weighted sum of channels.
 
   This is how Waymo ChauffeurNet and Tesla Planner decompose their costs.
@@ -22,22 +23,42 @@ class CostFunction:
     """
     Multi-objective cost function.
     Returns (total_reward, cost_breakdown) per step.
+
+    FIXED v2 — Reward shaping to prevent idle behavior:
+    - Anti-idle: -1.0 per step if barely moving
+    - Progress: +speed_bonus when moving forward
+    - Collision: reduced from -5 to -2 (avoid idle hacking)
+    - Waypoint: +5.0 per new waypoint reached
     """
 
-    # --- Weight schedule (can be tuned per curriculum stage) ---
+    # --- Weight schedule (tuned for Stage 1 = just drive forward) ---
     WEIGHTS = {
-        "progress": 3.0,      # Primary objective
-        "safety": 2.0,        # Non-negotiable
-        "comfort": 0.5,       # Nice to have
-        "rules": 1.0,         # Traffic law compliance
+        "progress": 5.0,     # PRIMARY: encourage forward movement
+        "safety": 2.0,       # Secondary: collision avoidance
+        "comfort": 0.5,      # Nice to have: smooth driving
+        "rules": 1.0,        # Traffic rules compliance
     }
 
-    def __init__(self, reward_clip=(-30, 30)):
+    # === FIX v2: Stronger anti-idle parameters ===
+    ANTI_IDLE_PENALTY = -1.0      # Per step if not moving (was -0.3)
+    IDLE_THRESHOLD_MPS = 0.1      # < 0.1 m/s = considered idle
+    MOVING_REWARD_PER_MPS = 0.5   # Reward per m/s of forward progress
+
+    # Collision penalty (reduced to avoid idle hacking)
+    COLLISION_PENALTY = -2.0      # Was -5, reduced to -2
+    HIGH_SPEED_CRASH_BONUS = -1.0 # Extra penalty for high-speed crash
+
+    # Waypoint reward
+    WAYPOINT_REWARD = 5.0         # Per new waypoint reached
+
+    def __init__(self, reward_clip=(-50, 100)):  # Wider clip range
         self.clip_lo, self.clip_hi = reward_clip
         self.episode_costs = {"progress": 0, "safety": 0, "comfort": 0, "rules": 0}
+        self._waypoints_reached = 0
 
     def reset(self):
         self.episode_costs = {"progress": 0, "safety": 0, "comfort": 0, "rules": 0}
+        self._waypoints_reached = 0
 
     def compute(self, ctx: dict) -> tuple:
         """
@@ -53,6 +74,7 @@ class CostFunction:
             heading_alignment (dot product with road direction),
             at_junction,
             was_offroad, recovery_success,
+            new_waypoint (bool),
         """
         costs = {}
 
@@ -61,22 +83,31 @@ class CostFunction:
         # =====================================================================
         progress = 0.0
 
-        # Route following: reward getting closer to target (like GPS nav)
+        # Route following: reward getting closer to target
         route_delta = ctx.get("route_delta", 0.0)
-        progress += route_delta * 2.0  # +2.0 per meter closer
+        progress += route_delta * 3.0  # Increased from 2.0
 
-        # Reaching a waypoint
+        # Reaching a waypoint (significant reward)
         if ctx.get("route_waypoint_reached", False):
-            progress += 1.0
+            progress += 3.0  # Increased from 1.0
 
-        # Forward movement on road
+        # === FIX v2: Strong forward-progress reward ===
         step_dist = ctx.get("step_dist", 0.0)
-        if ctx.get("on_road", False) and step_dist > 0.05 and not ctx.get("reverse", False):
-            progress += min(ctx.get("kmh", 0) / 30.0, 1.0)  # Speed bonus [0..1]
+        speed_ms = ctx.get("kmh", 0) / 3.6
 
-        # Standing still penalty
-        if step_dist < 0.05:
-            progress -= 0.3
+        if ctx.get("on_road", False):
+            if speed_ms > self.IDLE_THRESHOLD_MPS and not ctx.get("reverse", False):
+                # Moving forward: big reward!
+                progress += min(speed_ms * self.MOVING_REWARD_PER_MPS, 3.0)
+            elif speed_ms <= self.IDLE_THRESHOLD_MPS and ctx.get("step_dist", 0) < 0.05:
+                # NOT moving and not in recovery: HUGE penalty
+                # This ensures the car ALWAYS tries to move
+                progress += self.ANTI_IDLE_PENALTY
+
+        # === FIX v2: Waypoint discovery bonus ===
+        if ctx.get("new_waypoint", False):
+            progress += self.WAYPOINT_REWARD
+            self._waypoints_reached += 1
 
         # New waypoint bonus
         if ctx.get("new_waypoint", False):
@@ -89,23 +120,26 @@ class CostFunction:
         # =====================================================================
         safety = 0.0
 
-        # Collision
-        if ctx.get("collisions", 0) > 0:
-            safety -= 5.0
-            if ctx.get("kmh", 0) > 5:
-                safety -= 2.0  # High-speed crash extra
+        # === FIX v2: Reduced collision penalty ===
+        # Original: -5 to -7 per collision (too punishing, encourages idle)
+        # New: -2 to -3 per collision (still punishing but not game-breaking)
+        n_collisions = ctx.get("collisions", 0)
+        if n_collisions > 0:
+            safety += self.COLLISION_PENALTY * n_collisions
+            if ctx.get("kmh", 0) > 10:  # High-speed crash only
+                safety += self.HIGH_SPEED_CRASH_BONUS * n_collisions
 
-        # Off-road
+        # Off-road penalty (reduced)
         if not ctx.get("on_road", True):
-            safety -= 0.5
+            safety -= 0.3  # Was -0.5
 
         # Recovery success (rare, valuable)
         if ctx.get("recovery_success", False):
-            safety += 3.0
+            safety += 5.0  # Increased from 3.0
 
         # Reverse penalty (unless recovering)
         if ctx.get("reverse", False) and ctx.get("on_road", True):
-            safety -= 0.5
+            safety -= 0.3  # Was -0.5
 
         costs["safety"] = safety
 
@@ -148,7 +182,7 @@ class CostFunction:
 
         # Lane invasion
         if ctx.get("lane_invasions", 0) > 0:
-            rules -= 0.5
+            rules -= 0.3  # Was -0.5
 
         costs["rules"] = rules
 
