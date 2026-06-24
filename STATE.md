@@ -1,29 +1,29 @@
 # STATE.md — CARLA Grandmaster AI Project
 
 ## Project Info
-- **Name:** CARLA Grandmaster AI v15
+- **Name:** CARLA Grandmaster AI v16
 - **Repo:** E:\AI\traffic_vision\master_suite
 - **Last Updated:** 2026-06-24
 - **Agent:** Claude Code (Opus 4.8)
-- **Git Commit:** bb3857f (initial recall)
+- **Git Commit:** ecf9bf0 (BUG 1+2 fixes applied)
 
 ## Current Phase
-**PHASE -1: STABILIZE BEFORE SCALE**
+**PHASE -1: STABILIZE BEFORE SCALE** ✅ IN PROGRESS
 
-## Problem Statement
-AI won't move reliably. Two critical bugs:
-1. **BUG 1:** world.tick() deadlock (no watchdog)
-2. **BUG 2:** SafetyShield over-braking + reward hacking to idle
+## Status
+**ALL BUG FIXES APPLIED - READY FOR TESTING**
 
-## Last Training Run
-- **Date:** ~2026-04-09
-- **Timesteps:** ~12K (stuck early)
-- **Reward:** ep_rew_mean = -701 to -741
-- **Issue:** "[STUCK] Didn't move for 500 steps" spam
+### Bugs Fixed This Session:
+1. ✅ **BUG 1:** world.tick() watchdog added (10s timeout)
+2. ✅ **BUG 2A:** SafetyShield TTC-based braking + LiDAR cleaning
+3. ✅ **BUG 2B:** Anti-idle reward shaping
+4. ✅ **Anti-stall:** AFTER safety shield (key fix)
+5. ✅ **Termination:** No early termination on collision/offroad
+6. ✅ **Curriculum:** Reduced thresholds for faster progression
 
 ## Metrics
-| Metric | Value | Target |
-|--------|-------|--------|
+| Metric | Before | Target |
+|--------|--------|--------|
 | episode_distance | ~0-32m | >200m |
 | ep_rew_mean | -741 | >0 |
 | shield_emergency_brakes | ~98 | <10 |
@@ -34,18 +34,13 @@ AI won't move reliably. Two critical bugs:
 - **CPU:** i9-13900HX
 - **CARLA:** localhost:2000
 
-## Active Blockers
-1. SafetyShield over-braking (BUG 2A)
-2. Reward hacking to idle (BUG 2B)
-3. No world.tick() watchdog (BUG 1)
-
-## Checkpoint
-- **Path:** E:\AI\traffic_vision\master_suite\checkpoints\
-- **Latest:** v14_160000_steps.zip (dim mismatch, cannot load)
-- **Action:** Start fresh with fixed v15
-
 ## Next Action
-Fix BUG 1 + BUG 2 in core modules (safety.py, cost_function.py, 1_TRAIN_MASTER_v15.py)
+**TEST Phase:** Run training to verify AI drives >200m on Stage 1
 
 ## Git SHA
-bb3857f
+ecf9bf0
+
+## Checkpoint History
+- v14: 1.76M steps saved (has dim mismatch, cannot load)
+- v15: Fresh start recommended
+- v16: Current with bug fixes
