@@ -39,10 +39,12 @@ class CostFunction:
         "rules": 1.0,        # Traffic rules compliance
     }
 
-    # === FIX v2: Stronger anti-idle parameters ===
-    ANTI_IDLE_PENALTY = -1.0      # Per step if not moving (was -0.3)
-    IDLE_THRESHOLD_MPS = 0.1      # < 0.1 m/s = considered idle
-    MOVING_REWARD_PER_MPS = 0.5   # Reward per m/s of forward progress
+    # === FIX v3: Strong moving reward to beat reverse ===
+    # Anti-idle penalty: only when IDLE (not moving at all)
+    ANTI_IDLE_PENALTY = -2.0   # Reduced from -5.0
+    IDLE_THRESHOLD_MPS = 0.05   # < 0.05 m/s = considered idle (very lenient)
+    MOVING_REWARD_PER_MPS = 10.0  # MUCH STRONGER: 10x (was 3.0)
+    STEP_MOVING_BONUS = 1.0    # Extra bonus per step when moving
 
     # Collision penalty (reduced to avoid idle hacking)
     COLLISION_PENALTY = -2.0      # Was -5, reduced to -2
@@ -85,33 +87,32 @@ class CostFunction:
 
         # Route following: reward getting closer to target
         route_delta = ctx.get("route_delta", 0.0)
-        progress += route_delta * 3.0  # Increased from 2.0
+        progress += route_delta * 5.0  # Strong route-following reward
 
         # Reaching a waypoint (significant reward)
         if ctx.get("route_waypoint_reached", False):
-            progress += 3.0  # Increased from 1.0
+            progress += 5.0
 
-        # === FIX v2: Strong forward-progress reward ===
+        # === FIX v3: MUCH stronger moving reward ===
+        # Forward motion must ALWAYS be better than reverse or idle
         step_dist = ctx.get("step_dist", 0.0)
         speed_ms = ctx.get("kmh", 0) / 3.6
 
         if ctx.get("on_road", False):
-            if speed_ms > self.IDLE_THRESHOLD_MPS and not ctx.get("reverse", False):
-                # Moving forward: big reward!
-                progress += min(speed_ms * self.MOVING_REWARD_PER_MPS, 3.0)
-            elif speed_ms <= self.IDLE_THRESHOLD_MPS and ctx.get("step_dist", 0) < 0.05:
-                # NOT moving and not in recovery: HUGE penalty
-                # This ensures the car ALWAYS tries to move
+            if not ctx.get("reverse", False) and speed_ms > self.IDLE_THRESHOLD_MPS:
+                # Moving forward: HUGE reward that dominates all penalties
+                # At 0.5 m/s: +5.0 — beats -5.0 idle penalty by 10x margin
+                progress += min(speed_ms * self.MOVING_REWARD_PER_MPS, 10.0)
+                progress += self.STEP_MOVING_BONUS
+            elif speed_ms <= self.IDLE_THRESHOLD_MPS and ctx.get("step_dist", 0) < 0.02:
+                # Truly stuck: moderate penalty
                 progress += self.ANTI_IDLE_PENALTY
 
-        # === FIX v2: Waypoint discovery bonus ===
+        # === FIX v3: Waypoint discovery bonus ===
         if ctx.get("new_waypoint", False):
             progress += self.WAYPOINT_REWARD
             self._waypoints_reached += 1
-
-        # New waypoint bonus
-        if ctx.get("new_waypoint", False):
-            progress += 0.5
+            progress += 1.0
 
         costs["progress"] = progress
 

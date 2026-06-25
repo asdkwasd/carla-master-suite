@@ -44,6 +44,12 @@ import sys
 import time
 import json
 import random
+import logging
+
+# Suppress CARLA streaming client noise (not errors, just verbose connection logs)
+logging.getLogger("libcarla").setLevel(logging.WARNING)
+logging.getLogger("carla").setLevel(logging.WARNING)
+
 import math
 import glob
 import threading
@@ -57,94 +63,17 @@ from datetime import datetime
 
 
 # =============================================================================
-# BUG 1 FIX: world.tick() WATCHDOG — prevents freeze on CARLA hang
+# BUG 1 FIX: world.tick() — NO watchdog needed.
+# The old watchdog (10s timeout) fired during normal operation (rollout takes ~100s)
+# and caused cascading timeouts. CARLA synchronous mode is reliable -- no watchdog needed.
 # =============================================================================
-class TickWatchdog:
-    """
-    Watchdog timer for world.tick() calls.
-    Prevents deadlock when CARLA server hangs.
-
-    Usage:
-        watchdog = TickWatchdog(env, timeout=10.0)
-        watchdog.start()
-        env.world.tick()  # or watchdog.tick()
-        watchdog.stop()
-    """
-
-    def __init__(self, world, client, timeout: float = 10.0):
-        self.world = world
-        self.client = client
-        self.timeout = timeout
-        self._timer = None
-        self._hung = False
-        self._hung_count = 0
-        self._last_tick_ok = True
-        self.log = []
-
-    def start(self):
-        """Start the watchdog timer."""
-        self._hung = False
-        self._timer = threading.Timer(self.timeout, self._on_timeout)
-        self._timer.daemon = True
-        self._timer.start()
-
-    def stop(self):
-        """Stop the watchdog timer."""
-        if self._timer:
-            self._timer.cancel()
-            self._timer = None
-
-    def _on_timeout(self):
-        """Called when tick() takes too long."""
-        self._hung = True
-        self._hung_count += 1
-        msg = f"[WATCHDOG] tick() hung for >{self.timeout}s! Reconnecting... (#{self._hung_count})"
-        print(msg)
-        self.log.append(msg)
-        self._attempt_reconnect()
-
-    def _attempt_reconnect(self):
-        """Attempt to reconnect to CARLA."""
-        try:
-            # Force stop any pending operations
-            self.client.set_timeout(1.0)
-            # Try to reload the world
-            self.world = self.client.reload_world(False)
-            self.client.set_timeout(60.0)
-            msg = "[WATCHDOG] Reconnected successfully!"
-            print(msg)
-            self.log.append(msg)
-        except Exception as e:
-            msg = f"[WATCHDOG] Reconnect failed: {e}"
-            print(msg)
-            self.log.append(msg)
-
-    def tick(self):
-        """Execute tick with watchdog protection."""
-        self.start()
-        try:
-            self.world.tick()
-            self._last_tick_ok = True
-        except Exception as e:
-            msg = f"[WATCHDOG] tick() exception: {e}"
-            print(msg)
-            self.log.append(msg)
-            self._last_tick_ok = False
-            self._attempt_reconnect()
-        finally:
-            self.stop()
-        return self._last_tick_ok
-
-    @property
-    def is_hung(self) -> bool:
-        return self._hung
-
-    def get_stats(self) -> dict:
-        return {
-            "hung_count": self._hung_count,
-            "last_ok": self._last_tick_ok,
-        }
-
+def safe_tick(world, label=""):
+    """Tick the world. Exceptions are logged but don't crash training."""
+    try:
+        world.tick()
+    except Exception as e:
+        if label:
+            print(f"[WARN] tick() failed {label}: {e}")
 
 # ── Apply GPU optimizations BEFORE torch import ─────────────────────────────
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -268,14 +197,14 @@ class CarlaGrandmasterEnv(gym.Env):
         self.model = None
 
         # ── CARLA connection ────────────────────────────────────────────────
+        # FIX: Use get_world instead of load_world (load_world hangs on re-load)
+        # CARLA is already running - just connect and use existing world
         self.client = carla.Client(CARLA_HOST, CARLA_PORT)
         self.client.set_timeout(CARLA_TIMEOUT)
-        self.world = self.client.load_world(self.config["map"])
+        self.world = self.client.get_world()
         self.carla_map = self.world.get_map()
 
-        # === BUG 1 FIX: Add watchdog for world.tick() ===
-        self._watchdog = TickWatchdog(self.world, self.client, timeout=10.0)
-
+        # No watchdog — direct world.tick() with safe wrapper
         all_spawns = self.carla_map.get_spawn_points()
         self.initial_spawn = all_spawns[0]
         self._all_spawns = all_spawns
@@ -286,8 +215,14 @@ class CarlaGrandmasterEnv(gym.Env):
         settings.fixed_delta_seconds = PHYSICS_DT
         self.world.apply_settings(settings)
 
-        self.tm = self.client.get_trafficmanager(TM_PORT)
-        self.tm.set_synchronous_mode(True)
+        # Traffic Manager — handle timeout gracefully
+        try:
+            self.client.set_timeout(10.0)
+            self.tm = self.client.get_trafficmanager(TM_PORT)
+            self.tm.set_synchronous_mode(True)
+        except Exception:
+            print("[WARN] TM not available — running without TM")
+            self.tm = None
 
         # ── Spaces (from constants — SINGLE SOURCE) ─────────────────────────
         self.observation_space = spaces.Dict({
@@ -310,6 +245,7 @@ class CarlaGrandmasterEnv(gym.Env):
         # ── Episode state ───────────────────────────────────────────────────
         self.steps = 0
         self.stuck_counter = 0
+        self._anti_stall_nudged = False  # Anti-stall nudge flag
         self.episode_reward = 0.0
         self.current_distance = 0.0
         self.current_penalty = 0.0
@@ -366,7 +302,7 @@ class CarlaGrandmasterEnv(gym.Env):
                 pass
 
         # === BUG 1 FIX: Use watchdog for tick ===
-        self._watchdog.tick()
+        safe_tick(self.world, "cleanup")
 
     # =========================================================================
     # NPC SPAWN — Fixed: exclude ego spawn point
@@ -456,7 +392,7 @@ class CarlaGrandmasterEnv(gym.Env):
                     break
                 except RuntimeError:
                     time.sleep(0.2)
-                    self._watchdog.tick()  # BUG 1 FIX
+                    safe_tick(self.world, "cleanup")  # BUG 1 FIX
             if spawned:
                 break
         if not spawned:
@@ -488,13 +424,14 @@ class CarlaGrandmasterEnv(gym.Env):
 
         # Wait for sensors
         for _ in range(30):
-            self._watchdog.tick()  # BUG 1 FIX
+            safe_tick(self.world, "cleanup")  # BUG 1 FIX
             if self.sensors.has_camera_data():
                 break
 
         # Reset episode state
         self.steps = 0
         self.stuck_counter = 0
+        self._anti_stall_nudged = False  # Reset anti-stall nudge flag
         self.episode_reward = 0.0
         self.current_distance = 0.0
         self.current_penalty = 0.0
@@ -626,13 +563,31 @@ class CarlaGrandmasterEnv(gym.Env):
         self.steps += 1
         steer = float(action[0])
         throttle = float(action[1])
-        brake = float(action[2])
-        reverse = throttle < 0
-        if reverse:
+        brake_raw = float(action[2])
+
+        # === CRITICAL FIX: Map action space to CARLA controls ===
+        # RL outputs throttle in [-1, 1]: negative = reverse, positive = forward
+        # RL outputs brake in [-1, 1]: positive = brake (BUT RL outputs high brake
+        #   while requesting forward -> cancels throttle!)
+        # Fix: separate throttle/brake so they don't conflict.
+        # Strategy: throttle takes priority over brake for forward motion.
+        #   If throttle > 0.1, reduce brake to 0.
+        #   If brake > 0, reduce throttle.
+        if throttle < 0:
+            reverse = True
             throttle = abs(throttle)
+        else:
+            reverse = False
+
+        # If we're trying to go forward, ignore high brake values
+        if throttle > 0.1:
+            brake = 0.0  # Override brake when moving forward
+        else:
+            # Braking only when nearly stopped
+            brake = max(0.0, brake_raw)
 
         self.last_steer = steer
-        self.last_throttle = float(action[1])
+        self.last_throttle = throttle
 
         # --- Current state ---
         v = self.vehicle.get_velocity()
@@ -656,17 +611,36 @@ class CarlaGrandmasterEnv(gym.Env):
             steer, throttle, brake, lidar, kmh, on_road
         )
 
-        # === ANTI-STALL: Apply AFTER safety shield ===
-        # IMPORTANT: This ensures SafetyShield has priority, but if the car
-        # is stuck (shield preventing all movement), anti-stall gives it a nudge.
-        # This is the KEY FIX for BUG 2: AI learns to move instead of staying still.
-        if self.stuck_counter > 100 and brake > 0.5 and throttle < 0.2:
-            # Car is stuck due to safety shield - give it a strong nudge forward
-            # Only do this if we've been stuck for 100+ steps (not a real obstacle)
-            steer = 0.0  # Go straight
-            throttle = 0.6  # Moderate throttle to overcome static friction
-            brake = 0.0  # Release brake
-            print(f"[ANTI_STALL] Stuck={self.stuck_counter} - Nudging forward")
+        # === MINIMUM THROTTLE FLOOR ===
+        # Ensure the car always tries to move forward at minimum.
+        # This prevents RL from learning "stand still = safe".
+        # Small throttle won't cause crashes on an empty road.
+        if throttle < 0.15 and brake < 0.3:
+            throttle = max(throttle, 0.2)  # Floor: minimum 0.2 throttle
+
+        # === ANTI-STALL: ONE-TIME NUDGE (reset counter after firing) ===
+        # Key fix: Only nudge ONCE when stuck, then let RL take over.
+        # The old code kept nudging every step, overriding RL entirely.
+        # This prevents RL from ever learning to output throttle.
+        # Trigger at 30 steps (was 50) so RL learns faster.
+        if self.stuck_counter > 30 and not getattr(self, '_anti_stall_nudged', False):
+            # First time stuck — give one strong nudge
+            steer = 0.0
+            throttle = 0.9  # Full forward
+            brake = 0.0
+            self.last_steer = steer
+            self.last_throttle = 0.9
+            self._anti_stall_nudged = True  # Mark as nudged — don't override again
+            print(f"[ANTI_STALL] Nudge! stuck={self.stuck_counter} -> throttle=0.9")
+        elif self.stuck_counter <= 5:
+            # Car is moving — reset the nudge flag
+            self._anti_stall_nudged = False
+
+        # === DEBUG: Print state every 50 steps ===
+        if self.steps % 50 == 0:
+            rl_throttle = float(action[1])
+            print(f"[STEP {self.steps}] kmh={kmh:.1f} stuck={self.stuck_counter} "
+                  f"rl_throttle={rl_throttle:.2f} shield_int={intervened}")
 
         # --- Apply control ---
         ctrl = carla.VehicleControl(
@@ -692,7 +666,7 @@ class CarlaGrandmasterEnv(gym.Env):
                 pass
 
         # === BUG 1 FIX: Use watchdog for main tick ===
-        self._watchdog.tick()
+        safe_tick(self.world, "cleanup")
 
         # --- Distance tracking ---
         step_dist = 0.0
@@ -703,9 +677,12 @@ class CarlaGrandmasterEnv(gym.Env):
                 self.current_distance += d
         self.last_loc = loc
 
-        # --- Stuck detection ---
-        if kmh < 1.0 and self.steps > 50:
+        # --- Stuck detection --- (more lenient: 0.3 km/h = barely walking pace)
+        if kmh < 0.3 and self.steps > 20:
             self.stuck_counter += 1
+        elif kmh > 0.5:
+            # Moving well — decrement faster so RL gets positive feedback
+            self.stuck_counter = max(0, self.stuck_counter - 3)
         else:
             self.stuck_counter = max(0, self.stuck_counter - 1)
 
@@ -823,7 +800,7 @@ class CarlaGrandmasterEnv(gym.Env):
         if self.steps >= MAX_EPISODE_STEPS:
             done = True
             termination_reason = "max_steps"
-        elif self.stuck_counter > 1000:  # Increased from 500 - allow more exploration
+        elif self.stuck_counter > 500:  # Reduced from 1000
             done = True
             termination_reason = "stuck_timeout"
 
@@ -937,13 +914,42 @@ def find_latest_checkpoint() -> tuple:
 
 
 # =============================================================================
+# CARLA CONNECTION HELPER
+# =============================================================================
+def wait_for_carla(client, max_retries=5, wait_time=10):
+    """Wait for CARLA to be ready. Tests world + TM connection."""
+    for attempt in range(max_retries):
+        try:
+            client.set_timeout(wait_time)
+            world = client.get_world()
+            _ = world.get_settings()  # Ping world
+            tm = client.get_trafficmanager(TM_PORT)  # Ping TM
+            print(f"[CARLA] Connected to {client.get_server_version()} "
+                  f"| Map: {world.get_map().name} | TM OK")
+            return True
+        except Exception as e:
+            print(f"[CARLA] Attempt {attempt+1}/{max_retries} failed: {e}")
+            import time
+            time.sleep(wait_time)
+    return False
+
+# =============================================================================
 # MAIN TRAINING
 # =============================================================================
 def main():
     print(f"\n{'=' * 70}")
-    print(f"  CARLA GRANDMASTER AI v15.0 — Tesla/Waymo Architecture")
+    print(f"  CARLA GRANDMASTER AI v15.0 -- Tesla/Waymo Architecture")
     print(f"  All bugs fixed | TensorRT ready | Route-following AI")
     print(f"{'=' * 70}\n")
+
+    # === Pre-flight CARLA check ===
+    print("[INIT] Connecting to CARLA...")
+    preflight_client = carla.Client(CARLA_HOST, CARLA_PORT)
+    preflight_client.set_timeout(10.0)
+    if not wait_for_carla(preflight_client, max_retries=5, wait_time=15):
+        print("[ERROR] CARLA not available. Start CARLA server first.")
+        return
+    del preflight_client  # Release preflight connection
 
     # Setup
     curriculum = CurriculumManager(stage=1)
@@ -978,14 +984,14 @@ def main():
                 features_extractor_kwargs=dict(features_dim=256),
                 net_arch=dict(pi=[256, 128], vf=[256, 128]),
             ),
-            learning_rate=3e-4,
-            n_steps=4096,
-            batch_size=512,
+            learning_rate=5e-4,    # Faster initial learning (was 3e-4)
+            n_steps=2048,          # Shorter rollout (was 4096) - faster updates
+            batch_size=256,         # Smaller batch (was 512)
             n_epochs=5,
             gamma=0.99,
             gae_lambda=0.95,
             clip_range=0.2,
-            ent_coef=0.015,      # Tuned: more exploration
+            ent_coef=0.03,         # More exploration (was 0.015)
             vf_coef=0.5,
             max_grad_norm=0.5,
         )

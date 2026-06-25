@@ -139,8 +139,7 @@ class GrandmasterExtractor(BaseFeaturesExtractor):
         )
 
         # Log dimensions
-        print(f"[EXTRACTOR] Vision={v_dim}d, LiDAR={l_dim}d, "
-              f"State={s_dim}d → {features_dim}d")
+        print(f"[EXTRACTOR] Vision={v_dim}d, LiDAR={l_dim}d, State={s_dim}d -> {features_dim}d")
 
     def forward(self, observations):
         # --- Camera (semantic segmentation) ---

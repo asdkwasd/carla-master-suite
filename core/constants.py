@@ -117,14 +117,14 @@ SEMANTIC_DEFAULT = [80, 0, 0]
 # CURRICULUM STAGES
 # =============================================================================
 CURRICULUM_STAGES = {
-    1: {"name": "Basics",  "map": "Town01", "traffic": 0,  "pedestrians": 0,
-        "weather": "Clear",  "obstacles": False, "threshold": 100.0},  # Reduced from 500
+    1: {"name": "Basics",  "map": "Town10HD_Opt", "traffic": 0,  "pedestrians": 0,  # Use current CARLA map
+        "weather": "Clear",  "obstacles": False, "threshold": 100.0},
     2: {"name": "Traffic", "map": "Town03", "traffic": 10, "pedestrians": 5,
-        "weather": "Cloudy", "obstacles": False, "threshold": 300.0},  # Reduced from 1000
+        "weather": "Cloudy", "obstacles": False, "threshold": 300.0},
     3: {"name": "Expert",  "map": "Town05", "traffic": 30, "pedestrians": 15,
-        "weather": "Rainy",  "obstacles": True,  "threshold": 500.0},  # Reduced from 2000
+        "weather": "Rainy",  "obstacles": True,  "threshold": 500.0},
     4: {"name": "Master",  "map": "Town10HD", "traffic": 50, "pedestrians": 30,
-        "weather": "Stormy", "obstacles": True,  "threshold": 1000.0},  # Reduced from 5000
+        "weather": "Stormy", "obstacles": True,  "threshold": 1000.0},
 }
 CURRICULUM_WINDOW = 50
 

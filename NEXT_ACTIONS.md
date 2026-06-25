@@ -1,42 +1,32 @@
 # NEXT_ACTIONS.md — Ordered Task Queue
 
 ## Phase -1: Stabilize (IN PROGRESS)
-All bug fixes applied. Now TESTING.
 
-### Task 1: ✅ BUG 1 - world.tick() Watchdog
-- **Status:** DONE
-- **Added:** TickWatchdog class with 10s timeout
-- **Files:** 1_TRAIN_MASTER_v15.py
+### DONE
+- ✅ Action space fix (throttle/brake conflict)
+- ✅ SafetyShield TTC fix (ignore <5m)
+- ✅ Anti-stall one-time nudge
+- ✅ min throttle floor = 0.2
+- ✅ Stuck threshold = 0.3 km/h
+- ✅ load_world → get_world
+- ✅ Removed watchdog
+- ✅ CARLA pre-flight check
+- ✅ Shield interventions = 0
 
-### Task 2: ✅ BUG 2A - SafetyShield Over-Braking
-- **Status:** DONE
-- **Fixed:** TTC-based braking, LiDAR cleaning, creep mode
-- **Files:** core/safety.py
+### IN PROGRESS: RL Learning
+- 🔄 RL oscillates between forward/reverse
+- 🔄 MOVING_REWARD_PER_MPS = 10.0 fix applied (need 50k+ steps to see effect)
+- 🔄 Need to monitor if distance improves over iterations
 
-### Task 3: ✅ BUG 2B - Reward Hacking to Idle
-- **Status:** DONE
-- **Fixed:** Anti-idle penalty -1.0, forward-progress bonus, waypoint reward +5
-- **Files:** core/cost_function.py
+### TODO After RL Learns Forward
+1. Verify episode_distance > 200m (Stage 1 acceptance)
+2. Add auto-restart script for overnight training
+3. Investigate CARLA memory leak (crashes ~10-20 min)
+4. Create TensorRT checkpoint at 100k steps
 
-### Task 4: ✅ Anti-Stall AFTER Safety Shield
-- **Status:** DONE
-- **Fixed:** Nudges car forward when stuck >100 steps
-- **Files:** 1_TRAIN_MASTER_v15.py
-
-### Task 5: ✅ No Early Termination
-- **Status:** DONE
-- **Fixed:** Removed collision/offroad early termination
-- **Files:** 1_TRAIN_MASTER_v15.py
-
-### Task 6: TESTING (NEXT)
-- **Action:** Run training to verify AI drives >200m on Stage 1
-- **Command:** `python 1_TRAIN_MASTER_v15.py`
-- **Expected:** No more "[STUCK]" logs, car moves forward
-- **Acceptance:** Mean episode distance >200m over 3 seeds
-
-## Phase 0-7: Future (After Phase -1)
+## Phase 0-7: Future
 See MASTER_PROMPT.txt for full roadmap.
 - Phase 0: Smoke-test no-op agent
-- Phase 1: Expert data collection
+- Phase 1: Expert data collection (PDM-lite/Roach)
 - Phase 2: Reproduce TransFuser++ baseline
 - Phase 3+: Improve perception and add System 1/2

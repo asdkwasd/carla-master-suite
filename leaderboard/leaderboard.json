@@ -32,5 +32,22 @@
     "avg_episode_reward": -719.1831351226813,
     "shield_interventions": 102,
     "last_updated": "2026-04-09 11:06:41"
+  },
+  "v15_Master": {
+    "agent_id": "v15_Master",
+    "total_distance": 690.5862100154359,
+    "total_penalty": 234255.0,
+    "collisions": 1918,
+    "off_roads": 8491,
+    "ego_wins": 0,
+    "rival_wins": 0,
+    "recoveries": 2,
+    "waypoints_visited": 0,
+    "episodes_completed": 0,
+    "best_single_distance": 24.45796665155649,
+    "safety_score": 100.0,
+    "avg_episode_reward": 0.0,
+    "shield_interventions": 767,
+    "last_updated": "2026-06-25 17:46:56"
   }
 }

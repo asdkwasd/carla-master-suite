@@ -90,21 +90,31 @@ class SafetyShield:
         # Compute TTC for front obstacle
         front_ttc = self._compute_ttc(front_min, speed_kmh)
 
-        # === FIX 2: Creep mode — allow slow movement ===
-        # If speed < 10 km/h, allow creeping even with close obstacle
-        is_creeping = speed_kmh < 10.0
+        # === FIX: Ignore near-field LiDAR (car's own roof/hood) ===
+        # Tesla Model 3 is ~4.7m long. LiDAR at z=2.4m detects roof ~1m ahead.
+        # Only consider obstacles beyond the car body (>5m) as real hazards.
+        # This prevents false positives on empty roads (Stage 1).
+        FRONT_IGNORE_NEAR = 5.0  # Ignore obstacles within 5m (car's own body)
 
-        # TTC thresholds (seconds) — much more lenient than hard distance
-        TTC_CRITICAL = 1.5   # Hard brake only if TTC < 1.5s (imminent collision)
-        TTC_WARNING = 3.0     # Gentle brake if TTC < 3.0s
-        TTC_SAFE = 5.0        # Full throttle OK if TTC > 5.0s
+        # === FIX 2: Creep mode — allow slow movement ===
+        # If speed < 15 km/h, allow creeping even with close obstacle
+        is_creeping = speed_kmh < 15.0
+
+        # TTC thresholds (seconds) — MUCH MORE LENIENT for empty road (Stage 1)
+        # TTC_CRITICAL: only hard brake if truly imminent (< 1.0s AND obstacle > 5m)
+        TTC_CRITICAL = 1.0   # Hard brake only if TTC < 1.0s AND obstacle > 5m
+        TTC_WARNING = 2.0     # Gentle brake if TTC < 2.0s AND obstacle > 5m
+        TTC_SAFE = 3.0        # Full throttle OK if TTC > 3.0s OR obstacle < 5m
 
         # === FIX 3: More lenient front collision prevention ===
-        if front_ttc < TTC_CRITICAL:
-            # CRITICAL: imminent collision, hard brake
-            # But if creeping, just reduce speed moderately
+        # Only apply front braking for REAL obstacles (> 5m away)
+        front_min_real = max(front_min, FRONT_IGNORE_NEAR)
+        front_ttc_real = self._compute_ttc(front_min_real, speed_kmh)
+
+        if front_ttc_real < TTC_CRITICAL:
+            # CRITICAL: imminent collision with REAL obstacle, hard brake
             if is_creeping:
-                throttle = min(throttle, 0.3)
+                throttle = min(throttle, 0.5)
                 brake = max(brake, 0.5)
             else:
                 throttle = 0.0
@@ -112,25 +122,25 @@ class SafetyShield:
             self.emergency_brakes += 1
             self.ttc_violations += 1
             intervened = True
-            self._log_intervention("FRONT_CRITICAL", front_min, front_ttc, speed_kmh)
+            self._log_intervention("FRONT_CRITICAL", front_min_real, front_ttc_real, speed_kmh)
 
-        elif front_ttc < TTC_WARNING and not is_creeping:
-            # WARNING: moderate braking needed
-            throttle = min(throttle, 0.2)
-            brake = max(brake, 0.3)
+        elif front_ttc_real < TTC_WARNING:
+            # WARNING: moderate braking needed for REAL obstacle
+            throttle = min(throttle, 0.4)
+            brake = max(brake, 0.4)
             intervened = True
-            self._log_intervention("FRONT_WARNING", front_min, front_ttc, speed_kmh)
+            self._log_intervention("FRONT_WARNING", front_min_real, front_ttc_real, speed_kmh)
 
-        elif front_ttc < TTC_SAFE:
+        elif front_ttc_real < TTC_SAFE:
             # CAUTION: gentle speed reduction
-            if speed_kmh > 15.0:
-                throttle = min(throttle, 0.4)
+            if speed_kmh > 25.0:
+                throttle = min(throttle, 0.6)
                 brake = max(brake, 0.2)
                 intervened = True
-                self._log_intervention("FRONT_CAUTION", front_min, front_ttc, speed_kmh)
+                self._log_intervention("FRONT_CAUTION", front_min_real, front_ttc_real, speed_kmh)
         else:
-            # SAFE: allow full throttle (unless other conditions)
-            self._log_intervention("FRONT_SAFE", front_min, front_ttc, speed_kmh)
+            # SAFE: allow full throttle
+            self._log_intervention("FRONT_SAFE", front_min_real, front_ttc_real, speed_kmh)
 
         # === SIDE COLLISION PREVENTION (T-bone at intersections) ===
         left_idxs = [i % n for i in range(3, 6)]
