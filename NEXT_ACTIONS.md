@@ -12,17 +12,21 @@
 - ✅ Removed watchdog
 - ✅ CARLA pre-flight check
 - ✅ Shield interventions = 0
+- ✅ Reward shaping fix (MOVING_REWARD=10, WAYPOINT=50, IDLE=-1)
+- ✅ Deleted redundant trainers (5 files removed)
+- ✅ Transfer learning v14→v15 implemented
 
-### IN PROGRESS: RL Learning
-- 🔄 RL oscillates between forward/reverse
-- 🔄 MOVING_REWARD_PER_MPS = 10.0 fix applied (need 50k+ steps to see effect)
-- 🔄 Need to monitor if distance improves over iterations
+### IN PROGRESS: Fix GPU Training
+- 🔄 GPU not utilized (CPU only) — ADD CUDA_VISIBLE_DEVICES=0
+- 🔄 CARLA may be crashed — restart headless
+- 🔄 RL oscillates (reward fix needs iterations)
 
-### TODO After RL Learns Forward
-1. Verify episode_distance > 200m (Stage 1 acceptance)
-2. Add auto-restart script for overnight training
-3. Investigate CARLA memory leak (crashes ~10-20 min)
-4. Create TensorRT checkpoint at 100k steps
+### TODO (Priority Order)
+1. **FIX GPU** — Add `os.environ['CUDA_VISIBLE_DEVICES']='0'` at top of 1_TRAIN_MASTER_v15.py
+2. **START CARLA** — CarlaUE4.exe -RenderOffScreen -quality-level=Low -carla-rpc-port=2000
+3. **RESUME** — python 1_TRAIN_MASTER_v15.py
+4. **MONITOR** — nvidia-smi should show 50-90% utilization
+5. **VERIFY** — episode_distance > 200m after 100K steps
 
 ## Phase 0-7: Future
 See MASTER_PROMPT.txt for full roadmap.

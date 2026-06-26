@@ -1,47 +1,68 @@
-# STATE.md — CARLA Grandmaster AI Project
+# STATE.md — CARLA Grandmaster AI
 
-## Project Info
-- **Name:** CARLA Grandmaster AI v15
-- **Repo:** E:\AI\traffic_vision\master_suite
-- **Venv:** E:\AI\traffic_vision\venv
-- **Last Updated:** 2026-06-25
-- **Agent:** Claude Code (Opus 4.8)
+## Repo Info
+- **Location:** D:\AI\traffic_vision\master_suite
+- **Venv:** D:\AI\traffic_vision\venv
+- **CARLA:** D:\AI\traffic_vision\CARLA_0.9.16
+- **GPU:** RTX 4080 Laptop (12GB)
+- **Updated:** 2026-06-26 15:27
 
-## Current Phase
-**PHASE -1: STABILIZE BEFORE SCALE** — PAUSED
+## Phase
+**PHASE -1: STABILIZE BEFORE SCALE** — IN PROGRESS
 
-## Bugs Fixed
-1. ✅ Action space: throttle/brake conflict fixed (RL outputs both positive = cancel)
-2. ✅ SafetyShield TTC: ignore <5m (car's own roof at 2m = false positive)
-3. ✅ Anti-stall: one-time nudge, then let RL learn
-4. ✅ min throttle floor: 0.2 (ensure forward motion)
-5. ✅ Stuck threshold: 0.3 km/h (lenient for fresh policy)
-6. ✅ load_world hangs → use get_world
-7. ✅ Removed watchdog (was causing cascading timeouts)
-8. ✅ CARLA pre-flight check (world + TM both verified)
+## Session Status
+**PAUSED** — Ready to resume with "lanjutkan carla ue4"
 
-## Training Results
+## Checkpoints Available
+| File | Steps | Date |
+|------|-------|------|
+| v15_20000_steps.zip | 20K | Jun 25 |
+| v15_40000_steps.zip | 40K | Jun 25 |
+| v15_60000_steps.zip | 60K | Jun 26 |
+| v14_1760000_steps.zip | 1.76M | Apr 7 |
+
+## Current Metrics (Last Known)
 | Metric | Value |
 |--------|-------|
-| episode_distance | ~25-62m |
-| ep_rew_mean | +4,000 to +24,000 (improving) |
-| shield_interventions | 0 (fixed!) |
-| top_speed | 19.7 km/h |
-| iterations | 11 (22,528 steps before crash) |
-| checkpoints | v15_20k, v15_40k |
+| Total timesteps | 64,096 |
+| Iterations | 2 |
+| Reward | ~36,800 |
+| Distance | ~7-11m |
+| GPU utilization | 0-33% (PROBLEM!) |
+| Curriculum stage | 1 |
 
-## Known Issues
-- RL oscillates between forward/reverse (untrained policy)
-- reward shaping: forward motion > reverse > idle
-- CARLA crashes ~10-20 min into training (after ~20-40k steps)
-- Need auto-restart script for overnight runs
+## Bugs Fixed This Session
+- [x] Reward shaping: MOVING_REWARD=10, IDLE_PENALTY=-1, WAYPOINT=50
+- [x] SafetyShield: TTC_CRITICAL 0.8s, creep 20 km/h
+- [x] Deleted 5 redundant trainers
 
-## Hardware
-- **GPU:** RTX 4080 Laptop (12GB)
-- **CARLA:** localhost:2000 (Town10HD_Opt)
+## CRITICAL Issues (Need Fix)
+1. **GPU Not Utilized** — Add `CUDA_VISIBLE_DEVICES=0` at top of training script
+2. **CARLA May Be Crashed** — Need to restart headless
+3. **Car Won't Move** — Stuck/oscillates (reward fix needs iterations)
 
-## Files Modified This Session
-- core/safety.py (TTC thresholds + 5m ignore)
-- core/cost_function.py (strong moving reward v3)
-- 1_TRAIN_MASTER_v15.py (safe_tick, action mapping, anti-stall, init fixes)
-- core/constants.py (Town10HD_Opt map)
+## Quick Resume Commands
+```batch
+cd D:\AI\traffic_vision\master_suite
+call ..\venv\Scripts\activate
+
+REM Start CARLA headless
+cd ..\CARLA_0.9.16
+start CarlaUE4.exe -RenderOffScreen -quality-level=Low -carla-rpc-port=2000
+
+REM Resume training
+cd ..\master_suite
+python 1_TRAIN_MASTER_v15.py
+```
+
+## Scripts Created
+- transfer_inject.py — On-the-fly transfer learning
+- rtx_maximizer.py — GPU optimizer
+- START_TRANSFER.bat — Transfer launcher
+- EMERGENCY_RESCUE.bat — Rescue script
+
+## Next Agent Actions (Priority)
+1. Fix GPU training (add CUDA_VISIBLE_DEVICES)
+2. Start CARLA headless
+3. Resume training
+4. Monitor for stuck behavior

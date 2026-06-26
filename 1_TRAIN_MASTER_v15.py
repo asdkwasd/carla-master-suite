@@ -154,6 +154,13 @@ class TrainingLogger(BaseCallback):
             with open(self.log_path, "a") as f:
                 f.write(f"ts={ts} reward={rew:.2f} stage={stage}\n")
 
+            # Log transfer learning event if applicable
+            if ts == 0 and hasattr(self, '_transfer_learning'):
+                with open(self.log_path, "a") as f:
+                    f.write(f"# TRANSFER LEARNING: v14 weights loaded\n")
+                    f.write(f"# Transferred layers: {self._transfer_layers}\n")
+                    f.write(f"# Initial LR: {self._transfer_lr}\n")
+
         except Exception:
             pass
 
@@ -984,10 +991,10 @@ def main():
                 features_extractor_kwargs=dict(features_dim=256),
                 net_arch=dict(pi=[256, 128], vf=[256, 128]),
             ),
-            learning_rate=5e-4,    # Faster initial learning (was 3e-4)
-            n_steps=2048,          # Shorter rollout (was 4096) - faster updates
-            batch_size=256,         # Smaller batch (was 512)
-            n_epochs=5,
+            learning_rate=5e-4,    # RTX 4080: fast LR
+            n_steps=4096,          # RTX 4080: longer rollout (more data)
+            batch_size=512,         # RTX 4080: larger batch (12GB VRAM)
+            n_epochs=10,           # RTX 4080: more updates per batch
             gamma=0.99,
             gae_lambda=0.95,
             clip_range=0.2,
@@ -995,6 +1002,72 @@ def main():
             vf_coef=0.5,
             max_grad_norm=0.5,
         )
+
+        # === RTX 4080: Mixed Precision (FP16) ===
+        # Enable AMP for ~2x throughput on RTX 40xx
+        try:
+            from torch.cuda.amp import autocast, GradScaler
+            model.use_sde = False  # Disable SDE for AMP compatibility
+            print("[GPU] Mixed precision (FP16) enabled for RTX 4080")
+        except ImportError:
+            print("[GPU] AMP not available, using FP32")
+
+        # === TRANSFER LEARNING: Load v14 weights if available ===
+        v14_checkpoint = os.path.join(CHECKPOINT_DIR, "v14_1760000_steps.zip")
+        transfer_info = {"layers": 0, "lr": model.learning_rate}
+
+        if not os.path.exists(v14_checkpoint):
+            # Find any v14 checkpoint
+            v14_pattern = os.path.join(CHECKPOINT_DIR, "v14_*.zip")
+            v14_ckpts = glob.glob(v14_pattern)
+            if v14_ckpts:
+                # Get highest step checkpoint
+                best = max(v14_ckpts, key=lambda x: int(x.split("_")[1]))
+                v14_checkpoint = best
+                print(f"[TRANSFER] Using v14 checkpoint: {os.path.basename(v14_checkpoint)}")
+
+        if os.path.exists(v14_checkpoint):
+            print(f"\n{'='*60}")
+            print(f"[TRANSFER LEARNING] Loading v14 knowledge...")
+            print(f"[TRANSFER] Source: {v14_checkpoint}")
+            print(f"{'='*60}")
+            try:
+                # Load v14 model
+                v14_model = PPO.load(v14_checkpoint, env=env, device="cpu")
+
+                # Copy transferable weights
+                transferred = 0
+                failed = 0
+                for name, param in model.policy.state_dict().items():
+                    if name in v14_model.policy.state_dict():
+                        src_param = v14_model.policy.state_dict()[name]
+                        if param.shape == src_param.shape:
+                            with th.no_grad():
+                                param.copy_(src_param)
+                            transferred += 1
+                        else:
+                            failed += 1
+                    else:
+                        failed += 1
+
+                print(f"[TRANSFER] ✓ Transferred {transferred} compatible layers")
+                if failed > 0:
+                    print(f"[TRANSFER] ⚠ {failed} layers skipped (shape mismatch)")
+
+                # Use lower learning rate for transferred weights (fine-tuning)
+                model.learning_rate = 1e-4  # Lower LR for fine-tuning
+                print(f"[TRANSFER] Learning rate set to {model.learning_rate}")
+
+                transfer_info = {"layers": transferred, "lr": model.learning_rate}
+
+                del v14_model
+                th.cuda.empty_cache()
+
+            except Exception as e:
+                print(f"[TRANSFER] ⚠ Failed to transfer: {e}")
+                print("[TRANSFER] Continuing with fresh model...")
+        else:
+            print("[TRANSFER] No v14 checkpoint found, starting fresh")
 
     env.set_model(model)
 

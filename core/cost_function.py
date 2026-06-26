@@ -40,18 +40,18 @@ class CostFunction:
     }
 
     # === FIX v3: Strong moving reward to beat reverse ===
-    # Anti-idle penalty: only when IDLE (not moving at all)
-    ANTI_IDLE_PENALTY = -2.0   # Reduced from -5.0
-    IDLE_THRESHOLD_MPS = 0.05   # < 0.05 m/s = considered idle (very lenient)
-    MOVING_REWARD_PER_MPS = 10.0  # MUCH STRONGER: 10x (was 3.0)
-    STEP_MOVING_BONUS = 1.0    # Extra bonus per step when moving
+    # Anti-idle penalty: -1 per step if speed < 0.5 m/s
+    ANTI_IDLE_PENALTY = -1.0     # Changed from -2.0
+    IDLE_THRESHOLD_MPS = 0.5      # Changed from 0.05 - penalize if < 0.5 m/s
+    MOVING_REWARD_PER_MPS = 10.0  # +10 per m/s forward progress
+    STEP_MOVING_BONUS = 2.0       # Extra bonus per step when moving (increased)
 
     # Collision penalty (reduced to avoid idle hacking)
     COLLISION_PENALTY = -2.0      # Was -5, reduced to -2
     HIGH_SPEED_CRASH_BONUS = -1.0 # Extra penalty for high-speed crash
 
-    # Waypoint reward
-    WAYPOINT_REWARD = 5.0         # Per new waypoint reached
+    # Waypoint reward: +50 bonus for reaching waypoint
+    WAYPOINT_REWARD = 50.0        # Per new waypoint reached (was 5.0)
 
     def __init__(self, reward_clip=(-50, 100)):  # Wider clip range
         self.clip_lo, self.clip_hi = reward_clip
@@ -104,9 +104,10 @@ class CostFunction:
                 # At 0.5 m/s: +5.0 — beats -5.0 idle penalty by 10x margin
                 progress += min(speed_ms * self.MOVING_REWARD_PER_MPS, 10.0)
                 progress += self.STEP_MOVING_BONUS
-            elif speed_ms <= self.IDLE_THRESHOLD_MPS and ctx.get("step_dist", 0) < 0.02:
-                # Truly stuck: moderate penalty
-                progress += self.ANTI_IDLE_PENALTY
+            # === FIX v4: Anti-idle — penalize if not moving enough ===
+        if speed_ms < self.IDLE_THRESHOLD_MPS and ctx.get("step_dist", 0) < 0.5:
+            # Stuck/idle: penalty that encourages movement
+            progress += self.ANTI_IDLE_PENALTY
 
         # === FIX v3: Waypoint discovery bonus ===
         if ctx.get("new_waypoint", False):

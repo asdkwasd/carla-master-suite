@@ -1,5 +1,67 @@
 # CHANGELOG.md
 
+## 2026-06-26 — Session 4b: Fix "Car Won't Move" Oscillation
+
+### Problem Fixed
+- AI oscillates forward/reverse and gets stuck
+- Collision penalty (-5) > forward progress reward (+5)
+- RL learns "stand still = safe" (negative reward for movement)
+
+### Changes Made
+
+#### core/cost_function.py — Reward Shaping
+1. **Forward progress reward: +10 per m/s** (confirmed, already correct)
+2. **Anti-idle penalty: -1 per step if speed < 0.5 m/s** (was -2, threshold raised)
+   - Idle threshold: 0.05 → 0.5 m/s (penalize slow movement more strictly)
+   - Step bonus: 1.0 → 2.0 (reward sustained movement)
+3. **Waypoint reached: +50 bonus** (was 5.0, 10x increase)
+   - Massive reward for progress prevents idle optimization
+
+#### core/safety.py — Less Aggressive SafetyShield
+1. **Creep mode speed: 15 → 20 km/h** (allow faster creeping)
+2. **TTC_CRITICAL: 1.0s → 0.8s** (only hard brake for very close)
+3. **TTC_WARNING: 2.0s → 2.5s** (gentle brake threshold)
+4. **TTC_SAFE: 3.0s → 4.0s** (full throttle OK sooner)
+
+### Expected Behavior
+- Forward motion reward (+10/m/s) now DOMINATES idle penalty (-1/step)
+- Car earns +5/step at 0.5 m/s vs -1/step when idle
+- Waypoint bonuses (+50) encourage route following
+- SafetyShield allows speeds up to 20 km/h in creep mode
+
+## 2026-06-26 — Session 4: Repo Cleanup
+
+### Files Deleted (Superseded by v15)
+- `1_TRAIN_MASTER.py` — v14 duplicate (all features in v15)
+- `1_TRAIN_MASTER_ULTIMATE.py` — v10 duplicate (HER/WorldModel in v15 core)
+- `1_TRAIN_MASTER_RECOVERY.py` — v11 duplicate (RecoveryModule in v15 core)
+- `3_TEST_LIVE.py` — v8 evaluation script (superseded by 3_TEST_LIVE_v15.py)
+- `TEST_NOW.py` — one-off v14 test script
+
+### Kept
+- `1_TRAIN_MASTER_v15.py` — Production training (Tesla/Waymo architecture)
+- `3_TEST_LIVE_v15.py` — Live evaluation for v15 models
+
+## 2026-06-26 — Session 3: Transfer Learning from v14
+
+### New Feature: Transfer Learning Pipeline
+- **Goal:** Leverage 1.76M steps of v14 training to accelerate v15
+- **Implementation:** Automatic weight transfer when starting fresh v15 model
+- **Transfer Strategy:**
+  1. Load best v14 checkpoint (v14_1760000_steps.zip)
+  2. Match compatible layers by name and shape
+  3. Copy weights with `torch.no_grad()` (no gradient modification)
+  4. Lower learning rate (1e-4) for fine-tuning transferred weights
+
+### Files Modified
+- `1_TRAIN_MASTER_v15.py` — Added transfer learning logic (~50 lines)
+- `transfer_learning_v15.py` — New analysis script for checkpoint inspection
+
+### Expected Benefits
+- Faster convergence (starting from ~1.76M steps of knowledge)
+- Better base behavior (v14 learned route following, obstacle avoidance)
+- Reduced stuck/sloth behavior (v14 learned to move)
+
 ## 2026-06-25 — Session 2: Stabilization + Testing
 
 ### Bugs Fixed

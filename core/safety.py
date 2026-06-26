@@ -97,14 +97,14 @@ class SafetyShield:
         FRONT_IGNORE_NEAR = 5.0  # Ignore obstacles within 5m (car's own body)
 
         # === FIX 2: Creep mode — allow slow movement ===
-        # If speed < 15 km/h, allow creeping even with close obstacle
-        is_creeping = speed_kmh < 15.0
+        # If speed < 20 km/h, allow creeping even with close obstacle
+        is_creeping = speed_kmh < 20.0
 
-        # TTC thresholds (seconds) — MUCH MORE LENIENT for empty road (Stage 1)
-        # TTC_CRITICAL: only hard brake if truly imminent (< 1.0s AND obstacle > 5m)
-        TTC_CRITICAL = 1.0   # Hard brake only if TTC < 1.0s AND obstacle > 5m
-        TTC_WARNING = 2.0     # Gentle brake if TTC < 2.0s AND obstacle > 5m
-        TTC_SAFE = 3.0        # Full throttle OK if TTC > 3.0s OR obstacle < 5m
+        # TTC thresholds (seconds) — MORE LENIENT for Stage 1 (empty road)
+        # TTC_CRITICAL: only hard brake if truly imminent (< 0.8s AND obstacle > 5m)
+        TTC_CRITICAL = 0.8   # Reduced from 1.0 - only brake for very close
+        TTC_WARNING = 2.5     # Reduced from 2.0
+        TTC_SAFE = 4.0        # Increased from 3.0 - allow more speed
 
         # === FIX 3: More lenient front collision prevention ===
         # Only apply front braking for REAL obstacles (> 5m away)

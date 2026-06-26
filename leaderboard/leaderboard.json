@@ -35,19 +35,19 @@
   },
   "v15_Master": {
     "agent_id": "v15_Master",
-    "total_distance": 690.5862100154359,
-    "total_penalty": 234255.0,
-    "collisions": 1918,
-    "off_roads": 8491,
+    "total_distance": 825.6925534258439,
+    "total_penalty": 475435.0,
+    "collisions": 4076,
+    "off_roads": 13567,
     "ego_wins": 0,
     "rival_wins": 0,
     "recoveries": 2,
     "waypoints_visited": 0,
     "episodes_completed": 0,
-    "best_single_distance": 24.45796665155649,
-    "safety_score": 100.0,
+    "best_single_distance": 14.157679372621715,
+    "safety_score": 0,
     "avg_episode_reward": 0.0,
-    "shield_interventions": 767,
-    "last_updated": "2026-06-25 17:46:56"
+    "shield_interventions": 0,
+    "last_updated": "2026-06-26 15:19:36"
   }
 }

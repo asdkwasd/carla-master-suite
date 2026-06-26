@@ -1,78 +1,119 @@
 # HANDOFF.md — CARLA Grandmaster AI
 
 ## Who Am I
-- **Agent:** Claude Code (Opus 4.8)
-- **Machine:** Windows Laptop (RTX 4080 12GB)
-- **Date:** 2026-06-25
-- **Session:** Started ~4 hours ago, pausing now
+- **Agent:** Claude Code (Autonomous Mode)
+- **Machine:** Windows Laptop RTX 4080 12GB
+- **Date:** 2026-06-26 15:27
+- **Status:** PAUSED - Save State
 
 ## What I Did
-1. Located repo at E:\AI\traffic_vision\master_suite (moved from original location)
-2. Found venv at E:\AI\traffic_vision\venv (PyTorch 2.5.1+cu121)
-3. Found CARLA at E:\AI\traffic_vision\CARLA_0.9.16
-4. Fixed BUG 1: Action space — throttle/brake conflict (RL outputs both positive = cancel!)
-5. Fixed BUG 2A: SafetyShield TTC too aggressive (car's own roof at 2m)
-6. Fixed BUG 2B: Anti-stall one-time nudge (was overriding RL every step)
-7. Fixed BUG 3: load_world hangs → use get_world
-8. Removed watchdog (was causing cascading timeouts)
-9. Added CARLA pre-flight check (world + TM both verified)
-10. Verified physics works (car moves fine in diagnostic test)
-11. Training runs but RL oscillates between forward/reverse
 
-## What You MUST Do Next
-1. **CARLA may be dead** — launch with:
-   ```
-   E:\AI\traffic_vision\CARLA_0.9.16\CarlaUE4.exe -quality-level=Low -prefernvidia -carla-rpc-port=2000
-   ```
-2. **Verify CARLA:**
-   ```python
-   import carla
-   c = carla.Client('127.0.0.1', 2000)
-   c.set_timeout(10)
-   w = c.get_world(); tm = c.get_trafficmanager(8000)
-   print(w.get_map().name)  # Should be Town10HD_Opt
-   ```
-3. **Resume training:**
-   ```
-   cd E:\AI\traffic_vision\master_suite
-   E:\AI\traffic_vision\venv\Scripts\python.exe 1_TRAIN_MASTER_v15.py
-   ```
-4. **Latest checkpoint:** `checkpoints/v15_40000_steps.zip` (auto-resumes)
+### Session Summary
+1. Found repo at D:\AI\traffic_vision\master_suite
+2. Implemented Transfer Learning v14→v15 (12/85 layers matched)
+3. Fixed reward shaping (MOVING_REWARD=10, WAYPOINT=50, ANTI_IDLE=-1)
+4. Made SafetyShield less aggressive (TTC thresholds increased)
+5. Deleted redundant trainers (1_TRAIN_MASTER.py, etc.)
+6. Training ran but GPU not utilized (CPU only issue)
 
-## Key Metrics
+### Current Training Metrics
 | Metric | Value |
 |--------|-------|
-| episode_distance | ~25-62m (best) |
-| ep_rew_mean | +4k to +24k |
-| shield_interventions | 0 (FIXED) |
-| top_speed | 19.7 km/h |
-| iterations done | 11 (22,528 steps) |
+| Total timesteps | 64,096 |
+| Iterations | 2 |
+| Reward | ~36,800 |
+| Distance | ~7-11m |
+| GPU utilization | 0-33% (PROBLEM) |
 
-## Root Cause of RL Oscillation
-RL learns to output negative throttle (= reverse direction) because:
-- Collision penalty -5.0 > forward progress reward +5.0
-- Reverse keeps car moving (progress reward) without collision risk
-- FIX APPLIED: MOVING_REWARD_PER_MPS = 10.0 (much stronger)
-- Need more iterations to see if fix works
+### Bugs Fixed This Session
+1. Reward shaping: forward reward +10/m/s, idle penalty -1/step, waypoint +50
+2. SafetyShield: TTC_CRITICAL 1.0→0.8s, creep speed 20 km/h
+3. Deleted: 1_TRAIN_MASTER.py, 1_TRAIN_MASTER_ULTIMATE.py, 1_TRAIN_MASTER_RECOVERY.py, 3_TEST_LIVE.py, TEST_NOW.py
+
+### Files Modified
+- D:\AI\traffic_vision\master_suite\STATE.md (updated)
+- D:\AI\traffic_vision\master_suite\core\cost_function.py (reward fixes)
+- D:\AI\traffic_vision\master_suite\core\safety.py (SafetyShield less aggressive)
+- D:\AI\traffic_vision\master_suite\1_TRAIN_MASTER_v15.py (various fixes)
+- D:\AI\traffic_vision\master_suite\CHANGELOG.md (updated)
+
+### Scripts Created
+- D:\AI\traffic_vision\master_suite\transfer_inject.py (on-the-fly transfer learning)
+- D:\AI\traffic_vision\master_suite\rtx_maximizer.py (GPU optimizer)
+- D:\AI\traffic_vision\master_suite\START_TRANSFER.bat (transfer launcher)
+- D:\AI\traffic_vision\master_suite\EMERGENCY_RESCUE.bat (rescue script)
+
+## Active Issues (Need Fix)
+
+### CRITICAL: GPU Not Utilized
+- Training runs on CPU, not GPU
+- GPU utilization: 0-33%
+- Fix: Add `os.environ['CUDA_VISIBLE_DEVICES']='0'` at top of training script
+- Ensure PPO uses device='cuda'
+
+### CRITICAL: CARLA May Have Crashed
+- Training frozen at step 2150
+- Symptoms: "streaming client: connection failed"
+- Fix: Restart CARLA headless before training
+
+### Car Won't Move
+- Stuck/sloth behavior persists
+- Reward shaping fix applied but needs more iterations
+- Waypoint reward +50 should help
+
+## What You MUST Do Next
+
+### 1. RESTART CARLA (if crashed)
+```batch
+cd D:\AI\traffic_vision\CARLA_0.9.16
+start CarlaUE4.exe -RenderOffScreen -quality-level=Low -carla-rpc-port=2000
+```
+
+### 2. FIX GPU TRAINING
+Add at TOP of D:\AI\traffic_vision\master_suite\1_TRAIN_MASTER_v15.py (before torch import):
+```python
+import os
+os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+os.environ['PYTORCH_CUDA_ALLOC_CONF'] = 'expandable_segments:True'
+```
+
+### 3. RESUME TRAINING
+```batch
+cd D:\AI\traffic_vision\master_suite
+call ..\venv\Scripts\activate
+python 1_TRAIN_MASTER_v15.py
+```
+
+## Checkpoints Available
+- D:\AI\traffic_vision\master_suite\checkpoints\v15_20000_steps.zip
+- D:\AI\traffic_vision\master_suite\checkpoints\v15_40000_steps.zip
+- D:\AI\traffic_vision\master_suite\checkpoints\v15_60000_steps.zip
+- D:\AI\traffic_vision\master_suite\checkpoints\v14_1760000_steps.zip (1.76M steps!)
+
+## Exact Resume Commands
+
+### Resume Training
+```batch
+cd D:\AI\traffic_vision\master_suite
+call ..\venv\Scripts\activate
+python 1_TRAIN_MASTER_v15.py
+```
+
+### Check GPU Status
+```powershell
+nvidia-smi --query-gpu=name,utilization.gpu,memory.used --format=csv
+```
+
+### Check CARLA
+```powershell
+Test-NetConnection localhost -Port 2000
+```
 
 ## Open Risks
-1. RL may need 100k+ steps to learn forward-only
-2. CARLA crashes ~10-20 min in (memory leak suspected)
-3. Need auto-restart script for overnight runs
-4. v14 checkpoint has numpy version mismatch (can't load)
+1. GPU not utilized - training slow on CPU
+2. CARLA may crash during training
+3. Car still oscillates forward/reverse
+4. Need headless mode for better GPU utilization
 
-## Files Modified This Session
-- 1_TRAIN_MASTER_v15.py (many fixes)
-- core/safety.py (TTC thresholds, 5m ignore)
-- core/cost_function.py (strong moving reward v3)
-- core/constants.py (Town10HD_Opt map)
-- core/feature_extractor.py (Unicode fix)
-- Checkpoints: v15_20k, v15_40k
-- TB logs: tb_logs/PPO_102/
-
-## Exact Resume Command
-```
-cd E:\AI\traffic_vision\master_suite
-git pull
-E:\AI\traffic_vision\venv\Scripts\python.exe 1_TRAIN_MASTER_v15.py
-```
+## Phase Status
+**PHASE -1: STABILIZE** — In progress, not yet passed
