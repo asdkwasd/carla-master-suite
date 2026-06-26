@@ -60,6 +60,13 @@ if errorlevel 1 echo     (Tidak ada perubahan baru, snapshot terakhir tetap aman
 echo [5/5] Mengunggah ke GitHub...
 git remote get-url origin >nul 2>&1
 if errorlevel 1 goto BUAT_REPO
+for /f "delims=" %%U in ('git remote get-url origin') do set "ORIGIN_URL=%%U"
+echo %ORIGIN_URL% | findstr /C:"USERNAME/NAMA_REPO" >nul
+if not errorlevel 1 (
+  echo     Alamat GitHub lama masih contoh, menggantinya dengan repo asli...
+  git remote remove origin
+  goto BUAT_REPO
+)
 git push -u origin main
 if errorlevel 1 goto PUSH_GAGAL
 goto SELESAI
