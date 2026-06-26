@@ -73,25 +73,32 @@ goto SELESAI
 
 :BUAT_REPO
 where gh >nul 2>&1
-if errorlevel 1 goto PASANG_GH
-gh auth status >nul 2>&1
+if not errorlevel 1 ( set "GH=gh" & goto GH_READY )
+if exist "%ProgramFiles%\GitHub CLI\gh.exe" ( set "GH=%ProgramFiles%\GitHub CLI\gh.exe" & goto GH_READY )
+if exist "%LOCALAPPDATA%\Programs\GitHub CLI\gh.exe" ( set "GH=%LOCALAPPDATA%\Programs\GitHub CLI\gh.exe" & goto GH_READY )
+goto PASANG_GH
+
+:GH_READY
+"%GH%" auth status >nul 2>&1
 if errorlevel 1 (
-  echo Silakan login GitHub di browser yang akan terbuka...
-  gh auth login -w
+  echo Silakan login GitHub di browser yang akan terbuka, lalu kembali ke sini...
+  "%GH%" auth login -w
 )
 echo Membuat repo privat "%REPO_NAME%" dan mengunggah...
-gh repo create %REPO_NAME% --private --source=. --remote=origin --push
+"%GH%" repo create %REPO_NAME% --private --source=. --remote=origin --push
 if errorlevel 1 goto PUSH_GAGAL
 goto SELESAI
 
 :PASANG_GH
 echo.
-echo GitHub CLI belum ada. Memasang otomatis (sekali saja)...
+echo Memasang GitHub CLI...
 winget install --id GitHub.cli -e --source winget
+if exist "%ProgramFiles%\GitHub CLI\gh.exe" ( set "GH=%ProgramFiles%\GitHub CLI\gh.exe" & goto GH_READY )
+if exist "%LOCALAPPDATA%\Programs\GitHub CLI\gh.exe" ( set "GH=%LOCALAPPDATA%\Programs\GitHub CLI\gh.exe" & goto GH_READY )
 echo.
 echo ============================================================
-echo   Pemasangan selesai. TUTUP jendela ini,
-echo   lalu klik dua kali file ini SEKALI LAGI.
+echo   GitHub CLI sudah terpasang tapi belum terbaca. Silakan
+echo   RESTART komputer, lalu klik dua kali file ini sekali lagi.
 echo ============================================================
 pause
 exit /b 0
