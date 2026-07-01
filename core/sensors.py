@@ -11,7 +11,8 @@ import carla
 from .constants import (
     IMG_WIDTH, IMG_HEIGHT, N_LIDAR_SECTORS, LIDAR_MAX_RANGE,
     SEMANTIC_PALETTE, SEMANTIC_DEFAULT, CAMERA_TYPE, CAMERA_FOV,
-    LIDAR_CHANNELS, LIDAR_PPS, LIDAR_RPM, LIDAR_UPPER_FOV, LIDAR_LOWER_FOV
+    LIDAR_CHANNELS, LIDAR_PPS, LIDAR_RPM, LIDAR_UPPER_FOV, LIDAR_LOWER_FOV,
+    N_RADAR_SECTORS, RADAR_RANGE, RADAR_FOV, RADAR_POINTS
 )
 
 
@@ -25,18 +26,21 @@ class SensorSuite:
         # --- Buffers ---
         self.last_img: np.ndarray | None = None
         self.last_lidar = np.full(N_LIDAR_SECTORS, LIDAR_MAX_RANGE, np.float32)
+        self.last_radar = np.zeros(N_RADAR_SECTORS, np.float32)
         self.collision_events: list = []
         self.lane_invasion_events: list = []
 
         # --- Locks ---
         self._img_lock = threading.Lock()
         self._lidar_lock = threading.Lock()
+        self._radar_lock = threading.Lock()
         self._col_lock = threading.Lock()
         self._lane_lock = threading.Lock()
 
         # --- Actor handles (set after attach) ---
         self.camera = None
         self.lidar = None
+        self.radar = None
         self.collision = None
         self.lane = None
 
@@ -82,6 +86,19 @@ class SensorSuite:
         )
         self.lidar.listen(self._on_lidar)
 
+        # --- Radar ---
+        rad_bp = lib.find("sensor.other.radar")
+        rad_bp.set_attribute("horizontal_fov", str(RADAR_FOV))
+        rad_bp.set_attribute("vertical_fov", str(RADAR_FOV))
+        rad_bp.set_attribute("points_per_second", str(RADAR_POINTS))
+        rad_bp.set_attribute("range", str(RADAR_RANGE))
+        self.radar = world.spawn_actor(
+            rad_bp,
+            carla.Transform(carla.Location(x=2.0, z=1.0)), # Front bumper
+            attach_to=vehicle
+        )
+        self.radar.listen(self._on_radar)
+
         # --- Collision ---
         self.collision = world.spawn_actor(
             lib.find("sensor.other.collision"),
@@ -99,7 +116,7 @@ class SensorSuite:
     def detach(self):
         """Stop and mark sensors for destruction. Returns list of actors."""
         actors = []
-        for attr in ("camera", "lidar", "collision", "lane"):
+        for attr in ("camera", "lidar", "radar", "collision", "lane"):
             s = getattr(self, attr, None)
             if s is not None:
                 try:
@@ -116,6 +133,8 @@ class SensorSuite:
             self.last_img = None
         with self._lidar_lock:
             self.last_lidar = np.full(N_LIDAR_SECTORS, LIDAR_MAX_RANGE, np.float32)
+        with self._radar_lock:
+            self.last_radar = np.zeros(N_RADAR_SECTORS, np.float32)
         with self._col_lock:
             self.collision_events = []
         with self._lane_lock:
@@ -154,6 +173,34 @@ class SensorSuite:
         with self._lidar_lock:
             self.last_lidar = sectors
 
+    def _on_radar(self, radar_data):
+        """Convert Radar → N-sector velocity array."""
+        # raw_data is an array of carla.RadarDetection
+        # We can extract velocity and azimuth
+        pts = np.frombuffer(radar_data.raw_data, dtype=np.float32)
+        if pts.size == 0:
+            return
+        
+        # radar format per point: velocity, azimuth, altitude, depth
+        pts = pts.reshape(-1, 4)
+        velocities = pts[:, 0]
+        azimuths = pts[:, 1]
+        
+        sectors = np.zeros(N_RADAR_SECTORS, np.float32)
+        if len(pts) > 0:
+            # Map azimuth (-FOV/2 to FOV/2) to sector bins
+            # shift to [0, FOV], then normalize
+            fov_rad = math.radians(RADAR_FOV)
+            shifted = azimuths + (fov_rad / 2)
+            indices = (shifted / fov_rad * N_RADAR_SECTORS).astype(np.intp)
+            indices = np.clip(indices, 0, N_RADAR_SECTORS - 1)
+            
+            # Use max velocity approaching us (negative velocity = moving toward ego)
+            np.minimum.at(sectors, indices, velocities)
+
+        with self._radar_lock:
+            self.last_radar = sectors
+
     def _on_collision(self, event):
         with self._col_lock:
             self.collision_events.append(event)
@@ -174,6 +221,10 @@ class SensorSuite:
     def get_lidar(self) -> np.ndarray:
         with self._lidar_lock:
             return self.last_lidar.copy()
+
+    def get_radar(self) -> np.ndarray:
+        with self._radar_lock:
+            return self.last_radar.copy()
 
     def get_and_clear_collisions(self) -> list:
         with self._col_lock:

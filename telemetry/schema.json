@@ -1,0 +1,17 @@
+{
+  "run_id": "string",
+  "git_sha": "string",
+  "timestamp": "ISO-8601",
+  "benchmark": "LB2.1 | Bench2Drive | LangAuto",
+  "seed": 0,
+  "aggregate": { "driving_score": 0.0, "route_completion": 0.0, "infraction_penalty": 0.0 },
+  "infractions_per_km": {
+    "collisions_pedestrian": 0.0, "collisions_vehicle": 0.0, "collisions_layout": 0.0,
+    "red_light": 0.0, "stop_sign": 0.0, "off_road": 0.0, "agent_blocked": 0.0
+  },
+  "top_failures": [ {"scenario": "string", "route": "string", "hypothesis": "string"} ],
+  "system2_narration": "penjelasan bahasa alami manuver berisiko terakhir",
+  "delta_since_last": "apa yang berubah (config/diff)",
+  "next_action": "string",
+  "source_backing_next_action": "URL paper/forum"
+}

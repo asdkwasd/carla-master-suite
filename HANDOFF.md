@@ -1,119 +1,95 @@
 # HANDOFF.md — CARLA Grandmaster AI
 
 ## Who Am I
-- **Agent:** Claude Code (Autonomous Mode)
+- **Agent:** Claude Code (Autonomous Mode v2)
 - **Machine:** Windows Laptop RTX 4080 12GB
-- **Date:** 2026-06-26 15:27
-- **Status:** PAUSED - Save State
+- **Date:** 2026-07-01
+- **Status:** ACTIVE - Running Phase -1 Stabilization
 
 ## What I Did
 
 ### Session Summary
-1. Found repo at D:\AI\traffic_vision\master_suite
-2. Implemented Transfer Learning v14→v15 (12/85 layers matched)
-3. Fixed reward shaping (MOVING_REWARD=10, WAYPOINT=50, ANTI_IDLE=-1)
-4. Made SafetyShield less aggressive (TTC thresholds increased)
-5. Deleted redundant trainers (1_TRAIN_MASTER.py, etc.)
-6. Training ran but GPU not utilized (CPU only issue)
+1. Located repo at D:\AI\traffic_vision\master_suite (moved from E:\)
+2. Read all state files (STATE.md, HANDOFF.md, PROGRESS.jsonl, CHANGELOG.md)
+3. Analyzed training log: reward=0.00 indicates car NOT moving
+4. Found available CARLA maps: Town01-Town10HD
+5. Fixed curriculum map: "Town10HD_Opt" → "Town01" (Stage 1)
+6. Added explicit map loading in reset()
 
 ### Current Training Metrics
 | Metric | Value |
 |--------|-------|
-| Total timesteps | 64,096 |
-| Iterations | 2 |
-| Reward | ~36,800 |
-| Distance | ~7-11m |
+| Total timesteps | 64,096 (last known) |
+| Iterations | 2 (last known) |
+| Reward | 0.00 (PROBLEM - car not moving) |
+| Distance | ~7-11m (last known) |
 | GPU utilization | 0-33% (PROBLEM) |
 
 ### Bugs Fixed This Session
-1. Reward shaping: forward reward +10/m/s, idle penalty -1/step, waypoint +50
-2. SafetyShield: TTC_CRITICAL 1.0→0.8s, creep speed 20 km/h
-3. Deleted: 1_TRAIN_MASTER.py, 1_TRAIN_MASTER_ULTIMATE.py, 1_TRAIN_MASTER_RECOVERY.py, 3_TEST_LIVE.py, TEST_NOW.py
+1. **Curriculum map fix**: Town10HD_Opt → Town01 (valid map)
+2. **Map loading**: Added explicit map loading in reset()
 
 ### Files Modified
-- D:\AI\traffic_vision\master_suite\STATE.md (updated)
-- D:\AI\traffic_vision\master_suite\core\cost_function.py (reward fixes)
-- D:\AI\traffic_vision\master_suite\core\safety.py (SafetyShield less aggressive)
-- D:\AI\traffic_vision\master_suite\1_TRAIN_MASTER_v15.py (various fixes)
-- D:\AI\traffic_vision\master_suite\CHANGELOG.md (updated)
-
-### Scripts Created
-- D:\AI\traffic_vision\master_suite\transfer_inject.py (on-the-fly transfer learning)
-- D:\AI\traffic_vision\master_suite\rtx_maximizer.py (GPU optimizer)
-- D:\AI\traffic_vision\master_suite\START_TRANSFER.bat (transfer launcher)
-- D:\AI\traffic_vision\master_suite\EMERGENCY_RESCUE.bat (rescue script)
+- D:\AI\traffic_vision\master_suite\core\constants.py (curriculum map)
+- D:\AI\traffic_vision\master_suite\1_TRAIN_MASTER_v15.py (map loading)
 
 ## Active Issues (Need Fix)
 
+### CRITICAL: Car Not Moving (reward=0.00)
+- Training log shows reward=0.00 consistently
+- Possible causes:
+  1. RL not learning (needs more steps)
+  2. Environment step() returning 0 reward
+  3. CARLA not running
+  4. Map/sensor issues
+
 ### CRITICAL: GPU Not Utilized
-- Training runs on CPU, not GPU
 - GPU utilization: 0-33%
-- Fix: Add `os.environ['CUDA_VISIBLE_DEVICES']='0'` at top of training script
-- Ensure PPO uses device='cuda'
-
-### CRITICAL: CARLA May Have Crashed
-- Training frozen at step 2150
-- Symptoms: "streaming client: connection failed"
-- Fix: Restart CARLA headless before training
-
-### Car Won't Move
-- Stuck/sloth behavior persists
-- Reward shaping fix applied but needs more iterations
-- Waypoint reward +50 should help
+- Fix: Already have CUDA_VISIBLE_DEVICES=0 set
+- Need to verify training actually uses GPU
 
 ## What You MUST Do Next
 
-### 1. RESTART CARLA (if crashed)
-```batch
-cd D:\AI\traffic_vision\CARLA_0.9.16
-start CarlaUE4.exe -RenderOffScreen -quality-level=Low -carla-rpc-port=2000
-```
-
-### 2. FIX GPU TRAINING
-Add at TOP of D:\AI\traffic_vision\master_suite\1_TRAIN_MASTER_v15.py (before torch import):
-```python
-import os
-os.environ['CUDA_VISIBLE_DEVICES'] = '0'
-os.environ['PYTORCH_CUDA_ALLOC_CONF'] = 'expandable_segments:True'
-```
-
-### 3. RESUME TRAINING
-```batch
-cd D:\AI\traffic_vision\master_suite
-call ..\venv\Scripts\activate
-python 1_TRAIN_MASTER_v15.py
-```
-
-## Checkpoints Available
-- D:\AI\traffic_vision\master_suite\checkpoints\v15_20000_steps.zip
-- D:\AI\traffic_vision\master_suite\checkpoints\v15_40000_steps.zip
-- D:\AI\traffic_vision\master_suite\checkpoints\v15_60000_steps.zip
-- D:\AI\traffic_vision\master_suite\checkpoints\v14_1760000_steps.zip (1.76M steps!)
-
-## Exact Resume Commands
-
-### Resume Training
-```batch
-cd D:\AI\traffic_vision\master_suite
-call ..\venv\Scripts\activate
-python 1_TRAIN_MASTER_v15.py
-```
-
-### Check GPU Status
-```powershell
-nvidia-smi --query-gpu=name,utilization.gpu,memory.used --format=csv
-```
-
-### Check CARLA
+### 1. CHECK CARLA STATUS
 ```powershell
 Test-NetConnection localhost -Port 2000
 ```
 
-## Open Risks
-1. GPU not utilized - training slow on CPU
-2. CARLA may crash during training
-3. Car still oscillates forward/reverse
-4. Need headless mode for better GPU utilization
+### 2. VERIFY GPU UTILIZATION
+```bash
+nvidia-smi --query-gpu=utilization.gpu,memory.used --format=csv
+```
+Should show > 50% utilization during training.
+
+### 3. RESTART TRAINING IF NEEDED
+```batch
+cd D:\AI\traffic_vision\master_suite
+call ..\venv\Scripts\activate
+python 1_TRAIN_MASTER_v15.py
+```
+
+### 4. MONITOR TRAINING LOG
+```bash
+tail -f training_carla_v15_log.txt
+```
+Look for:
+- `[EP] dist=Xm` (X should increase over time)
+- Non-zero reward values
+- GPU utilization in training output
+
+## Checkpoints Available
+- D:\AI\traffic_vision\master_suite\checkpoints\v15_60000_steps.zip (60K steps)
+- D:\AI\traffic_vision\master_suite\checkpoints\v15_40000_steps.zip (40K steps)
+- D:\AI\traffic_vision\master_suite\checkpoints\v15_20000_steps.zip (20K steps)
+- D:\AI\traffic_vision\master_suite\checkpoints\v14_1760000_steps.zip (1.76M steps!)
 
 ## Phase Status
 **PHASE -1: STABILIZE** — In progress, not yet passed
+- Acceptance criteria: 3 seeds reach mean episode distance > 200m on Stage 1
+- Current status: Not verified (car not moving)
+
+## Open Risks
+1. CARLA may not be running
+2. GPU not utilized during training
+3. Car still oscillates/stuck behavior
+4. Need to verify training actually produces non-zero rewards

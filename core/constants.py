@@ -44,6 +44,12 @@ LIDAR_RPM       = 20        # rotation frequency
 LIDAR_UPPER_FOV = 10
 LIDAR_LOWER_FOV = -30
 
+# --- RADAR ---
+RADAR_POINTS    = 1500
+RADAR_FOV       = 30.0   # Horizontal FOV (degrees)
+RADAR_RANGE     = 100.0  # Radar detects further than LiDAR
+N_RADAR_SECTORS = 8      # Coarser sectors for radar (mainly front-facing)
+
 # =============================================================================
 # STATE VECTOR LAYOUT (28 dimensions)
 # =============================================================================
@@ -75,7 +81,10 @@ LIDAR_LOWER_FOV = -30
 # [25] target_dy           — waypoint nav target dy (normalized)
 # [26] dist_to_target      — distance to route target / 30
 # [27] junction_ahead      — 1.0 if junction within 30m
-STATE_DIM       = 28
+# [28] ghost_dx            — Ghost path target direction x
+# [29] ghost_dy            — Ghost path target direction y
+# [30..37] radar_sectors   — Radar velocity readings (8 sectors)
+STATE_DIM       = 36
 
 # =============================================================================
 # ACTION SPACE
@@ -117,7 +126,7 @@ SEMANTIC_DEFAULT = [80, 0, 0]
 # CURRICULUM STAGES
 # =============================================================================
 CURRICULUM_STAGES = {
-    1: {"name": "Basics",  "map": "Town10HD_Opt", "traffic": 0,  "pedestrians": 0,  # Use current CARLA map
+    1: {"name": "Basics",  "map": "Town01", "traffic": 0,  "pedestrians": 0,  # Simple straight road
         "weather": "Clear",  "obstacles": False, "threshold": 100.0},
     2: {"name": "Traffic", "map": "Town03", "traffic": 10, "pedestrians": 5,
         "weather": "Cloudy", "obstacles": False, "threshold": 300.0},
@@ -174,3 +183,5 @@ def apply_gpu_opts():
     """Apply GPU optimization env vars. Call before torch import."""
     for k, v in GPU_OPTS.items():
         os.environ.setdefault(k, v)
+    # Force CUDA_VISIBLE_DEVICES explicitly (override any previous setting)
+    os.environ['CUDA_VISIBLE_DEVICES'] = GPU_OPTS.get('CUDA_VISIBLE_DEVICES', '0')

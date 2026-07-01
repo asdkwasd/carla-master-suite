@@ -46,8 +46,9 @@ class SafetyShield:
         """
         cleaned = sectors.copy()
         # Replace zeros, NaN, and negative values with max range
-        cleaned = np.where((cleaned <= 0) | np.isnan(cleaned) | (cleaned > LIDAR_MAX_RANGE),
-                           LIDAR_MAX_RANGE, cleaned)
+        # Also clamp values > LIDAR_MAX_RANGE (sensor noise)
+        mask = (cleaned <= 0) | np.isnan(cleaned) | np.isinf(cleaned) | (cleaned > LIDAR_MAX_RANGE)
+        cleaned[mask] = LIDAR_MAX_RANGE
         return cleaned
 
     def _compute_ttc(self, distance: float, speed_kmh: float) -> float:
@@ -97,24 +98,25 @@ class SafetyShield:
         FRONT_IGNORE_NEAR = 5.0  # Ignore obstacles within 5m (car's own body)
 
         # === FIX 2: Creep mode — allow slow movement ===
-        # If speed < 20 km/h, allow creeping even with close obstacle
-        is_creeping = speed_kmh < 20.0
+        # If speed < 5 km/h, allow creeping even with close obstacle
+        is_creeping = speed_kmh < 5.0
 
         # TTC thresholds (seconds) — MORE LENIENT for Stage 1 (empty road)
-        # TTC_CRITICAL: only hard brake if truly imminent (< 0.8s AND obstacle > 5m)
-        TTC_CRITICAL = 0.8   # Reduced from 1.0 - only brake for very close
-        TTC_WARNING = 2.5     # Reduced from 2.0
-        TTC_SAFE = 4.0        # Increased from 3.0 - allow more speed
+        # TTC_CRITICAL: only hard brake if truly imminent (< 0.8s AND obstacle > 5m AND < 50m)
+        TTC_CRITICAL = 0.8   # Only brake for very close
+        TTC_WARNING = 2.5
+        TTC_SAFE = 4.0
 
         # === FIX 3: More lenient front collision prevention ===
-        # Only apply front braking for REAL obstacles (> 5m away)
+        # Only apply front braking for REAL obstacles (> 5m away AND < 50m away)
         front_min_real = max(front_min, FRONT_IGNORE_NEAR)
         front_ttc_real = self._compute_ttc(front_min_real, speed_kmh)
 
-        if front_ttc_real < TTC_CRITICAL:
+        # FIX: Only brake if TTC < 0.8 AND distance < 50m (per requirement)
+        if front_ttc_real < TTC_CRITICAL and front_min_real < 50.0:
             # CRITICAL: imminent collision with REAL obstacle, hard brake
             if is_creeping:
-                throttle = min(throttle, 0.5)
+                throttle = min(throttle, 0.1)  # Allow 0.1 throttle for creep
                 brake = max(brake, 0.5)
             else:
                 throttle = 0.0
@@ -175,13 +177,22 @@ class SafetyShield:
             intervened = True
             self._log_intervention("OFF_ROAD_LIMIT", 0, 0, speed_kmh)
 
-        # === FIX 4: Anti-stall — ensure car tries to move ===
+        # === FIX 4: Creep mode — allow 0.1 throttle if speed < 5km/h and no critical obstacle ===
+        # This ensures the car can creep forward without constant braking
+        if is_creeping and not intervened:
+            # No critical obstacle detected, allow slow creep
+            throttle = max(throttle, 0.1)
+            self.creep_allowed += 1
+            self._log_intervention("CREEP_ALLOWED", front_min_real, front_ttc_real, speed_kmh)
+
+        # === FIX 5: Anti-stall — ensure car tries to move ===
         # Only apply if the car has been nearly stationary for a while
         # This prevents the car from learning to stay still
         if speed_kmh < 1.0 and throttle < 0.1 and brake < 0.1:
             # Car is stalled — give it a nudge
             throttle = max(throttle, 0.3)
             self._log_intervention("ANTI_STALL", 0, 0, speed_kmh)
+            intervened = True
 
         if intervened:
             self.total_interventions += 1

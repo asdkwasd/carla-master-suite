@@ -58,3 +58,8 @@ ts=66144 reward=0.00 stage=1
 ts=68192 reward=0.00 stage=1
 ts=70240 reward=0.00 stage=1
 ts=72288 reward=0.00 stage=1
+ts=62048 reward=0.00 stage=1
+ts=4096 reward=0.00 stage=1
+ts=4096 reward=0.00 stage=1
+ts=4096 reward=0.00 stage=1
+ts=8192 reward=0.00 stage=1

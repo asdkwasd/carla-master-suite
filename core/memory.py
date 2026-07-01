@@ -139,6 +139,42 @@ class RecallMemory:
                     return (w["x"], w["y"], w["z"])
         return None
 
+    def get_ghost_target(self, x: float, y: float, lookahead: float = 15.0) -> Optional[tuple[float, float]]:
+        """
+        GHOST PATH MEMORY:
+        Finds the closest point on the successful route, then looks ahead along the path
+        to provide a steering vector (dx, dy) normalized.
+        """
+        if not self.successful_route:
+            return None
+        
+        best_idx, best_dist = -1, float('inf')
+        for i, w in enumerate(self.successful_route):
+            d = math.sqrt((w["x"] - x)**2 + (w["y"] - y)**2)
+            if d < best_dist:
+                best_dist = d
+                best_idx = i
+                
+        # If we are near a known good path (within 10 meters)
+        if best_dist < 10.0 and best_idx < len(self.successful_route) - 1:
+            # Look ahead to find target
+            target_idx = best_idx
+            accum_dist = 0.0
+            while target_idx < len(self.successful_route) - 1 and accum_dist < lookahead:
+                w1 = self.successful_route[target_idx]
+                w2 = self.successful_route[target_idx + 1]
+                step_dist = math.sqrt((w2["x"] - w1["x"])**2 + (w2["y"] - w1["y"])**2)
+                accum_dist += step_dist
+                target_idx += 1
+                
+            tw = self.successful_route[target_idx]
+            dx, dy = tw["x"] - x, tw["y"] - y
+            dist = math.sqrt(dx**2 + dy**2)
+            if dist > 0.1:
+                return (dx / dist, dy / dist)
+                
+        return None
+
 
 def load_super_memory(target: RecallMemory):
     """Load merged knowledge from all previous training sessions."""

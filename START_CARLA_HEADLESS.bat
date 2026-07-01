@@ -11,7 +11,7 @@ REM ============================================================
 setlocal enabledelayedexpansion
 
 REM === Configuration ===
-set "CARLA_ROOT=C:\Carla\CARLA_0.9.15"
+set "CARLA_ROOT=D:\AI\traffic_vision\CARLA_0.9.16"
 set "MAP= Town03 "
 set "PORT=2000"
 set "TM_PORT=8000"

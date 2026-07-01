@@ -38,8 +38,14 @@
   ✅ apply_batch_sync in synchronous mode
 ==============================================================================
 """
-
+# ── GPU FIX: Set CUDA device BEFORE any torch import ──────────────────────────
 import os
+os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+os.environ['NVIDIA_TF32_OVERRIDE'] = '1'
+os.environ['TORCH_ALLOW_TF32_CUBLAS_OVERRIDE'] = '1'
+os.environ['CUDA_DEVICE_ORDER'] = 'PCI_BUS_ID'
+os.environ['PYTORCH_CUDA_ALLOC_CONF'] = 'expandable_segments:True,max_split_size_mb:256'
+
 import sys
 import time
 import json
@@ -215,6 +221,31 @@ class CarlaGrandmasterEnv(gym.Env):
         all_spawns = self.carla_map.get_spawn_points()
         self.initial_spawn = all_spawns[0]
         self._all_spawns = all_spawns
+
+        # === FIX: Load curriculum map explicitly ===
+        # get_world() uses whatever map is loaded; curriculum specifies which map to use
+        target_map = self.config.get("map", "Town01")
+        current_map = self.carla_map.name
+
+        if target_map not in current_map:
+            print(f"[MAP] Loading curriculum map: {target_map}")
+            try:
+                self.world = self.client.load_world(target_map)
+                self.carla_map = self.world.get_map()
+                
+                # FIX: Update spawn points after map changes!
+                all_spawns = self.carla_map.get_spawn_points()
+                if all_spawns:
+                    self.initial_spawn = all_spawns[0]
+                    self._all_spawns = all_spawns
+
+                # Re-enable synchronous mode after map load
+                settings = self.world.get_settings()
+                settings.synchronous_mode = True
+                settings.fixed_delta_seconds = PHYSICS_DT
+                self.world.apply_settings(settings)
+            except Exception as e:
+                print(f"[MAP] Could not load {target_map}: {e}, using current map")
 
         # Synchronous mode
         settings = self.world.get_settings()
@@ -453,6 +484,12 @@ class CarlaGrandmasterEnv(gym.Env):
         self.cost_fn.reset()
         self.successful_recoveries = 0
 
+        # FIX: Ensure car starts on ground with zero velocity
+        # Sometimes CARLA spawns cars slightly above ground -> they freefall
+        self.vehicle.set_target_velocity(carla.Vector3D(0, 0, 0))
+        safe_tick(self.world, "settle")  # Let physics settle
+        safe_tick(self.world, "settle")
+
         return self._get_obs(), {}
 
     # =========================================================================
@@ -464,7 +501,9 @@ class CarlaGrandmasterEnv(gym.Env):
 
         loc = self.vehicle.get_location()
         v = self.vehicle.get_velocity()
-        kmh = 3.6 * math.sqrt(v.x**2 + v.y**2 + v.z**2)
+        # FIX: Use only x,y for speed (ignore z = freefall gravity)
+        kmh = 3.6 * math.sqrt(v.x**2 + v.y**2)
+        kmh = min(kmh, 300.0)  # Sanity clamp
         fwd = self.vehicle.get_transform().get_forward_vector()
 
         wp = self.carla_map.get_waypoint(
@@ -572,25 +611,17 @@ class CarlaGrandmasterEnv(gym.Env):
         throttle = float(action[1])
         brake_raw = float(action[2])
 
-        # === CRITICAL FIX: Map action space to CARLA controls ===
-        # RL outputs throttle in [-1, 1]: negative = reverse, positive = forward
-        # RL outputs brake in [-1, 1]: positive = brake (BUT RL outputs high brake
-        #   while requesting forward -> cancels throttle!)
-        # Fix: separate throttle/brake so they don't conflict.
-        # Strategy: throttle takes priority over brake for forward motion.
-        #   If throttle > 0.1, reduce brake to 0.
-        #   If brake > 0, reduce throttle.
-        if throttle < 0:
-            reverse = True
-            throttle = abs(throttle)
-        else:
-            reverse = False
+        # === CRITICAL FIX v5: Map action space to CARLA controls ===
+        # FIX: BLOCK REVERSE ENTIRELY for Stage 1 (and beyond).
+        # RL was oscillating forward/backward, never learning to drive straight.
+        # Reverse serves no purpose in early curriculum — only confuses PPO.
+        reverse = False  # NEVER reverse
+        throttle = max(0.0, throttle)  # Clamp to [0, 1] — no negative
 
-        # If we're trying to go forward, ignore high brake values
+        # If we're trying to go forward, ignore brake
         if throttle > 0.1:
-            brake = 0.0  # Override brake when moving forward
+            brake = 0.0  # Override brake when accelerating
         else:
-            # Braking only when nearly stopped
             brake = max(0.0, brake_raw)
 
         self.last_steer = steer
@@ -598,7 +629,9 @@ class CarlaGrandmasterEnv(gym.Env):
 
         # --- Current state ---
         v = self.vehicle.get_velocity()
-        kmh = 3.6 * math.sqrt(v.x**2 + v.y**2 + v.z**2)
+        # FIX: Use only x,y for ground speed (z = gravity/freefall noise)
+        kmh = 3.6 * math.sqrt(v.x**2 + v.y**2)
+        kmh = min(kmh, 300.0)  # Sanity clamp
         loc = self.vehicle.get_location()
         fwd = self.vehicle.get_transform().get_forward_vector()
 
@@ -618,19 +651,18 @@ class CarlaGrandmasterEnv(gym.Env):
             steer, throttle, brake, lidar, kmh, on_road
         )
 
-        # === MINIMUM THROTTLE FLOOR ===
-        # Ensure the car always tries to move forward at minimum.
+        # === MINIMUM THROTTLE FLOOR v2 ===
+        # Always push forward with minimum throttle (Stage 1 = empty road).
         # This prevents RL from learning "stand still = safe".
-        # Small throttle won't cause crashes on an empty road.
-        if throttle < 0.15 and brake < 0.3:
-            throttle = max(throttle, 0.2)  # Floor: minimum 0.2 throttle
+        if brake < 0.3:
+            throttle = max(throttle, 0.2)  # Floor: minimum 0.2 throttle always
 
         # === ANTI-STALL: ONE-TIME NUDGE (reset counter after firing) ===
+        # Per requirement: if speed < 0.3 km/h for 100 steps, apply anti-stall nudge
         # Key fix: Only nudge ONCE when stuck, then let RL take over.
         # The old code kept nudging every step, overriding RL entirely.
         # This prevents RL from ever learning to output throttle.
-        # Trigger at 30 steps (was 50) so RL learns faster.
-        if self.stuck_counter > 30 and not getattr(self, '_anti_stall_nudged', False):
+        if self.stuck_counter > 100 and not getattr(self, '_anti_stall_nudged', False):
             # First time stuck — give one strong nudge
             steer = 0.0
             throttle = 0.9  # Full forward
@@ -807,7 +839,7 @@ class CarlaGrandmasterEnv(gym.Env):
         if self.steps >= MAX_EPISODE_STEPS:
             done = True
             termination_reason = "max_steps"
-        elif self.stuck_counter > 500:  # Reduced from 1000
+        elif self.stuck_counter > 2000:  # Increased: give PPO more time to learn
             done = True
             termination_reason = "stuck_timeout"
 
@@ -871,7 +903,7 @@ class CarlaGrandmasterEnv(gym.Env):
         state = np.zeros(STATE_DIM, dtype=np.float32)
         if self.rival_vehicle:
             v = self.rival_vehicle.get_velocity()
-            state[0] = 3.6 * math.sqrt(v.x**2 + v.y**2 + v.z**2) / 50.0
+            state[0] = 3.6 * math.sqrt(v.x**2 + v.y**2) / 50.0
         return {"camera": cam, "lidar": lidar, "state": state}
 
     # =========================================================================
@@ -1026,48 +1058,10 @@ def main():
                 v14_checkpoint = best
                 print(f"[TRANSFER] Using v14 checkpoint: {os.path.basename(v14_checkpoint)}")
 
-        if os.path.exists(v14_checkpoint):
-            print(f"\n{'='*60}")
-            print(f"[TRANSFER LEARNING] Loading v14 knowledge...")
-            print(f"[TRANSFER] Source: {v14_checkpoint}")
-            print(f"{'='*60}")
-            try:
-                # Load v14 model
-                v14_model = PPO.load(v14_checkpoint, env=env, device="cpu")
-
-                # Copy transferable weights
-                transferred = 0
-                failed = 0
-                for name, param in model.policy.state_dict().items():
-                    if name in v14_model.policy.state_dict():
-                        src_param = v14_model.policy.state_dict()[name]
-                        if param.shape == src_param.shape:
-                            with th.no_grad():
-                                param.copy_(src_param)
-                            transferred += 1
-                        else:
-                            failed += 1
-                    else:
-                        failed += 1
-
-                print(f"[TRANSFER] ✓ Transferred {transferred} compatible layers")
-                if failed > 0:
-                    print(f"[TRANSFER] ⚠ {failed} layers skipped (shape mismatch)")
-
-                # Use lower learning rate for transferred weights (fine-tuning)
-                model.learning_rate = 1e-4  # Lower LR for fine-tuning
-                print(f"[TRANSFER] Learning rate set to {model.learning_rate}")
-
-                transfer_info = {"layers": transferred, "lr": model.learning_rate}
-
-                del v14_model
-                th.cuda.empty_cache()
-
-            except Exception as e:
-                print(f"[TRANSFER] ⚠ Failed to transfer: {e}")
-                print("[TRANSFER] Continuing with fresh model...")
-        else:
-            print("[TRANSFER] No v14 checkpoint found, starting fresh")
+        # === SKIP v14 TRANSFER LEARNING ===
+        # v14 checkpoint is incompatible (numpy version mismatch + wrong action patterns).
+        # Fresh start with our fixed action space (no reverse) is better.
+        print("[TRANSFER] Skipping v14 transfer — starting fresh with fixed action space")
 
     env.set_model(model)
 

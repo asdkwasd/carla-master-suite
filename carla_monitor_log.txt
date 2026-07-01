@@ -1,0 +1,14 @@
+# CARLA UE4 Process Monitor Log
+# Generated: 2026-07-01
+# Check Interval: 1 minute x 3 samples
+
+[CARLA MONITOR] 2026-07-01 21:13:26, NO_PROCESS, false
+[CARLA MONITOR] 2026-07-01 21:13:31, NO_PROCESS, false
+[CARLA MONITOR] 2026-07-01 21:13:38, NO_PROCESS, false
+
+# Summary
+# - No CARLA UE4 processes detected
+# - Port 2000 is NOT listening
+# - CARLA server appears to be NOT running
+
+# End of Log

@@ -1,0 +1,54 @@
+========================================
+TRAINING MONITOR LOG - Started 2026-07-01
+Log: D:/AI/traffic_vision/master_suite/training_carla_v15_log.txt
+========================================
+
+[CHECK 0] Baseline @ starting time
+  - Total entries: 61
+  - reward=0.00 entries: 61
+  - [EP] episodes: 0
+  - [ERROR] entries: 0
+  - [STUCK] entries: 0
+
+[CHECK 1] @ 1 minute
+  - Total entries: 60
+  - No changes detected
+  - All entries: reward=0.00 stage=1
+
+[CHECK 2] @ 2 minutes
+  - Total entries: 60
+  - No changes detected
+  - All entries: reward=0.00 stage=1
+
+[CHECK 3] @ 3 minutes
+  - Total entries: 60
+  - No changes detected
+  - All entries: reward=0.00 stage=1
+
+[CHECK 4] @ 4 minutes
+  - Total entries: 60
+  - No changes detected
+  - All entries: reward=0.00 stage=1
+
+[CHECK 5] @ 5 minutes - FINAL
+  - Total entries: 60
+  - No changes detected
+  - All entries: reward=0.00 stage=1
+  - [EP] episodes: 0
+  - [ERROR] entries: 0
+  - [STUCK] entries: 0
+
+========================================
+MONITORING SUMMARY
+========================================
+Duration: 5 minutes
+Status: NO NEW ACTIVITY
+Training appears STALLED or PAUSED
+- All timestamps show reward=0.00
+- No episode completions ([EP])
+- No errors or stuck detections
+- Timestamps range: ts=2048 to ts=72288
+
+Recommendation: Verify training process is running.
+Check if CARLA simulation is active and vehicle is receiving commands.
+========================================

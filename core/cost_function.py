@@ -40,18 +40,18 @@ class CostFunction:
     }
 
     # === FIX v3: Strong moving reward to beat reverse ===
-    # Anti-idle penalty: -1 per step if speed < 0.5 m/s
-    ANTI_IDLE_PENALTY = -1.0     # Changed from -2.0
-    IDLE_THRESHOLD_MPS = 0.5      # Changed from 0.05 - penalize if < 0.5 m/s
-    MOVING_REWARD_PER_MPS = 10.0  # +10 per m/s forward progress
-    STEP_MOVING_BONUS = 2.0       # Extra bonus per step when moving (increased)
+    # Anti-idle penalty: -2 per step if speed < 0.5 m/s (stricter per requirement)
+    ANTI_IDLE_PENALTY = -2.0     # Changed from -1.0 per requirement: IDLE_PENALTY <= -2
+    IDLE_THRESHOLD_MPS = 0.5
+    MOVING_REWARD_PER_MPS = 10.0  # +10 per m/s forward progress (per requirement: >= 10)
+    STEP_MOVING_BONUS = 2.0       # Extra bonus per step when moving
 
     # Collision penalty (reduced to avoid idle hacking)
     COLLISION_PENALTY = -2.0      # Was -5, reduced to -2
     HIGH_SPEED_CRASH_BONUS = -1.0 # Extra penalty for high-speed crash
 
-    # Waypoint reward: +50 bonus for reaching waypoint
-    WAYPOINT_REWARD = 50.0        # Per new waypoint reached (was 5.0)
+    # Waypoint reward: +50 bonus for reaching waypoint (per requirement: >= 50)
+    WAYPOINT_REWARD = 50.0        # Per new waypoint reached
 
     def __init__(self, reward_clip=(-50, 100)):  # Wider clip range
         self.clip_lo, self.clip_hi = reward_clip
@@ -139,9 +139,9 @@ class CostFunction:
         if ctx.get("recovery_success", False):
             safety += 5.0  # Increased from 3.0
 
-        # Reverse penalty (unless recovering)
+        # Reverse penalty (strong — forward only!)
         if ctx.get("reverse", False) and ctx.get("on_road", True):
-            safety -= 0.3  # Was -0.5
+            safety -= 3.0  # Strong penalty to reinforce forward-only driving
 
         costs["safety"] = safety
 
