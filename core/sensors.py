@@ -5,6 +5,7 @@
 ==============================================================================
 """
 import threading
+import math
 import numpy as np
 import carla
 
